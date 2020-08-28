@@ -1,8 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 could(   Person, Action, Thing      )   :- could(Person, Action, Thing, _).
-could(   Person, Action, Thing, Path)   :-
-    
+could(   Person, Action, Thing, Path)   :-    
     a(   Person, Action, Thing      ),
     path(Person, Thing,  Path       ).
 
@@ -27,15 +26,6 @@ traverse(From, To):-
      (thing(To), entity(From), has(From, To))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-typed_path(Type, From, To)              :- typed_path(Type, From, To, _).
-typed_path(Type, From, To, Path)        :-
-    type(From, Type),
-    path(From, To, Path).
-
-person_path(From, To)                   :- person_path(From, To, _).
-person_path(From, To, Path)             :-
-    typed_path(person, From, To, Path).
 
 path(From, To)                          :- path(From, To, _).
 path(X, [], Path)                       :- entity(X), Path = [].
