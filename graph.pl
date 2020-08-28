@@ -1,11 +1,11 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 could(   Person, Action, Thing      )   :- could(Person, Action, Thing, _).
 could(   Person, Action, Thing, Path)   :-
     a(   Person, Action, Thing      ),
     path(Person, Thing,  Path       ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 a(Appliance, break,  [])   :- appliance(Appliance), \+ could(    _,      repair, Appliance   ).
 a(Person,    starve, [])   :- person(   Person   ), \+ could(    Person, eat,    _           ).
@@ -16,7 +16,16 @@ a(Person,    repair, X)    :- human(    Person   ),    appliance(X),     path(  
 a(Person,    shop,   X)    :- person(   Person   ),    store(    X),     shop(   Person, X   ).
 a(Person,    smoke,  X)    :- person(   Person   ),    thing(    X),     smoke(  Person, X   ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+traverse(From, To):-
+    (human(From),  appliance(To));
+    (person(From), person(To), like(From,To));
+    (person(From), person(To), like(To,From));
+    (person(From), store(To),  shop(From,To));
+    (thing(To),    has(From, To)).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(From, To)                          :- path(From, To, _).
 path(_, [], Path)                       :- Path = [].
@@ -30,14 +39,4 @@ path(From, To, Path, Build)             :-
     path(Next, To, Path, [From|Build]).
 path(From, From, Build, Path)           :-
     Path = Build.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-traverse(From, To):-
-    (human(From),  appliance(To));
-    (person(From), person(To), like(From,To));
-    (person(From), person(To), like(To,From));
-    (person(From), store(To),  shop(From,To));
-    (thing(To),    has(From, To)).
-
 
