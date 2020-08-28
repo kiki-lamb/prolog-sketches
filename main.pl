@@ -31,8 +31,8 @@ ploop_paths :-
     fail.
 
 ploop_person_paths :-
-    person(W), path(W,T,P),
+    path(W,T,P),
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     
-main :- ploop_paths; possible_paths; true. %; halt.
+main :- ploop_person_paths; true. %; halt.
