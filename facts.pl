@@ -83,3 +83,6 @@ smoke(kiki,  cigarette).
 
 human(X)  :- person(X), \+ cat(X).    
 
+location(X) :- store(X).
+
+entity(X) :- person(X); thing(X); location(X).
