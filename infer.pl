@@ -5,6 +5,8 @@ move(Here, To):-
                                    like(To,Here)));
                      (store(To), shop(Here,To))))).
 
+stop(Location, Target) :- has(Location, Target).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
