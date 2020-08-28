@@ -8,8 +8,10 @@ move(From, To):-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+stop(From, From) :-
+    true.
+
 stop(From, To) :-
-    From == To;
     has(From, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -21,17 +23,16 @@ typed_path(Type, From, To, Path)        :-
     path(From, To, Path).
 
 path(From, To)                          :- path(From, To, _).
-
 path(X, [], Path)                       :- entity(X), Path = [].
 
 path(From, To, Path)                    :-
     path(From, To, TmpPath, []),
     reverse(TmpPath, TmpPath2),
     append(TmpPath2, [To], Path).
-
+    
 path(From, To, Path, Build)             :-
     stop(From, To),
-    Path = Build ;
+    Path = Build;
     (move(From, Next),
      not(member(Next,Build)),
      path(Next, To, Path, [From|Build])).
