@@ -26,13 +26,9 @@ loop_paths :-
     fail.
 
 ploop_paths :-
-    path(W,T,P),
-    format("~w -> ~w: ~w\n", [W,T,P]),
-    fail.
-
-ploop_person_paths :-
-    person(W), path(W,T,P), 
+    %person(W),
+    path(W,T,P), 
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     
-main :- ploop_person_paths; true. % halt.
+main :- ploop_paths; true. % halt.

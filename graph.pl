@@ -8,17 +8,18 @@ move(From, To):-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-typed_path(Type, From, To)              :- typed_path(Type, From, To, _).
+typed_path(Type, From, To)                  :- typed_path(Type, From, To, _).
 
-typed_path(Type, From, To, Path)        :-
+typed_path(Type, From, To, Path)            :-
     type(From, Type),
     path(From, To, Path).
 
-path(From, To)                          :- path(From, To, _).
+path(From, To)                              :- path(From, To, _).
 
-path(X, [], Path)                       :- entity(X), Path = [].
+path(X, [], Path)                           :-
+    exist(X), Path = [].
 
-path(From, To, Path)                    :-
+path(From, To, Path)                        :-
     search(From, To, TmpPath, []),
     reverse(TmpPath, TmpPath2),
     append(TmpPath2, [To], Path).
@@ -30,7 +31,7 @@ o_search(From, To, Path, Build)             :-
      not(member(Next,Build)),
      search(Next, To, Path, [From|Build])).
 
-search(From, To, Path, Build)             :-
+search(From, To, Path, Build)               :-
     stop(From, To, Path, Build);
     (move(From, Next),     
      descend(Next, To, Path, [From|Build])).

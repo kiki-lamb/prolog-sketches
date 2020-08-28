@@ -71,6 +71,6 @@ human(X)  :- person(X), \+ cat(X).
 
 location(X) :- store(X).
 
-entity(X) :- person(X); thing(X); location(X).
+exist(X) :- person(X); thing(X); location(X).
 
 provider(X, Thing) :- (person(X); store(X)), has(X, Thing).
