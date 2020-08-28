@@ -8,14 +8,6 @@ move(From, To):-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-stop(From, From) :-
-    true.
-
-stop(From, To) :-
-    has(From, To).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 typed_path(Type, From, To)              :- typed_path(Type, From, To, _).
 
 typed_path(Type, From, To, Path)        :-
@@ -31,9 +23,25 @@ path(From, To, Path)                    :-
     reverse(TmpPath, TmpPath2),
     append(TmpPath2, [To], Path).
     
-search(From, To, Path, Build)             :-
+o_search(From, To, Path, Build)             :-
     stop(From, To),
     Path = Build;
     (move(From, Next),
      not(member(Next,Build)),
      search(Next, To, Path, [From|Build])).
+
+search(From, To, Path, Build)             :-
+    stop(From, To),
+    Path = Build;
+    (move(From, Next),     
+     descend(Next, To, Path, [From|Build])).
+
+descend(Next, To, Path, Build) :-
+    not(member(Next,Build)),
+    search(Next, To, Path, Build).
+
+stop(From, To) :-
+    has(From, To).
+
+stop(From, From) :-
+    true.
