@@ -1,5 +1,5 @@
 
-move(Here, To):-
+move(Here, To) :-
     ((human(Here), appliance(To));
      (person(Here), ((person(To), (like(Here,To);
                                    like(To,Here)));
