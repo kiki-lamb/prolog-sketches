@@ -38,5 +38,6 @@ path(From, To, Path, Build)             :-
     not(member(Next,Build)),
     path(Next, To, Path, [From|Build]).
 path(From, From, Build, Path)           :-
-    Path = Build.
+    (thing(From),
+     Path = Build) ; fail.
 
