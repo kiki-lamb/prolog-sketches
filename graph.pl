@@ -12,8 +12,8 @@ path(Start, Here, _, [], _, Path) :-
 
 path(Start, Here, Move, To, Stop, Path) :-
     G =.. [Start, Here], call(G),
-    search([], Here, Move, To, Stop, TmpPath),
-    reverse([To|TmpPath], Path).
+    search([], Here, Move, To, Stop, Tmp),
+    reverse([To|Tmp], Path).
     
 search(Build, Here, Move, To, Stop, Path) :-
     found(Build, Here, Move, To, Stop, Path);
