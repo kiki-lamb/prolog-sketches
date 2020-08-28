@@ -14,7 +14,7 @@ path(Here, Move, To, Stop, Path) :-
     reverse([To|TmpPath], Path).
     
 search(Here, Move, To, Stop, Path, Build) :-
-    found(Here, To, Stop, Path, Build);
+    found(Here, Move, To, Stop, Path, Build);
     descend(Here, Move, To, Stop, Path, [Here|Build]).
 
 descend(Here, Move, To, Stop, Path, Build) :-
@@ -22,9 +22,9 @@ descend(Here, Move, To, Stop, Path, Build) :-
     not(member(Next,Build)),
     search(Next, Move, To, Stop, Path, Build).
 
-found(Here, Here, Stop, Path, Build) :-
+found(Here, _, Here, _, Path, Build) :-
     Path = Build. 
 
-found(Here, To, Stop, Path, Build) :-
+found(Here, _, To, Stop, Path, Build) :-
     G =.. [Stop, Here, To], call(G),
-    found(Here, Here, Stop, Path, [Here|Build]).
+    found(Here, _, Here, Stop, Path, [Here|Build]).
