@@ -10,21 +10,21 @@ path(X, _, [], _, Path) :-
     exist(X), Path = [].
 
 path(Here, Move, To, Stop, Path) :-
-    search(Here, Move, To, Stop, TmpPath, []),
+    search([], Here, Move, To, Stop, TmpPath),
     reverse([To|TmpPath], Path).
     
-search(Here, Move, To, Stop, Path, Build) :-
-    found(Here, Move, To, Stop, Path, Build);
-    descend(Here, Move, To, Stop, Path, [Here|Build]).
+search(Build, Here, Move, To, Stop, Path) :-
+    found(Build, Here, Move, To, Stop, Path);
+    descend([Here|Build], Here, Move, To, Stop, Path).
 
-descend(Here, Move, To, Stop, Path, Build) :-
+descend(Build, Here, Move, To, Stop, Path) :-
     G =.. [Move, Here, Next],call(G),
     not(member(Next,Build)),
-    search(Next, Move, To, Stop, Path, Build).
+    search(Build, Next, Move, To, Stop, Path).
 
-found(Here, _, Here, _, Path, Build) :-
+found(Build, Here, _, Here, _, Path) :-
     Path = Build. 
 
-found(Here, _, To, Stop, Path, Build) :-
+found(Build, Here, _, To, Stop, Path) :-
     G =.. [Stop, Here, To], call(G),
-    found(Here, _, Here, Stop, Path, [Here|Build]).
+    found([Here|Build], Here, _, Here, Stop, Path).
