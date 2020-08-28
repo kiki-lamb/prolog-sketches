@@ -39,5 +39,5 @@ path(From, To, Path, Build)             :-
     path(Next, To, Path, [From|Build]).
 path(From, From, Build, Path)           :-
     (thing(From),
-     Path = Build) ; fail.
+     Path = Build); fail.
 
