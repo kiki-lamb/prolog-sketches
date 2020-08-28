@@ -37,4 +37,4 @@ ploop_person_paths :-
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     
-main :- ploop_person_paths; true. %; halt.
+main :- ploop_person_paths; possible; true. %; halt.
