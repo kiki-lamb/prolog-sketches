@@ -3,13 +3,14 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-path(Here, Move, To, Stop) :-
-    path(Here, Move, To, Stop, _).
+path(_, Here, Move, To, Stop) :-
+    path(_, Here, Move, To, Stop, _).
 
-path(X, _, [], _, Path) :-
+path(_, X, _, [], _, Path) :-
     exist(X), Path = [].
 
-path(Here, Move, To, Stop, Path) :-
+path(Start, Here, Move, To, Stop, Path) :-
+    G =.. [Start, Here], call(G),
     search([], Here, Move, To, Stop, TmpPath),
     reverse([To|TmpPath], Path).
     
@@ -18,7 +19,7 @@ search(Build, Here, Move, To, Stop, Path) :-
     descend([Here|Build], Here, Move, To, Stop, Path).
 
 descend(Build, Here, Move, To, Stop, Path) :-
-    G =.. [Move, Here, Next],call(G),
+    G =.. [Move, Here, Next], call(G),
     not(member(Next,Build)),
     search(Build, Next, Move, To, Stop, Path).
 
