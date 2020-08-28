@@ -2,6 +2,7 @@
 :- consult("facts.pl").
 :- consult("exists.pl").
 :- consult("graph.pl").
+:- consult("infer.pl").
 
 possible :-
     could(W,A,T),
