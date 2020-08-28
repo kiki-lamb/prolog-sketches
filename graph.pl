@@ -28,7 +28,8 @@ traverse(From, To):-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(From, To)                          :- path(From, To, _).
-path(_, [], Path)                       :- Path = [].
+%path(From, [], Path)                    :- entity(From), Path = [].
+path(X, [], Path)                       :- (?= X), Path = [].
 path(From, To, Path)                    :-
     person(From),
     path(From, To, TmpPath, []),

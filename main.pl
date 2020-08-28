@@ -16,5 +16,10 @@ loop_paths :-
     path(_,_,P),
     format("~w\n", [P]),
     fail.
+
+ploop_paths :-
+    path(W,T,P),
+    format("~w -> ~w: ~w\n", [W,T,P]),
+    fail.
     
-main :- loop_paths; true.
+main :- ploop_paths; true.
