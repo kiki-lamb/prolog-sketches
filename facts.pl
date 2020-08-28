@@ -1,3 +1,17 @@
+type(X, store)     :- store(X).
+type(X, person)    :- person(X).
+type(X, cat)       :- cat(X).
+type(X, beverage)  :- beverage(X).
+type(X, alcohol)   :- alcohol(X).
+type(X, vegetable) :- vegetable(X).
+type(X, meat)      :- meat(X).
+type(X, vegetable) :- vegetable(X).
+type(X, appliance) :- appliance(X).
+type(X, thing)     :- thing(X).
+type(X, food)      :- food(X).
+type(X, human)     :- human(X).
+type(X, entity)    :- entity(X).
+
 store(freshco).
 store(home_hardware).
 store(lcbo).
@@ -41,8 +55,8 @@ meat(cat_food).
 meat(pepperoni).
 meat(steak).
 
-dislikes(kiki, cat_food).
-dislikes(kiki, tequila).
+dislike(kiki, cat_food).
+dislike(kiki, tequila).
 
 appliance(dish_washer).
 appliance(sink).
@@ -69,13 +83,13 @@ like(higgy, boson).
 
 eat(sybil, turkey).
 eat(sybil, X)           :- vegetable(X).
-eat(kiki,  X)           :- food(X), \+ eat(sybil, X), \+ dislikes(kiki, X).
+eat(kiki,  X)           :- food(X), \+ eat(sybil, X), \+ dislike(kiki, X).
 eat(Who,   X)           :- cat(Who), meat(X).
 
 drink(sybil, pepsi).
 drink(sybil, tequila).
 drink(kiki, energy_drink).
-drink(kiki, X) :- alcohol(X), \+ dislikes(kiki, X).
+drink(kiki, X) :- alcohol(X), \+ dislike(kiki, X).
 drink(Cat, water) :- cat(Cat).
     
 smoke(X,     weed) :- human(X).

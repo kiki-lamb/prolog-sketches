@@ -19,8 +19,6 @@ a(Person,    smoke,  X)    :- person(   Person   ),    thing(    X),     smoke( 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-type(Person, person) :- person(Person).
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 traverse(From, To):-
@@ -42,9 +40,8 @@ person_path(From, To, Path)             :-
     typed_path(person, From, To, Path).
 
 path(From, To)                          :- path(From, To, _).
-path(_, [], Path)                       :- Path = [].
+path(X, [], Path)                       :- entity(X), Path = [].
 path(From, To, Path)                    :-
-    person(From),
     path(From, To, TmpPath, []),
     reverse(TmpPath, TmpPath2),
     append(TmpPath2, [To], Path).
@@ -54,5 +51,6 @@ path(From, To, Path, Build)             :-
     path(Next, To, Path, [From|Build]).
 path(From, From, Path, Build)           :-
     (entity(From),
-     Path = Build); fail.
+     Path = Build);
+    fail.
 
