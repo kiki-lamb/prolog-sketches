@@ -1,31 +1,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-move(Here, To):-
-    ((human(Here), appliance(To));
-     (person(Here), ((person(To), (like(Here,To);
-                                   like(To,Here)));
-                     (store(To), shop(Here,To))))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-path(Here, To)                              :-
-    path(Here, To, _).
+path(Here, Move, To)                              :-
+    path(Here, Move, To, _).
 
 path(X, [], Path)                           :-
     exist(X), Path = [].
 
-path(Here, To, Path)                        :-
-    search(Here, To, TmpPath, []),
+path(Here, Move, To, Path)                        :-
+    search(Here, Move, To, TmpPath, []),
     reverse([To|TmpPath], Path).
     
-search(Here, To, Path, Build)               :-
+search(Here, Move, To, Path, Build)               :-
     stop(Here, To, Path, Build);
-    descend(Here, To, Path, [Here|Build]).
+    descend(Here, Move, To, Path, [Here|Build]).
 
-descend(Here, To, Path, Build) :-
-    move(Here, Next),
+descend(Here, Move, To, Path, Build) :-
+    F =.. [Move, Here, Next],
+    call(F),
     not(member(Next,Build)),
-    search(Next, To, Path, Build).
+    search(Next, Move, To, Path, Build).
 
 stop(Here, Here, Path, Build) :-
     Path = Build. 

@@ -1,8 +1,8 @@
 :- initialization(main).
-:- consult("graph.pl").
 :- consult("facts.pl").
 :- consult("exists.pl").
 :- consult("infer.pl").
+:- consult("graph.pl").
 
 possible :-
     could(W,A,T),
@@ -21,13 +21,13 @@ desires :-
     fail.  
 
 loop_paths :-
-    path(_,_,P),
+    path(_,move,_,P),
     format("~w\n", [P]),
     fail.
 
 ploop_paths :-
     %person(W),
-    path(W,T,P), 
+    path(W,move,T,P), 
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     
