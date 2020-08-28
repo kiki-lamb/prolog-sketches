@@ -19,11 +19,11 @@ a(Person,    smoke,  X)    :- person(   Person   ),    thing(    X),     smoke( 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 traverse(From, To):-
-    (human(From), appliance(To));
-    (person(From), ((person(To), (like(From,To);
-                                  like(To,From)));
-                    (store(To), shop(From,To))));
-    (thing(To), entity(From), has(From, To)).
+    ((human(From), appliance(To));
+     (person(From), ((person(To), (like(From,To);
+                                   like(To,From)));
+                     (store(To), shop(From,To))));
+     (thing(To), entity(From), has(From, To))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
