@@ -1,3 +1,4 @@
+start(X) :- person(X).
 
 move(Here, To) :-
     ((human(Here),
