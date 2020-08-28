@@ -27,13 +27,13 @@ path(From, To)                          :- path(From, To, _).
 path(X, [], Path)                       :- entity(X), Path = [].
 
 path(From, To, Path)                    :-
-    path(From, To, TmpPath, []),
+    search(From, To, TmpPath, []),
     reverse(TmpPath, TmpPath2),
     append(TmpPath2, [To], Path).
     
-path(From, To, Path, Build)             :-
+search(From, To, Path, Build)             :-
     stop(From, To),
     Path = Build;
     (move(From, Next),
      not(member(Next,Build)),
-     path(Next, To, Path, [From|Build])).
+     search(Next, To, Path, [From|Build])).
