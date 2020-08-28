@@ -1,11 +1,14 @@
 
 move(Here, To) :-
-    ((human(Here), appliance(To));
-     (person(Here), ((person(To), (like(Here,To);
-                                   like(To,Here)));
-                     (store(To), shop(Here,To))))).
+    ((human(Here),
+      appliance(To)) ;
+     (person(Here),
+      ((person(To), (like(Here,To) ;
+                     like(To,Here))) ;
+       (store(To), shop(Here,To))))).
 
-stop(Location, Target) :- has(Location, Target).
+stop(Location, Target) :-
+    has(Location, Target).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
