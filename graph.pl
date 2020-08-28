@@ -23,6 +23,7 @@ typed_path(Type, From, To, Path)        :-
     path(From, To, Path).
 
 path(From, To)                          :- path(From, To, _).
+
 path(X, [], Path)                       :- entity(X), Path = [].
 
 path(From, To, Path)                    :-
