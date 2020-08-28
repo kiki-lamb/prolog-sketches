@@ -30,6 +30,7 @@ traverse(From, To):-
 path(From, To)                          :- path(From, To, _).
 path(_, [], Path)                       :- Path = [].
 path(From, To, Path)                    :-
+    person(From),
     path(From, To, TmpPath, []),
     reverse(TmpPath, TmpPath2),
     append(TmpPath2, [To], Path).
