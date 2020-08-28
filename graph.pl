@@ -34,7 +34,7 @@ descend(Here, To, Path, Build) :-
     search(Next, To, Path, Build).
 
 stop(Here, Here, Path, Build) :-
-    Path = Build.
+    Path = [Here|Build].
 
 stop(Here, To, Path, Build) :-
     has(Here, To),
