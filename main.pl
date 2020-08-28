@@ -27,8 +27,8 @@ loop_paths :-
 
 ploop_paths :-
     %person(W),
-    path(W,T,P), 
-    format("~w -> ~w: ~w\n", [W,T,P]),
+    path(boson,T,P), 
+    format("~w -> ~w: ~w\n", [boson,T,P]),
     fail.
     
 main :- ploop_paths; true. % halt.

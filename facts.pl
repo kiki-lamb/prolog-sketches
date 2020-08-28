@@ -51,7 +51,7 @@ has(chicken_freak,         cat_food).
 has(chicken_freak,         cigarette).
 has(home_hardware,         nail).
 has(dave,                  weed).
-has(kiki, water)        :- could(_, repair, sink).
+has(kiki, water)        :- could(_, repair, sink), !.
 
 eat(sybil, turkey).
 eat(sybil, X)           :- vegetable(X).
