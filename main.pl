@@ -26,8 +26,7 @@ loop_paths :-
     fail.
 
 ploop_paths :-
-    %person(W),
-    path(start,W,move,T,stop,P), 
+    path(startl,W,move,T,stop,P), 
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     

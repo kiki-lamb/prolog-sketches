@@ -3,11 +3,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-path(_, Here, Move, To, Stop) :-
-    path(_, Here, Move, To, Stop, _).
+path(Start, Here, Move, To, Stop) :-
+    path(Start, Here, Move, To, Stop, _).
 
-path(_, X, _, [], _, Path) :-
-    exist(X), Path = [].
+path(Start, Here, _, [], _, Path) :-
+    G =.. [Start, Here], call(G),
+    Path = [].
 
 path(Start, Here, Move, To, Stop, Path) :-
     G =.. [Start, Here], call(G),
