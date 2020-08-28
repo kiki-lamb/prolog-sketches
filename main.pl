@@ -17,4 +17,4 @@ loop_paths :-
     format("~w\n", [P]),
     fail.
     
-main :- loop_paths; halt(0).
+main :- loop_paths; true.
