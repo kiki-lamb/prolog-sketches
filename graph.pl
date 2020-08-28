@@ -52,7 +52,7 @@ path(From, To, Path, Build)             :-
     traverse(From, Next),
     not(member(Next,Build)),
     path(Next, To, Path, [From|Build]).
-path(From, From, Build, Path)           :-
-    (thing(From),
+path(From, From, Path, Build)           :-
+    (entity(From),
      Path = Build); fail.
 

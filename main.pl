@@ -1,5 +1,6 @@
 :- initialization(main).
 :- consult("facts.pl").
+:- consult("exists.pl").
 :- consult("graph.pl").
  
 loop :-
