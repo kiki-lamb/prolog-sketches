@@ -24,13 +24,6 @@ path(Here, To, Path)                        :-
     reverse(TmpPath, TmpPath2),
     append(TmpPath2, [To], Path).
     
-o_search(Here, To, Path, Build)             :-
-    stop(Here, To),
-    Path = Build;
-    (move(Here, Next),
-     not(member(Next,Build)),
-     search(Next, To, Path, [Here|Build])).
-
 search(Here, To, Path, Build)               :-
     stop(Here, To, Path, Build);
     descend(Here, To, Path, [Here|Build]).
