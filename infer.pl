@@ -1,9 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 could(   Person, Action, Thing      )   :- could(Person, Action, Thing, _).
 could(   Person, Action, Thing, Path)   :-    
     a(   Person, Action, Thing      ),
-    path(Person, Thing,  Path       ).
+    call((path(Person,Thing,Path), !)).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
