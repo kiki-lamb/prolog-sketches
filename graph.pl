@@ -31,7 +31,7 @@ path(From, To, Path)                    :-
 
 path(From, To, Path, Build)             :-
     stop(From, To),
-    Path = [From|Build];
+    Path = Build ;
     (move(From, Next),
      not(member(Next,Build)),
      path(Next, To, Path, [From|Build])).
