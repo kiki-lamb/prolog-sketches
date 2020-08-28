@@ -10,7 +10,7 @@ type(X, appliance) :- appliance(X).
 type(X, thing)     :- thing(X).
 type(X, food)      :- food(X).
 type(X, human)     :- human(X).
-type(X, entity)    :- entity(X).
+type(X, exist)     :- exist(X).
 
 chase(higgy, boson).
 chase(boson, higgy).
