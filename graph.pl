@@ -6,8 +6,8 @@
 path(Here, Move, To)                              :-
     path(Here, Move, To, _).
 
-%path(X, [], Path)                           :-
-%    exist(X), Path = [].
+path(X, [], Path)                           :-
+    exist(X), Path = [].
 
 path(Here, Move, To, Path)                        :-
     search(Here, Move, To, stop, TmpPath, []),
