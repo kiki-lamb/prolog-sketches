@@ -21,13 +21,13 @@ desires :-
     fail.  
 
 loop_paths :-
-    path(_,move,_,P),
+    path(_,move,_,stp,P),
     format("~w\n", [P]),
     fail.
 
 ploop_paths :-
     %person(W),
-    path(W,move,T,P), 
+    path(W,move,T,stop,P), 
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     
