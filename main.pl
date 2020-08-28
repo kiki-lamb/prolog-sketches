@@ -21,12 +21,12 @@ desires :-
     fail.  
 
 loop_paths :-
-    path(_,move,_,stp,P),
+    apath(_,_,P),
     format("~w\n", [P]),
     fail.
 
 ploop_paths :-
-    path(startl,W,move,T,stop,P), 
+    apath(W,T,P), 
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     

@@ -1,4 +1,6 @@
-startl(X) :- person(X).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+start(X) :- person(X).
 
 move(Here, To) :-
     ((human(Here),
@@ -11,13 +13,20 @@ move(Here, To) :-
 stop(Location, Target) :-
     has(Location, Target).
 
+apath(Here, To) :-
+    apath(Here, To, _).
+
+apath(Here, To, Path) :-
+    path(start, Here, move, To, stop, Path).
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 could(   Person, Action, Thing      )   :- could(Person, Action, Thing, _).
 could(   Person, Action, Thing, Path)   :-    
     a(   Person, Action, Thing      ),
-    call((path(startl,Person,move,Thing,stop,Path), !)).
+    call((path(start,Person,move,Thing,stop,Path), !)).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,4 +38,4 @@ a(Person,    drink,  X)    :- person(   Person   ),    thing(    X),     drink( 
 a(Person,    eat,    X)    :- person(   Person   ),    thing(    X),     eat(    Person, X   ).
 a(Person,    shop,   X)    :- person(   Person   ),    store(    X),     shop(   Person, X   ).
 a(Person,    smoke,  X)    :- person(   Person   ),    thing(    X),     smoke(  Person, X   ).
-% a(Person,    repair, X)    :- human(    Person   ),    appliance(X),     path(   startl, Person, move, nail, stop).
+a(Person,    repair, X)    :- human(    Person   ),    appliance(X),     apath(  Person, nail).
