@@ -76,7 +76,8 @@ has(chicken_freak,         cat_food).
 has(chicken_freak,         cigarette).
 has(home_hardware,         nail).
 has(dave,                  weed).
-    
+has(kiki, water)        :- could(_, repair, sink).
+
 like(sybil, kiki).
 like(kiki, boson).
 like(higgy, boson).

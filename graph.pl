@@ -9,6 +9,11 @@ traverse(From, To):-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+typed_path(Type, From, To)              :- typed_path(Type, From, To, _).
+typed_path(Type, From, To, Path)        :-
+    type(From, Type),
+    path(From, To, Path).
+
 path(From, To)                          :- path(From, To, _).
 path(X, [], Path)                       :- entity(X), Path = [].
 path(From, To, Path)                    :-
