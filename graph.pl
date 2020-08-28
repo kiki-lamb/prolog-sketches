@@ -1,47 +1,48 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-move(From, To):-
-    ((human(From), appliance(To));
-     (person(From), ((person(To), (like(From,To);
-                                   like(To,From)));
-                     (store(To), shop(From,To))))).
+move(Here, To):-
+    ((human(Here), appliance(To));
+     (person(Here), ((person(To), (like(Here,To);
+                                   like(To,Here)));
+                     (store(To), shop(Here,To))))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-typed_path(Type, From, To)                  :- typed_path(Type, From, To, _).
+typed_path(Type, Here, To)                  :- typed_path(Type, Here, To, _).
 
-typed_path(Type, From, To, Path)            :-
-    type(From, Type),
-    path(From, To, Path).
+typed_path(Type, Here, To, Path)            :-
+    type(Here, Type),
+    path(Here, To, Path).
 
-path(From, To)                              :- path(From, To, _).
+path(Here, To)                              :- path(Here, To, _).
 
 path(X, [], Path)                           :-
     exist(X), Path = [].
 
-path(From, To, Path)                        :-
-    search(From, To, TmpPath, []),
+path(Here, To, Path)                        :-
+    search(Here, To, TmpPath, []),
     reverse(TmpPath, TmpPath2),
     append(TmpPath2, [To], Path).
     
-o_search(From, To, Path, Build)             :-
-    stop(From, To),
+o_search(Here, To, Path, Build)             :-
+    stop(Here, To),
     Path = Build;
-    (move(From, Next),
+    (move(Here, Next),
      not(member(Next,Build)),
-     search(Next, To, Path, [From|Build])).
+     search(Next, To, Path, [Here|Build])).
 
-search(From, To, Path, Build)               :-
-    stop(From, To, Path, Build);
-    (move(From, Next),     
-     descend(Next, To, Path, [From|Build])).
+search(Here, To, Path, Build)               :-
+    stop(Here, To, Path, Build);
+    descend(Here, To, Path, [Here|Build]).
 
-descend(Next, To, Path, Build) :-
+descend(Here, To, Path, Build) :-
+    move(Here, Next),
     not(member(Next,Build)),
     search(Next, To, Path, Build).
 
-stop(From, From, Path, Build) :-
+stop(Here, Here, Path, Build) :-
     Path = Build.
 
-stop(From, To, Path, Build) :-
-    has(From, To), stop(From, From, Path, Build).
+stop(Here, To, Path, Build) :-
+    has(Here, To),
+    stop(Here, Here, Path, Build).
