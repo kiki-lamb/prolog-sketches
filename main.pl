@@ -1,4 +1,4 @@
-%:- initialization loop_a
+:- initialization(main).
 :- consult("facts.pl").
 :- consult("graph.pl").
  
@@ -12,4 +12,9 @@ loop_a :-
     format("~w could ~w ~w.\n", [P,A,X]),
     fail.
 
-main :- loop; halt(0).
+loop_paths :-
+    path(_,_,P),
+    format("~w\n", [P]),
+    fail.
+    
+main :- loop_paths; halt(0).
