@@ -2,6 +2,7 @@
 
 could(   Person, Action, Thing      )   :- could(Person, Action, Thing, _).
 could(   Person, Action, Thing, Path)   :-
+    
     a(   Person, Action, Thing      ),
     path(Person, Thing,  Path       ).
 
@@ -18,6 +19,10 @@ a(Person,    smoke,  X)    :- person(   Person   ),    thing(    X),     smoke( 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+type(Person, person) :- person(Person).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 traverse(From, To):-
     ((human(From), appliance(To));
      (person(From), ((person(To), (like(From,To);
@@ -27,9 +32,17 @@ traverse(From, To):-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+typed_path(Type, From, To)              :- typed_path(Type, From, To, _).
+typed_path(Type, From, To, Path)        :-
+    type(From, Type),
+    path(From, To, Path).
+
+person_path(From, To)                   :- person_path(From, To, _).
+person_path(From, To, Path)             :-
+    typed_path(person, From, To, Path).
+
 path(From, To)                          :- path(From, To, _).
-%path(From, [], Path)                    :- entity(From), Path = [].
-path(X, [], Path)                       :- (?= X), Path = [].
+path(_, [], Path)                       :- Path = [].
 path(From, To, Path)                    :-
     person(From),
     path(From, To, TmpPath, []),

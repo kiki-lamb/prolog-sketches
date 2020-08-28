@@ -18,7 +18,7 @@ loop_paths :-
     fail.
 
 ploop_paths :-
-    path(W,T,P),
+    typed_path(person,W,T,P),
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     
