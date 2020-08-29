@@ -7,7 +7,7 @@ move(Here, To)         :- (person(Here),
                                           like(To,Here))) ;
                             store(To), shop(Here,To))).
 
-stop(Location, Target) :- (store(Location);
+stop(Location, Target) :- (store(Location) ;
                            appliance(Location)),
                           has(Location, Target).
 
