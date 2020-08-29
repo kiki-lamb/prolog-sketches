@@ -1,7 +1,13 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+appliance(dish_washer).
+appliance(sink).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 thing(nail).
 thing(weed).
 thing(cigarette).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 beverage(energy_drink).
 beverage(pepsi).
 beverage(water).
@@ -53,6 +59,3 @@ like(sybil, kiki).
 like(kiki,  boson).
 like(higgy, boson).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-appliance(dish_washer).
-appliance(sink).
