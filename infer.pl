@@ -23,7 +23,7 @@ couldnt(Person, Action, Thing      ) :- couldnt(Person, Action, Thing, _).
 couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-a(Person,    shower, [])   :- human(    Person),    apath(    Person, water               ).
+a(Person,    shower, [])   :- human(    Person   ), apath(    Person, water               ).
 a(Person,    starve, [])   :- person(   Person   ), couldnt(  Person, eat,    _           ).
 a(Appliance, break,  [])   :- appliance(Appliance), couldnt(  _,      repair, Appliance   ).
 

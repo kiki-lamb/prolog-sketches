@@ -1,4 +1,3 @@
-
 person(sybil).
 person(kiki).
 person(higgy).
@@ -22,7 +21,7 @@ shop(sybil, mr_meat).
 shop(sybil, dave).
 
 like(sybil, kiki).
-like(kiki, boson).
+like(kiki,  boson).
 like(higgy, boson).
 
 appliance(dish_washer).

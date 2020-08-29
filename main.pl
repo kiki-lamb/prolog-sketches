@@ -23,5 +23,5 @@ apaths           :- apath(W,T,P),
                     format("~w -> ~w: ~w\n", [W,T,P]),
                     fail.
     
-main             :- paths;
+main             :- apaths;
                     true.
