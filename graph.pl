@@ -1,16 +1,16 @@
-pred(L) :- G =.. L, call(G).
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-path(Start, Here, Move, To, Stop) :-
-    path(Start, Here, Move, To, Stop, _).
+path(Start, Here, Move, To, Stop, Path) :-
+    path(Start, Here, Move, To, Stop, Path).
 
-path(Start, Here, _, [], _, Path) :-
-    call(Start, Here),
-    Path = [].
 
 path(Start, Here, Move, To, Stop, Path) :-
     call(Start, Here),
+    qpath(Start, Here, Move, To, Stop, Path).
+
+qpath(_, _, [], _, Path) :-
+    Path = [].
+
+qpath(Here, Move, To, Stop, Path) :-
     search([], Here, Move, To, Stop, Tmp),
     reverse([To|Tmp], Path).
 
