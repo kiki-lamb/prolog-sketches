@@ -3,12 +3,11 @@ start(X)                               :- person(X) ;
                                           appliance(X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-move(Here, To)                         :- person(Here),
-                                          (\+ cat(Here),
-                                           (appliance(To)) ;
+move(Here, To)                         :- (person(Here),
+                                          (wwould(Here, operate, To)));
 
-                                           (person(To), would(To, help, Here)) ;
-                                           store(To), would(Here, shop_at, To)).
+                                          person(To), would(To, help, Here) ;
+                                          store(To), would(Here, shop_at, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 stop(Here, To)                         :- (store(Here) ;
