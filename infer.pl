@@ -25,7 +25,6 @@ couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 a(Person,    shower, [])   :- human(    Person   ), apath(    Person, water               ).
 a(Person,    starve, [])   :- person(   Person   ), couldnt(  Person, eat,    _           ).
 a(Appliance, break,  [])   :- appliance(Appliance), couldnt(  _,      repair, Appliance   ).
-
 a(Person,    chase,  X)    :- cat(      Person   ), cat(      X),     chase(  Person, X   ).
 a(Person,    drink,  X)    :- person(   Person   ), thing(    X),     drink(  Person, X   ).
 a(Person,    eat,    X)    :- person(   Person   ), thing(    X),     eat(    Person, X   ).
