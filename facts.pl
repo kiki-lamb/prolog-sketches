@@ -1,4 +1,3 @@
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 dislike(kiki, cat_food).
 dislike(kiki, tequila).
@@ -14,9 +13,6 @@ object(X)              :- food(X) ;
 soft_drink(X)         :- beverage(X), 
                          water \= X,
                          \+ alcohol(X).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% beverage(X)           :- alcohol(X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 food(X)               :- vegetable(X) ;

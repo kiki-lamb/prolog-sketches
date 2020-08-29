@@ -38,7 +38,7 @@ would(Person,    chase,     X)         :- cat(Person),
                                           cat(X).
 would(Person,    drink,     X)         :- object(X),
                                           drink(Person, X).
-would(Person,    eat,       X)         :- thing(X),
+would(Person,    eat,       X)         :- food(X),
                                           eat(Person, X).
 would(Person,    shop_at,   X)         :- store(X),
                                           shop_at(Person, X).
