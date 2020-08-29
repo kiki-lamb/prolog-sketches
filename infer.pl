@@ -51,7 +51,7 @@ wwould(Appliance, break,     Appliance  ) :- appliance(Appliance),
 
 wwould(Person,    buy,       Object     ) :- object(Object),
                                              has(Store, Object),
-                                             wwould(Person, shop_at, Store).
+                                             would(Person, shop_at, Store).
 
 wwould(Cat,       chase,     C2         ) :- cat(Cat),
                                              cat(C2),
@@ -63,7 +63,7 @@ wwould(Person,    drink,     Drink      ) :- object(Drink),
 wwould(Person,    eat,       Food       ) :- food(Food),
                                              eat(Person, Food).
 
-wwould(Person,    get_help,  P2         ) :- wwould(P2, help, Person).
+wwould(Person,    get_help,  P2         ) :- would(P2, help, Person).
 
 wwould(Person,    help,      P2         ) :- person(Person),
                                              person(P2),

@@ -27,7 +27,7 @@ has(chicken_freak,       cat_food).
 has(chicken_freak,       cigarette).
 has(home_hardware,       screw).
 has(dave,                weed).
-has(sybil, pepperoni).
+%has(sybil, peppaeroni).
 has(sink, water)      :-
 %    could(_, operate, sink),
     could(_, repair, sink),
