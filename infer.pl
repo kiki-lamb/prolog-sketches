@@ -32,8 +32,8 @@ couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 would(Person,    shower,  Person)    :- human(Person),
                                         apath(Person, water).
 would(Person,    starve,  Person)    :- couldnt(Person, eat, _).
-would(Appliance, break,   Appliance) :- appliance(Appliance),
-                                        couldnt(_,  repair, Appliance).
+would(Appliance, break,   Appliance) :- appliance(Appliance). %,
+%                                        couldnt(_,  repair, Appliance).
 would(Person,    chase,   X)         :- cat(Person),
                                         cat(X),
                                         chase(Person, X).
