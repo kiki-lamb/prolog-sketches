@@ -5,13 +5,13 @@ path(   Start, Here, Move, To,   Stop, Path) :- call(Start, Here),
                                                 reverse([To|Tmp], Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-search( Build, Here, Move, To,   Stop, Path) :- found(Build, Here, Move, To, Stop, Path) ;
+search( Build, Here, Move, To,   Stop, Path) :- found(Build, Here, To, Stop, Path) ;
                                                 descend([Here|Build], Here, Move, To, Stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-found(  Build, Here, _,    Here, _,    Path) :- Path = Build. 
-found(  Build, Here, _,    To,   Stop, Path) :- call(Stop, Here, To),
-                                                found([Here|Build], Here, _, Here, Stop, Path).
+found(  Build, Here,       Here, _,    Path) :- Path = Build. 
+found(  Build, Here,       To,   Stop, Path) :- call(Stop, Here, To),
+                                                found([Here|Build], Here, Here, Stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 descend(Build, Here, Move, To,   Stop, Path) :- call(Move, Here, Next),
