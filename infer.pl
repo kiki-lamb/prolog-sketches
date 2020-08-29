@@ -20,7 +20,8 @@ ppath(Here, To, Path)                  :- path(start, Here, move, To, stop, Path
 could(  Person, Action, Thing      )   :- could(Person, Action, Thing, _      ).
 could(  Person, Action, Thing, Path)   :- % format("Could ~w ~w ~w?\n", [Person, Action, Thing]),
                                           X = (would(Person, Action, Thing         ),
-                                               call((ppath(Person,Thing,Path)     ))),
+                                               call((ppath(Person,Thing,Path),
+                                                     !))),
 %                                          ((X, format("~w CAN ~w ~w?\n", [Person, Action, Thing]));
 %                                           format("~w CANNOT ~w ~w?\n", [Person, Action, Thing])),
                                           X.
@@ -39,12 +40,10 @@ would( Start,     Action,    X          ) :-
     start(Start), % bind early for ordering.
     wwould(Start, Action, X).
 
-wwould(Person,    get_help,  P2         ) :- wwould(P2, help, Person).
-
-wwould(Person,    help,      P2         ) :- person(Person),
-                                             person(P2),
-                                             (like(Person,P2) ;
-                                              like(P2,Person)).
+wwould(Person,    borrow,    Object     ) :- person(Person),
+                                             object(Object),
+                                             would(Someone, buy, Object),
+                                             ppath(Person, Someone).
 
 wwould(Appliance, break,     Appliance  ) :- appliance(Appliance),
                                              human(Human),
@@ -63,6 +62,13 @@ wwould(Person,    drink,     Drink      ) :- object(Drink),
 
 wwould(Person,    eat,       Food       ) :- food(Food),
                                              eat(Person, Food).
+
+wwould(Person,    get_help,  P2         ) :- wwould(P2, help, Person).
+
+wwould(Person,    help,      P2         ) :- person(Person),
+                                             person(P2),
+                                             (like(Person,P2) ;
+                                              like(P2,Person)).
 
 wwould(Human,     operate,   Appliance  ) :- human(Human),    
                                              appliance(Appliance).
@@ -87,8 +93,9 @@ wwould(Human,     shop_at,   Store      ) :- human(Human),
                                              store(Store),
                                              shop_at(Human, Store).
 
-wwould(Human,     shower,    Human      ) :- human(Human),
-                                             ppath(Human, water).
+wwould(Human,     shower,    Appliance  ) :- human(Human),
+                                             appliance(Appliance),
+                                             provider(Appliance, water).
 
 wwould(Person,    starve,    Person     ) :- person(Person),
                                              could_not(Person, eat, _).
