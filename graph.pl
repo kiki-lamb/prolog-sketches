@@ -13,7 +13,7 @@ path(Start, Here, Move, To, Stop, Path) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 search(Build, Here, Move, To, Stop, Path) :-
-    found(Build, Here, Move, To, Stop, Path);
+    found(Build, Here, Move, To, Stop, Path) ;
     descend([Here|Build], Here, Move, To, Stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
