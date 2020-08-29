@@ -36,46 +36,47 @@ would( Start,     Action,    X          ) :-
 wwould(Person,    get_help,  P2         ) :- wwould(P2, help, Person).
 
 wwould(Person,    help,      P2         ) :- person(Person),
-                                            person(P2),
-                                            (like(Person,P2) ;
-                                             like(P2,Person)).
+                                             person(P2),
+                                             (like(Person,P2) ;
+                                              like(P2,Person)).
 
 wwould(Appliance, break,     Appliance  ) :- could_not(_,  repair, Appliance).
 
 wwould(Person,    buy,       Object     ) :- object(Object),
-                                            has(Store, Object),
-                                            wwould(Person, shop_at, Store).
+                                             has(Store, Object),
+                                             wwould(Person, shop_at, Store).
 
 wwould(Person,    chase,     Cat        ) :- cat(Person),
-                                            cat(Cat).
+                                             cat(Cat).
 
 wwould(Person,    drink,     Drink      ) :- object(Drink),
-                                            drink(Person, Drink).
+                                             drink(Person, Drink).
 
 wwould(Person,    eat,       Food       ) :- food(Food),
-                                            eat(Person, Food).
+                                             eat(Person, Food).
 
 wwould(Human,     operate,   Appliance  ) :- human(Human),    
-                                            appliance(Appliance).
+                                             appliance(Appliance).
 
 wwould(Person,    pet,       Cat        ) :- cat(Cat),                                        
-                                            wwould(Person, help, Cat).
+                                             wwould(Person, help, Cat).
 
 wwould(Human,     repair,     Appliance ) :- human(Human),
-                                            appliance(Appliance),
-                                            ppath(Human, screw).
+                                             appliance(Appliance),
+                                             ppath(Human, screw).
 
 wwould(Person,    scare_off, Cat        ) :- cat(Cat),
-                                            would_not(Person, help, cat).
+                                             would_not(Person, help, cat).
 
 wwould(Person,    smoke,     Thing      ) :- thing(Thing),
                                              smoke(Person, Thing).
 
 wwould(Human,     shop_at,   Store      ) :- human(Human),
-                                            store(Store),
-                                            shop_at(Human, Store).
+                                             store(Store),
+                                             shop_at(Human, Store).
 
 wwould(Human,     shower,    Human      ) :- human(Human),
-                                            ppath(Human, water).
+                                             ppath(Human, water).
 
-wwould(Person,    starve,    Person     ) :- could_not(Person, eat, _).
+wwould(Person,    starve,    Person     ) :- person(Person),
+                                             could_not(Person, eat, _).
