@@ -81,6 +81,7 @@ wwould(   Human,     repair,     Appliance  ) :- human(Human),
 
 wwould(   Person,    scare_off,  Cat        ) :- person(Person),
                                                  cat(Cat),
+                                                 Person \== Cat,
                                                  would_not(Person, help, Cat).
 
 wwould(   Person,    smoke,      Thing      ) :- thing(Thing),
