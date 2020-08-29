@@ -15,7 +15,7 @@ possible_paths :- person(W),
                          [W, A, T, P]),
                   fail.
 
-desires        :- a(P,A,X),
+desires        :- would(P,A,X),
                   format("~w would ~w ~w.\n", [P,A,X]),
                   fail.  
 
