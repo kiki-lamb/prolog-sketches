@@ -15,10 +15,28 @@ ppath(    Here,   To                        ) :- ppath(Here, To, _).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:- dynamic m_path/3.    
+:- dynamic m_path/3.
+
+recover_m_path(Here, To, Path) :-
+    m_path(Here, To, Path);
+    m_path(To, Here, Tmp),
+    format(" ... flip!\n", []),
+    reverse(Tmp, Path).
+
+
 ppath(    Here,   To,     Path              ) :-
 %    format("Find ~w -> ~w.\n", [Here, To]),
-    (m_path(Here, To, Path), !,
+    (
+
+        (m_path(Here, To, Path);
+         (m_path(To, Here, Tmp),
+          format(" ... flip!\n", []),
+          reverse(Tmp, Path)))
+
+
+
+
+     , !,
      format("   ... recover ~w -> ~w: ~w.\n", [Here, To, Path]),
      true);
     (path(start, Here, move, To, stop, Path),
