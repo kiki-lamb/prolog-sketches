@@ -19,7 +19,7 @@ ppath(Here, To, Path)                  :- path(start, Here, move, To, stop, Path
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 could(  Person, Action, Thing      )   :- could(Person, Action, Thing, _      ).
 could(  Person, Action, Thing, Path)   :- would(Person, Action, Thing         ),
-                                          call((ppath(Person,Thing,Path),   !)).
+                                          call((ppath(Person,Thing,Path)     )).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 could_not(Person, Action, Thing      ) :- could_not(Person, Action, Thing, _   ).
@@ -33,8 +33,10 @@ would_not(X, Action, Y) :- \+ would(X, Action, Y).
 
 would(Person,    help,      P2         ) :- person(Person),
                                             person(P2),
-                                            (like(Person, P2) ;
-                                             like(P2, Person)).
+                                            (like(Person,P2) ;
+                                             like(P2,Person)).
+
+would(Person,    starve,    Person     ) :- could_not(Person, eat, _).
 
 would(Appliance, break,     Appliance  ) :- could_not(_,  repair, Appliance).
 
@@ -50,7 +52,7 @@ would(Person,    eat,       Food       ) :- food(Food),
 would(Person,    pet,       Cat        ) :- cat(Cat),                                        
                                             would(Person, help, Cat).
 
-would(Human,    repair,     Appliance  ) :- human(Human),
+would(Human,     repair,     Appliance ) :- human(Human),
                                             appliance(Appliance),
                                             ppath(Human, screw).
 
@@ -66,8 +68,6 @@ would(Human,     shop_at,   Store      ) :- human(Human),
 
 would(Human,     shower,    Human      ) :- human(Human),
                                             ppath(Human, water).
-
-would(Person,    starve,    Person     ) :- could_not(Person, eat, _).
 
 would(Human,     operate,   Appliance  ) :- human(Human),    
                                             appliance(Appliance).
