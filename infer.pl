@@ -18,6 +18,8 @@ ppath(    Here,   To,     Path              ) :- path(start, Here, move, To, sto
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %:- table could/3.
+:- op(200, xfy, could).
+could(    Person, Action                    ) :- could(Person, Action, _              ).
 could(    Person, Action, Thing             ) :- could(Person, Action, Thing, _       ).
 could(    Person, Action, Thing, Path       ) :- (would(Person, Action, Thing         ),
                                                   call((ppath(Person,Thing,Path),  !))).

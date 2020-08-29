@@ -2,13 +2,10 @@ vegetable(cabbage).
 vegetable(turnip).
 vegetable(potato).
 
-vegetable(Hybrid) :-
-    functor(Hybrid, hybrid, 2),
-    arg(1, Hybrid, X),
-    arg(2, Hybrid, Y),
-    X @< Y, 
-    vegetable(X),
-    vegetable(Y).
+% vegetable(hybrid(X,Y)) :-
+%     X @< Y,
+%     vegetable(X),
+%     vegetable(Y).
 
 loop :- 
     % Desired behaviour: 
@@ -18,6 +15,12 @@ loop :-
     vegetable(X),
     format("Vegetable: ~w\n", [X]),
     fail.
+
+
+:- op(500, xf, is_dead).
+
+is_dead(X) :-
+  vegetable(X).
 
 main :- % Query this...
     loop ;
