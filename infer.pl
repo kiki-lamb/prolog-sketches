@@ -6,9 +6,9 @@ start(X)                               :- person(X) ;
 move(Here, To)                         :- person(Here),
                                           (\+ cat(Here),
                                            (appliance(To)) ;
-                                           (person(To), (like(Here,To) ;
-                                                         like(To,Here))) ;
-                                           store(To), shop_at(Here,To)).
+
+                                           (person(To), would(To, help, Here)) ;
+                                           store(To), would(Here, shop_at, To)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 stop(Here, To)                         :- (store(Here) ;
@@ -35,6 +35,9 @@ would(X, Action, Thing)                 :- wwould(X, Action, Thing).
 wwould(Appliance, break,     Appliance) :- appliance(Appliance),
                                            couldnt(_,  repair, Appliance).
 
+wwould(Person,    help,      X)         :- (like(Person,X) ;
+                                            like(X,Person)).
+
 wwould(Person,    chase,     X)         :- cat(Person),
                                            cat(X).
 
@@ -44,7 +47,8 @@ wwould(Person,    eat,       X)         :- food(X),
                                            eat(Person, X).
 wwould(Person,    pet,       X)         :- human(Person),
                                            cat(X),                                        
-                                           (like(Person,X) ; like(X,Person)).
+                                           (like(Person,X) ;
+                                            like(X,Person)).
 
 wwould(Person,    repair,    X)         :- human(Person),
                                            appliance(X),
@@ -52,7 +56,8 @@ wwould(Person,    repair,    X)         :- human(Person),
 
 wwould(Person,    scare_off, X)         :- human(Person),
                                            cat(X),                                        
-                                           \+ (like(Person,X) ; like(X,Person)).
+                                           \+ (like(Person,X) ;
+                                               like(X,Person)).
 
 wwould(Person,    shop_at,   X)         :- store(X),
                                            shop_at(Person, X).
@@ -65,3 +70,6 @@ wwould(Person,    smoke,     X)         :- thing(X),
 
 wwould(Person,    starve,    Person)    :- couldnt(Person, eat, _).
 
+wwould(Person, operate, Appliance) :-
+    \+ cat(Person),
+    (appliance(Appliance)).
