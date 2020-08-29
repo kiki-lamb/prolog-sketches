@@ -33,12 +33,12 @@ would( Start,     Action,    X          ) :-
     start(Start), % bind early for ordering.
     wwould(Start, Action, X).
 
+wwould(Person,    get_help,  P2         ) :- wwould(P2, help, Person).
+
 wwould(Person,    help,      P2         ) :- person(Person),
                                             person(P2),
                                             (like(Person,P2) ;
                                              like(P2,Person)).
-
-wwould(Person,    get_help,  P2         ) :- wwould(P2, help, Person).
 
 wwould(Appliance, break,     Appliance  ) :- could_not(_,  repair, Appliance).
 
