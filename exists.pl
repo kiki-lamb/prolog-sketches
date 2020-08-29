@@ -39,10 +39,10 @@ cat(higgy).
 cat(boson).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-store(freshco).
+%store(freshco).
 store(home_hardware).
 store(lcbo).
-store(mr_meat).
+% store(mr_meat).
 store(dave).
 store(chicken_freak).
 
