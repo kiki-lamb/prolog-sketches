@@ -1,6 +1,20 @@
+:- initialization(main).
+
 vegetable(cabbage).
 vegetable(turnip).
 vegetable(potato).
+
+% vegetable(Hybrid) :-
+%     functor(Hybrid, hybrid, 2),
+%     arg(1, Hybrid, Left),
+%     arg(2, Hybrid, Right),
+%
+%     sort([X,Y], L),
+%     L == [X,Y],
+%     atom(Left),
+%     atom(Right),
+%     vegetable(Left),
+%     vegetable(Right).
 
 vegetable(hybrid(X,Y)) :-
     atom(X),
@@ -17,7 +31,7 @@ loop :-
  	fail.
 
 main :-
+    vegetable(hybrid(cabbage,turnip)),
+    write("Yum.\n"),
     loop;
-    vegetable(hybrid(cabbage,turnip)), 
-    true,
-    write("Yum.").
+    halt.
