@@ -24,7 +24,7 @@ could(  Person, Action, Thing, Path) :- would(Person, Action, Thing         ),
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 couldnt(Person, Action, Thing      ) :- couldnt(Person, Action, Thing, _    ).
-couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
+couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path), !.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 would(Person,    shower, [])         :- human(Person),

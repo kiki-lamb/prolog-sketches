@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 path(   Start, Here, Move, To,   Stop      ) :- path(Start, Here, Move, To, Stop, _).
-path(   _,     _,    _,   [],    _,    Path) :- Path = [].
+path(   Start, Here, _,    [],   _,    Path) :- call(Start, Here), Path = [].
 path(   Start, Here, Move, To,   Stop, Path) :- call(Start, Here),
                                                 search(Here, Move, To, Stop, Tmp),
                                                 reverse([To|Tmp], Path).
