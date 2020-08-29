@@ -28,7 +28,5 @@ ppaths(W,T,P)  :- ppath(W,T,P),
                   format("~w -> ~w: ~w\n", [W,T,P]),
                   fail.
     
-main           :- ppaths ;
-                  nl ,
-                  possible_paths ;
+main           :- possible_paths ;
                   true.

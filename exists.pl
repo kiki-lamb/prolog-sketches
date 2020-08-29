@@ -18,9 +18,18 @@ alcohol(tequila).
 alcohol(vodka).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- dynamic(vegetable/1).
 vegetable(cabbage).
 vegetable(turnip). 
 vegetable(potato). 
+
+hybrid(_,_).
+hybrid(X,Y) :-
+    vegetable(X),
+    vegetable(Y),
+    X \== Y.
+    assert(vegetable(hybrid(X,Y))).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 meat(turkey).
@@ -61,5 +70,6 @@ dislike(kiki, tequila).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 like(sybil, kiki).
 like(kiki,  boson).
+like(kiki,  higgy).
 like(higgy, boson).
 
