@@ -29,47 +29,49 @@ could_not(Person, Action, Thing, Path) :- \+ could( Person, Action, Thing, Path)
 
 would_not(X, Action, Y) :- \+ would(X, Action, Y).
 
-would(Person,    help,      X        ) :- person(Person),
-                                          person(X),
-                                          (like(Person,X) ;
-                                           like(X,Person)).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-would(Appliance, break,     Appliance) :- could_not(_,  repair, Appliance).
+would(Person,    help,      P2         ) :- person(Person),
+                                            person(P2),
+                                            (like(Person, P2) ;
+                                             like(P2, Person)).
 
-would(Person,    chase,     X        ) :- cat(Person),
-                                           cat(X).
+would(Appliance, break,     Appliance  ) :- could_not(_,  repair, Appliance).
 
-would(Person,    drink,     X        ) :- object(X),
-                                           drink(Person, X).
+would(Person,    chase,     Cat        ) :- cat(Person),
+                                            cat(Cat).
 
-would(Person,    eat,       X        ) :- food(X),
-                                           eat(Person, X).
+would(Person,    drink,     Drink      ) :- object(Drink),
+                                            drink(Person, Drink).
 
-would(Person,    pet,       X        ) :- cat(X),                                        
-                                          would(Person, help, X).
+would(Person,    eat,       Food       ) :- food(Food),
+                                            eat(Person, Food).
 
-would(Person,    repair,    X        ) :- human(Person),
-                                          appliance(X),
-                                          ppath(Person, screw).
+would(Person,    pet,       Cat        ) :- cat(Cat),                                        
+                                            would(Person, help, Cat).
 
-would(Person,    scare_off, X        ) :- cat(X),
-                                          would_not(Person, help, cat).
+would(Human,    repair,     Appliance  ) :- human(Human),
+                                            appliance(Appliance),
+                                            ppath(Human, screw).
 
-would(Person,    smoke,     X        ) :- thing(X),
-                                           smoke(Person, X).
+would(Person,    scare_off, Cat        ) :- cat(Cat),
+                                            would_not(Person, help, cat).
 
-would(Person,    shop_at,   X        ) :- human(Person),
-                                          store(X),
-                                          shop_at(Person, X).
+would(Person,    smoke,     Thing      ) :- thing(Thing),
+                                             smoke(Person, Thing).
 
-would(Person,    shower,    Person)    :- human(Person),
-                                          ppath(Person, water).
+would(Human,     shop_at,   Store      ) :- human(Human),
+                                            store(Store),
+                                            shop_at(Human, Store).
 
-would(Person,    starve,    Person   ) :- could_not(Person, eat, _).
+would(Human,     shower,    Human      ) :- human(Human),
+                                            ppath(Human, water).
 
-would(Person,    operate,   Appliance) :- human(Person),    
-                                          appliance(Appliance).
+would(Person,    starve,    Person     ) :- could_not(Person, eat, _).
 
-would(Person,    buy,       Object   ) :- object(Object),
-                                          has(Store, Object),
-                                          would(Person, shop_at, Store).
+would(Human,     operate,   Appliance  ) :- human(Human),    
+                                            appliance(Appliance).
+
+would(Person,    buy,       Object     ) :- object(Object),
+                                            has(Store, Object),
+                                            would(Person, shop_at, Store).
