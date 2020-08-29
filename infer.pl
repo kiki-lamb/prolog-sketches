@@ -67,7 +67,7 @@ wwould(Human,     operate,   Appliance  ) :- human(Human),
 
 wwould(Person,    pet,       Cat        ) :- human(Person),
                                              cat(Cat),
-                                             wwould(Person, help, Cat).
+                                             would(Person, help, Cat).
 
 wwould(Human,     repair,    Appliance  ) :- human(Human),
                                              appliance(Appliance),
