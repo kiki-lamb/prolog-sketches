@@ -25,7 +25,7 @@ has(lcbo, X)          :- alcohol(X).
 has(chicken_freak, X) :- soft_drink(X).
 has(chicken_freak,       cat_food).
 has(chicken_freak,       cigarette).
-has(home_hardware,       nail).
+has(home_hardware,       screw).
 has(dave,                weed).
 has(sink, water)      :- could(_, repair, sink),
                          !.

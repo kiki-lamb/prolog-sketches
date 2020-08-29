@@ -3,7 +3,7 @@ appliance(dish_washer).
 appliance(sink).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-thing(nail).
+thing(screw).
 thing(weed).
 thing(cigarette).
 

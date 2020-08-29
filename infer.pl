@@ -46,7 +46,7 @@ would(Person,    smoke,     X)         :- thing(X),
                                           smoke(Person, X).
 would(Person,    repair,    X)         :- human(Person),
                                           appliance(X),
-                                          apath(Person, nail).
+                                          apath(Person, screw).
 would(Person,    pet,       X)         :- human(Person),
                                           cat(X),                                        
                                           (like(Person,X) ; like(X,Person)).
