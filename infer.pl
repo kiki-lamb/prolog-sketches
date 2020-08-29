@@ -17,11 +17,12 @@ ppath(    Here,   To                        ) :- ppath(Here, To, _).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 :- dynamic m_path/3.
 
-recover_m_path(Here, To, Path) :- %fail.
-    (m_path(Here, To, Path);
-     m_path(To, Here, Tmp),
+recover_m_path(_,    _,  _   ) :- fail.
+%recover_m_path(Here, To, Path) :- 
+%    (m_path(Here, To, Path);
+%     m_path(To, Here, Tmp),
 %     format("  ... flip ~w: !\n", [Tmp]),
-     reverse(Tmp, Path)). % ,
+%     reverse(Tmp, Path)). % ,
 %    format("  ... recover ~w -> ~w: ~w.\n", [Here, To, Path]).
 
 ppath(    Here,   To,     Path              ) :-
