@@ -18,18 +18,17 @@ alcohol(tequila).
 alcohol(vodka).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:- dynamic(vegetable/1).
+%:- dynamic(vegetable/1).
 vegetable(cabbage).
 vegetable(turnip). 
 vegetable(potato). 
 
-hybrid(_,_).
-hybrid(X,Y) :-
+vegetable([X|Y]) :-
+    [Z|Zs] = Y,
+    Zs == [],
+    X \== Z,
     vegetable(X),
-    vegetable(Y),
-    X \== Y.
-    assert(vegetable(hybrid(X,Y))).
-
+    vegetable(Z).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 meat(turkey).
