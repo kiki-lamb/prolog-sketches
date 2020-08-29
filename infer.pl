@@ -1,5 +1,4 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 start(X) :- person(X).
 
 move(Here, To) :-
@@ -19,7 +18,6 @@ apath(Here, To, Path) :-
     path(start, Here, move, To, stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 could(   Person, Action, Thing      )   :- could(Person, Action, Thing, _).
 could(   Person, Action, Thing, Path)   :-    
     a(   Person, Action, Thing      ),
@@ -32,7 +30,6 @@ couldnt(   Person, Action, Thing, Path) :-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 a(Person,    shower, [])   :- human(Person),           apath(    Person, water               ).
 a(Person,    starve, [])   :- person(   Person   ),  couldnt(    Person, eat,    _           ).
 a(Appliance, break,  [])   :- appliance(Appliance),  couldnt(    _,      repair, Appliance   ).

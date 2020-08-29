@@ -9,7 +9,7 @@ possible :-
     format("~w could ~w ~w.\n", [W, A, T]),
     fail.
 
-possible_paths :-
+possible_w_paths :-
     person(W),
     could(W,A,T,P),
     format("~w could ~w ~w: ~w.\n", [W, A, T, P]),
@@ -20,9 +20,9 @@ desires :-
     format("~w would ~w ~w.\n", [P,A,X]),
     fail.  
 
-loop_paths :-
+paths :-
     apath(W,T,P),
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     
-main :- loop_paths; true. % halt.
+main :- paths; true. % halt.
