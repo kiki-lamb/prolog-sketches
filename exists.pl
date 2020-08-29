@@ -23,12 +23,16 @@ vegetable(cabbage).
 vegetable(turnip). 
 vegetable(potato). 
 
-vegetable([X|Y]) :-
-    [Z|Zs] = Y,
-    Zs == [],
-    X \== Z,
+vegetable(hybrid(X,Y)) :-
+    atom(X),
+    atom(Y),
+    X \== Y,
+    sort([X,Y], L),
+    L == [X,Y],
     vegetable(X),
-    vegetable(Z).
+    vegetable(Y).
+    
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 meat(turkey).
