@@ -29,9 +29,8 @@ would_not(X, Action, Y) :- \+ would(X, Action, Y).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-would( Start,     Action,    X          ) :-
-    start(Start), % bind early for ordering.
-    wwould(Start, Action, X).
+would( Start,     Action,    X          ) :- start(Start), % bind early for ordering.
+                                             wwould(Start, Action, X).
 
 wwould(Person,    borrow,    Object     ) :- person(Person),
                                              object(Object),
