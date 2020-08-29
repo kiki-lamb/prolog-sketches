@@ -9,10 +9,8 @@ search( Build, Here, Move, To,   Stop, Path) :- found(Build, Here, To, Stop, Pat
                                                 descend([Here|Build], Here, Move, To, Stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-found(  Build, Here,       Here, _,    Path) :- % print("CASE 1"),
-                                                Path = Build. 
+found(  Build, Here,       Here, _,    Path) :- Path = Build. 
 found(  Build, Here,       To,   Stop, Path) :- call(Stop, Here, To),
-%                                                print("CASE 2"),
                                                 found([Here|Build], Here, Here, Stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
