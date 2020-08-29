@@ -6,14 +6,13 @@
 
 possible        :- possible(_,_,_).
 possible(W,A,T) :- could(W,A,T),
-                  format("~w could ~w ~w.\n",
-                         [W, A, T]),
-                  fail.
+                   format("~w could ~w ~w.\n",
+                          [W, A, T]),
+                   fail.
 
-       :- possible_paths(_,_,_,_).
+possible_paths          :- possible_paths(_,_,_,_).
 possible_paths(P)       :- possible_paths(_,_,_,P).
 possible_paths(W,A,T,P) :-
-    person(W),
     could(W,A,T,P),
     format("~w could ~w ~w: ~w.\n",
            [W, A, T, P]),
@@ -31,5 +30,5 @@ ppaths(W,T,P)  :- ppath(W,T,P),
     
 main           :- ppaths ;
                   nl ,
-                  possible ;
+                  possible_paths ;
                   true.
