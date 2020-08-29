@@ -29,27 +29,39 @@ couldnt(Person, Action, Thing      )   :- couldnt(Person, Action, Thing, _    ).
 couldnt(Person, Action, Thing, Path)   :- \+ could(Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-would(Person,    shower,    Person)    :- human(Person),
-                                          ppath(Person, water).
-would(Person,    starve,    Person)    :- couldnt(Person, eat, _).
-would(Appliance, break,     Appliance) :- appliance(Appliance),
-                                          couldnt(_,  repair, Appliance).
-would(Person,    chase,     X)         :- cat(Person),
-                                          cat(X).
-would(Person,    drink,     X)         :- object(X),
-                                          drink(Person, X).
-would(Person,    eat,       X)         :- food(X),
-                                          eat(Person, X).
-would(Person,    shop_at,   X)         :- store(X),
-                                          shop_at(Person, X).
-would(Person,    smoke,     X)         :- thing(X),
-                                          smoke(Person, X).
-would(Person,    repair,    X)         :- human(Person),
-                                          appliance(X),
-                                          ppath(Person, screw).
-would(Person,    pet,       X)         :- human(Person),
-                                          cat(X),                                        
-                                          (like(Person,X) ; like(X,Person)).
-would(Person,    scare_off, X)         :- human(Person),
-                                          cat(X),                                        
-                                          \+ (like(Person,X) ; like(X,Person)).
+
+would(X, Action, Thing)                 :- wwould(X, Action, Thing).
+
+wwould(Appliance, break,     Appliance) :- appliance(Appliance),
+                                           couldnt(_,  repair, Appliance).
+
+wwould(Person,    chase,     X)         :- cat(Person),
+                                           cat(X).
+
+wwould(Person,    drink,     X)         :- object(X),
+                                           drink(Person, X).
+wwould(Person,    eat,       X)         :- food(X),
+                                           eat(Person, X).
+wwould(Person,    pet,       X)         :- human(Person),
+                                           cat(X),                                        
+                                           (like(Person,X) ; like(X,Person)).
+
+wwould(Person,    repair,    X)         :- human(Person),
+                                           appliance(X),
+                                           ppath(Person, screw).
+
+wwould(Person,    scare_off, X)         :- human(Person),
+                                           cat(X),                                        
+                                           \+ (like(Person,X) ; like(X,Person)).
+
+wwould(Person,    shop_at,   X)         :- store(X),
+                                           shop_at(Person, X).
+
+wwould(Person,    shower,    Person)    :- human(Person),
+                                           ppath(Person, water).
+
+wwould(Person,    smoke,     X)         :- thing(X),
+                                           smoke(Person, X).
+
+wwould(Person,    starve,    Person)    :- couldnt(Person, eat, _).
+
