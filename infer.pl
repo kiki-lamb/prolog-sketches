@@ -22,15 +22,15 @@ could(  Person, Action, Thing, Path)   :- would(Person, Action, Thing         ),
                                           call((ppath(Person,Thing,Path),   !)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-couldnt(Person, Action, Thing      )   :- couldnt(Person, Action, Thing, _    ).
-couldnt(Person, Action, Thing, Path)   :- \+ could(Person, Action, Thing, Path).
+could_not(Person, Action, Thing      ) :- could_not(Person, Action, Thing, _    ).
+could_not(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% would(X, Action, Thing)                 :- would(X, Action, Thing).
+would_not(X, Action, Y): \+ would(X, Action, Y).
 
 would(Appliance, break,     Appliance) :- appliance(Appliance),
-                                           couldnt(_,  repair, Appliance).
+                                           could_not(_,  repair, Appliance).
 
 would(Person,    help,      X        ) :- person(Person),
                                           person(X),
@@ -46,19 +46,15 @@ would(Person,    drink,     X        ) :- object(X),
 would(Person,    eat,       X        ) :- food(X),
                                            eat(Person, X).
 
-would(Person,    pet,       X        ) :- human(Person),
-                                           cat(X),                                        
-                                           (like(Person,X) ;
-                                            like(X,Person)).
+would(Person,    pet,       X        ) :- cat(X),                                        
+                                          would(Person, help, X).
 
 would(Person,    repair,    X        ) :- human(Person),
                                            appliance(X),
                                            ppath(Person, screw).
 
-would(Person,    scare_off, X        ) :- human(Person),
-                                           cat(X),                                        
-                                           \+ (like(Person,X) ;
-                                               like(X,Person)).
+would(Person,    scare_off, X        ) :- cat(X),
+                                          \+ would(Person, help, cat).
 
 would(Person,    smoke,     X        ) :- thing(X),
                                            smoke(Person, X).
@@ -70,7 +66,7 @@ would(Person,    shop_at,   X        ) :- human(Person),
 would(Person,    shower,    Person)    :- human(Person),
                                            ppath(Person, water).
 
-would(Person,    starve,    Person   ) :- couldnt(Person, eat, _).
+would(Person,    starve,    Person   ) :- could_not(Person, eat, _).
 
 would(Person,    operate,   Appliance) :- human(Person),    
                                           appliance(Appliance).
