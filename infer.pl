@@ -33,6 +33,7 @@ would_not(X,         Action,     Y          ) :- \+ would(X, Action, Y).
 wwould(   Person,    borrow,     Object     ) :- person(Person),
                                                  object(Object),
                                                  would(Someone, buy, Object),
+                                                 Someone \= Person,
                                                  ppath(Person, Someone).
 
 wwould(   Appliance, break,      Appliance  ) :- appliance(Appliance),
