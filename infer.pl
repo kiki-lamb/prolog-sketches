@@ -30,7 +30,7 @@ would_not(X, Action, Y) :- \+ would(X, Action, Y).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 would( Start,     Action,    X          ) :-
-    start(Start),
+    start(Start), % bind early for ordering.
     wwould(Start, Action, X).
 
 wwould(Person,    help,      P2         ) :- person(Person),
