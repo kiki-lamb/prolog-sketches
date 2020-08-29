@@ -42,10 +42,10 @@ wwould(   Person,    borrow,     Object     ) :- person(Person),
 
 wwould(   Appliance, break,      Appliance  ) :- appliance(Appliance),
                                                  human(Human),
-                                                 could_not(Human,repair, Appliance).
+                                                 could_not(Human, repair, Appliance).
 
 wwould(   Person,    buy,        Object     ) :- object(Object),
-                                                 provider(Store, Object),
+                                                 has(Store, Object),
                                                  would(Person, shop_at, Store).
 
 wwould(   Cat,       chase,      C2         ) :- cat(Cat),
