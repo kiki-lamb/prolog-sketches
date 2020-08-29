@@ -55,6 +55,10 @@ shop_at(sybil, mr_meat).
 shop_at(sybil, dave).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+dislike(kiki, cat_food).
+dislike(kiki, tequila).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 like(sybil, kiki).
 like(kiki,  boson).
 like(higgy, boson).

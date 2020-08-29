@@ -1,8 +1,4 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-dislike(kiki, cat_food).
-dislike(kiki, tequila).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 object(X)              :- food(X) ;
                           beverage(X) ;
                           alcohol(X);
