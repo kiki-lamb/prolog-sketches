@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-start(X)                             :- person(X).
+start(X)                             :- person(X); appliance(X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 move(Here, To)                       :- person(Here),
@@ -30,24 +30,19 @@ couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 would(Person,    shower,  [])        :- human(Person),
                                         apath(Person, water).
-would(Person,    starve,  [])        :- person(Person),
-                                        couldnt(Person, eat, _).
-would(Appliance, break,   [])        :- appliance(Appliance),
-                                        couldnt(_,  repair, Appliance).
+would(Person,    starve,  [])        :- couldnt(Person, eat, _).
+would(Appliance, break,   [])        :- appliance(Appliance).  %,
+%%%%%                                        couldnt(_,  repair, Appliance).
 would(Person,    chase,   X)         :- cat(Person),
                                         cat(X),
                                         chase(Person, X).
-would(Person,    drink,   X)         :- person(Person),
-                                        thing(X),
+would(Person,    drink,   X)         :- thing(X),
                                         drink(Person, X).
-would(Person,    eat,     X)         :- person(Person),
-                                        thing(X),
+would(Person,    eat,     X)         :- thing(X),
                                         eat(Person, X).
-would(Person,    shop_at, X)         :- person(Person),
-                                        store(X),
+would(Person,    shop_at, X)         :- store(X),
                                         shop_at(Person, X).
-would(Person,    smoke,   X)         :- person(Person),
-                                        thing(X),
+would(Person,    smoke,   X)         :- thing(X),
                                         smoke(Person, X).
 would(Person,    repair,  X)         :- human(Person),
                                         appliance(X),
