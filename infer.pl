@@ -17,20 +17,17 @@ ppath(    Here,   To                        ) :- ppath(Here, To, _).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 :- dynamic m_path/3.
 
-recover_m_path(Here, To, Path) :-
+recover_m_path(Here, To, Path) :- %fail.
     (m_path(Here, To, Path);
      m_path(To, Here, Tmp),
-%     format("   ... flip!\n", []),
-     reverse(Tmp, Path)),
-%    format("   ... recover_m_path ~w -> ~w: ~w.\n", [Here, To, Path]),
-    !.
+%     format("  ... flip ~w: !\n", [Tmp]),
+     reverse(Tmp, Path)). % ,
+%    format("  ... recover ~w -> ~w: ~w.\n", [Here, To, Path]).
 
 ppath(    Here,   To,     Path              ) :-
     recover_m_path(Here,To, Path);
     (path(start, Here, move, To, stop, Path),
-%     format("   ... save ~w -> ~w: ~w\n", [Here, To, Path]),
      assert(m_path(Here,To,Path)), !).
-%    format("Fail.\n\n", []),
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -52,12 +49,6 @@ would(    Start,     Action,     X          ) :- start(Start), % bind early for 
                                                  wwould(Start, Action, X).
 
 would_not(X,         Action,     Y          ) :- \+ would(X, Action, Y).
-
-% wwould(   Person,    borrow,     Object     ) :- person(Person),
-%                                                  object(Object),
-%                                                  would(Someone, buy, Object),
-%                                                  Someone \= Person,
-%                                                  ppath(Person, Someone).
 
 wwould(   Appliance, break,      Appliance  ) :- appliance(Appliance),
                                                  human(Human),
