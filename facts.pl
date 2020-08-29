@@ -1,4 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- table object/1.
 object(X)              :- food(X) ;
                           beverage(X) ;
                           alcohol(X);
@@ -61,6 +62,7 @@ exist(X)              :- person(X) ;
                          location(X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- table provider/2.
 provider(X, Thing)    :- (store(X) ;
                           appliance(X);
                           person(X)), 

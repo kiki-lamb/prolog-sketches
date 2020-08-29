@@ -3,6 +3,7 @@ start(    X                                 ) :- person(X);
                                                  appliance(X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- table move/2.
 move(     Here,   To                        ) :- would(Here, operate,  To);
                                                  would(Here, get_help, To);
                                                  would(Here, shop_at,  To).
@@ -11,10 +12,12 @@ move(     Here,   To                        ) :- would(Here, operate,  To);
 stop(     Here,   To                        ) :- provider(Here, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- table ppath/3.
 ppath(    Here,   To                        ) :- ppath(Here, To, _).
 ppath(    Here,   To,     Path              ) :- path(start, Here, move, To, stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- table could/3.
 could(    Person, Action, Thing             ) :- could(Person, Action, Thing, _       ).
 could(    Person, Action, Thing, Path       ) :- (would(Person, Action, Thing         ),
                                                   call((ppath(Person,Thing,Path),  !))).
@@ -25,6 +28,7 @@ could_not(Person, Action, Thing, Path       ) :- \+ could( Person, Action, Thing
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:-table would/3.
 would(    Start,     Action,     X          ) :- start(Start), % bind early for ordering.
                                                  wwould(Start, Action, X).
 
@@ -41,7 +45,7 @@ wwould(   Appliance, break,      Appliance  ) :- appliance(Appliance),
                                                  could_not(Human,repair, Appliance).
 
 wwould(   Person,    buy,        Object     ) :- object(Object),
-                                                 has(Store, Object),
+                                                 provider(Store, Object),
                                                  would(Person, shop_at, Store).
 
 wwould(   Cat,       chase,      C2         ) :- cat(Cat),

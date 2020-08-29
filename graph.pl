@@ -5,6 +5,7 @@ path(   Start, Here, Move, To,   Stop, Path) :- call(Start, Here),
                                                 reverse([To|Tmp], Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+:- table search/6.
 search( Build, Here, Move, To,   Stop, Path) :- found(Build, Here, To, Stop, Path) ;
                                                 descend([Here|Build], Here, Move, To, Stop, Path).
 
