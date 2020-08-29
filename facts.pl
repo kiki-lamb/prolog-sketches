@@ -75,7 +75,7 @@ drink(kiki, X)        :- alcohol(X),
 drink(Cat, water)     :- cat(Cat).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    smoke(X, weed)        :- human(X).
+smoke(X, weed)        :- human(X).
 smoke(kiki,              cigarette).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

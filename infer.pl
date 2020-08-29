@@ -1,33 +1,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-start(X) :- person(X).
+start(X)               :- person(X).
 
-move(Here, To) :-
-    (person(Here),
-     ((appliance(To));
-      (person(To), (like(Here,To) ;
-                    like(To,Here))) ;
-      store(To), shop(Here,To))).
+move(Here, To)         :- (person(Here),
+                           ((appliance(To)) ;
+                            (person(To), (like(Here,To) ;
+                                          like(To,Here))) ;
+                            store(To), shop(Here,To))).
 
-stop(Location, Target) :-
-    (store(Location);
-     appliance(Location)),
-    has(Location, Target).
+stop(Location, Target) :- (store(Location);
+                           appliance(Location)),
+                          has(Location, Target).
 
-apath(Here, To)       :- apath(Here, To, _).
-apath(Here, To, Path) :-
-    path(start, Here, move, To, stop, Path).
+apath(Here, To)        :- apath(Here, To, _).
+apath(Here, To, Path)  :- path(start, Here, move, To, stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-could(   Person, Action, Thing      )   :- could(Person, Action, Thing, _).
-could(   Person, Action, Thing, Path)   :-    
-    a(   Person, Action, Thing      ),
-    call((apath(Person,Thing,Path), !)).
+could(  Person, Action, Thing      ) :- could(Person, Action, Thing, _).
+could(  Person, Action, Thing, Path) :- a(   Person, Action, Thing      ),
+                                        call((apath(Person,Thing,Path), !)).
 
-
-couldnt(   Person, Action, Thing      ) :- couldnt(Person, Action, Thing, _).
-couldnt(   Person, Action, Thing, Path) :-
-    \+ could(Person, Action, Thing, Path).
-
+couldnt(Person, Action, Thing      ) :- couldnt(Person, Action, Thing, _).
+couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 a(Person,    shower, [])   :- human(    Person),    apath(    Person, water               ).
