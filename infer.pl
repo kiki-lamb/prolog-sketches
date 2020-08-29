@@ -15,20 +15,7 @@ ppath(    Here,   To                        ) :- ppath(Here, To, _).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:- dynamic m_path/3.
-
-recover_m_path(_,    _,  _   ) :- fail.
-%recover_m_path(Here, To, Path) :- 
-%    (m_path(Here, To, Path);
-%     m_path(To, Here, Tmp),
-%     format("  ... flip ~w: !\n", [Tmp]),
-%     reverse(Tmp, Path)). % ,
-%    format("  ... recover ~w -> ~w: ~w.\n", [Here, To, Path]).
-
-ppath(    Here,   To,     Path              ) :-
-    recover_m_path(Here,To, Path);
-    (path(start, Here, move, To, stop, Path),
-     assert(m_path(Here,To,Path)), !).
+ppath(    Here,   To,     Path              ) :- path(start, Here, move, To, stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -86,7 +73,7 @@ wwould(   Person,    pet,        Cat        ) :- human(Person),
 
 wwould(   Human,     repair,     Appliance  ) :- human(Human),
                                                  appliance(Appliance),
-                                                 ppath(Human, screw).
+                                                 ppath(Human, screw, _).
 
 wwould(   Person,    scare_off,  Cat        ) :- person(Person),
                                                  cat(Cat),
