@@ -42,7 +42,7 @@ drink(kiki,              energy_drink).
 drink(kiki, X)        :- alcohol(X),
                          \+ dislike(kiki, X).
 drink(Cat, water)     :- cat(Cat).
-drink(Human,             water).
+drink(Human, water)   :- human(Human).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 smoke(X, weed)        :- human(X).

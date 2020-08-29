@@ -1,22 +1,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-start(X)                                      :- person(X);
+start(    X                                 ) :- person(X);
                                                  appliance(X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-move(Here, To)                                :- would(Here, operate,  To);
+move(     Here,   To                        ) :- would(Here, operate,  To);
                                                  would(Here, get_help, To);
                                                  would(Here, shop_at,  To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-stop(Here, To)                                :- provider(Here, To).
+stop(     Here,   To                        ) :- provider(Here, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ppath(Here, To)                               :- ppath(Here, To, _).
-ppath(Here, To, Path)                         :- path(start, Here, move, To, stop, Path).
+ppath(    Here,   To                        ) :- ppath(Here, To, _).
+ppath(    Here,   To,     Path              ) :- path(start, Here, move, To, stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-could(  Person, Action, Thing      )          :- could(Person, Action, Thing, _       ).
-could(  Person, Action, Thing, Path)          :- (would(Person, Action, Thing         ),
+could(    Person, Action, Thing      )        :- could(Person, Action, Thing, _       ).
+could(    Person, Action, Thing, Path)        :- (would(Person, Action, Thing         ),
                                                   call((ppath(Person,Thing,Path),  !))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
