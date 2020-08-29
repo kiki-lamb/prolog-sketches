@@ -9,11 +9,11 @@ search( Build, Here, Move, To,   Stop, Path) :- found(Build, Here, Move, To, Sto
                                                 descend([Here|Build], Here, Move, To, Stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-descend(Build, Here, Move, To,   Stop, Path) :- call(Move, Here, Next),
-                                                not(member(Next, Build)),
-                                                search(Build, Next, Move, To, Stop, Path).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 found(  Build, Here, _,    Here, _,    Path) :- Path = Build. 
 found(  Build, Here, _,    To,   Stop, Path) :- call(Stop, Here, To),
                                                 found([Here|Build], Here, _, Here, Stop, Path).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+descend(Build, Here, Move, To,   Stop, Path) :- call(Move, Here, Next),
+                                                not(member(Next, Build)),
+                                                search(Build, Next, Move, To, Stop, Path).
