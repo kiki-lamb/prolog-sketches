@@ -1,8 +1,22 @@
+:- dynamic cache/3.         
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 path(   Start, Here, Move, To,   Stop      ) :- path(Start, Here, Move, To, Stop, _).
-path(   Start, Here, Move, To,   Stop, Path) :- call(Start, Here),
+path(   Start, Here, Move, To,   Stop, Path) :- ((cache(Here, To, Path) ;
+                                                  (cache(To, Here, Tmp),
+                                                   reverse(Tmp,Path))),
+                                                 %format("... grab ~w -> ~w: ~w.\n",
+                                                 %       [Here, To, Path]),
+                                                 !);
+                                                
+                                                call(Start, Here),
                                                 search([], Here, Move, To, Stop, Tmp),
-                                                reverse([To|Tmp], Path).
+                                                reverse([To|Tmp], Path),
+                                                
+                                                %format("... stash ~w -> ~w: ~w.\n",
+                                                %       [Here, To, Path]),
+
+                                                assert(cache(Here, To, Path)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 search( Build, Here, Move, To,   Stop, Path) :- found(Build, Here, To, Stop, Path) ;
