@@ -3,7 +3,6 @@ start(    X                                 ) :- person(X);
                                                  appliance(X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:- table move/2.
 move(     Here,   To                        ) :- would(Here, operate,  To);
                                                  would(Here, get_help, To);
                                                  would(Here, shop_at,  To).
@@ -12,17 +11,30 @@ move(     Here,   To                        ) :- would(Here, operate,  To);
 stop(     Here,   To                        ) :- provider(Here, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:- table ppath/3.
 ppath(    Here,   To                        ) :- ppath(Here, To, _).
-ppath(    Here,   To,     Path              ) :- path(start, Here, move, To, stop, Path).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%:- table could/3.
+:- dynamic m_path/3.    
+ppath(    Here,   To,     Path              ) :-
+%    format("Find ~w -> ~w.\n", [Here, To]),
+    (m_path(Here, To, Path), !,
+     format("   ... recover ~w -> ~w: ~w.\n", [Here, To, Path]),
+     true);
+    (path(start, Here, move, To, stop, Path),
+%     format("   ... save ~w -> ~w: ~w\n", [Here, To, Path]),
+     assert(m_path(Here,To,Path)), !);
+    format("Fail.\n\n", []).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 :- op(200, xfy, could).
 could(    Person, Action                    ) :- could(Person, Action, _              ).
 could(    Person, Action, Thing             ) :- could(Person, Action, Thing, _       ).
 could(    Person, Action, Thing, Path       ) :- (would(Person, Action, Thing         ),
-                                                  call((ppath(Person,Thing,Path),  !))).
+                                                  format("Find ~w -> ~w to ~w.\n",
+                                                         [Person, Thing, Action]),
+                                                  ppath(Person,Thing,Path)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 could_not(Person, Action, Thing             ) :- could_not(Person, Action, Thing, _   ).
@@ -30,7 +42,6 @@ could_not(Person, Action, Thing, Path       ) :- \+ could( Person, Action, Thing
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%:-table would/3.
 would(    Start,     Action,     X          ) :- start(Start), % bind early for ordering.
                                                  wwould(Start, Action, X).
 
