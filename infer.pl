@@ -8,7 +8,9 @@ move(Here, To)                         :- would(Here, operate,  To);
                                           would(Here, shop_at,  To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-stop(Here, To)                         :- provider(Here, To).
+stop(Here, To)                         :- X = provider(Here, To),
+%                                          format("~w provides ~w.\n", [Here, To]),
+                                          X.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ppath(Here, To)                        :- ppath(Here, To, _).
@@ -16,8 +18,12 @@ ppath(Here, To, Path)                  :- path(start, Here, move, To, stop, Path
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 could(  Person, Action, Thing      )   :- could(Person, Action, Thing, _      ).
-could(  Person, Action, Thing, Path)   :- would(Person, Action, Thing         ),
-                                          call((ppath(Person,Thing,Path)     )).
+could(  Person, Action, Thing, Path)   :- % format("Could ~w ~w ~w?\n", [Person, Action, Thing]),
+                                          X = (would(Person, Action, Thing         ),
+                                               call((ppath(Person,Thing,Path)     ))),
+%                                          ((X, format("~w CAN ~w ~w?\n", [Person, Action, Thing]));
+%                                           format("~w CANNOT ~w ~w?\n", [Person, Action, Thing])),
+                                          X.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 could_not(Person, Action, Thing      ) :- could_not(Person, Action, Thing, _   ).
