@@ -66,6 +66,6 @@ exist(X)              :- person(X) ;
                          location(X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-provider(X, Thing)    :- (person(X) ;
-                          store(X)),
+provider(X, Thing)    :- (store(X) ;
+                          appliance(X)),
                          has(X, Thing).

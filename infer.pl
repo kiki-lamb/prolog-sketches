@@ -8,9 +8,7 @@ move(Here, To)                         :- would(Here, operate,  To);
                                           would(Here, shop_at,  To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-stop(Here, To)                         :- (store(Here) ;
-                                           appliance(Here)),
-                                          has(Here, To).
+stop(Here, To)                         :- provider(Here, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ppath(Here, To)                        :- ppath(Here, To, _).
