@@ -11,9 +11,9 @@ move(Here, To)                       :- person(Here),
                                          store(To), shop_at(Here,To)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-stop(Here, Target)                   :- (store(Here) ;
+stop(Here, To)                       :- (store(Here) ;
                                          appliance(Here)),
-                                        has(Here, Target).
+                                        has(Here, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 apath(Here, To)                      :- apath(Here, To, _).

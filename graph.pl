@@ -2,7 +2,7 @@
 path(   Start, Here, Move, To,   Stop      ) :- path(Start, Here, Move, To, Stop, _).
 path(   Start, Here, Move, To,   Stop, Path) :- call(Start, Here),
                                                 ppath(Here, Move, To, Stop, Path).
-% ppath(         _,    _,    [],   _,    Path) :- Path = [].
+% ppath(       _,    _,    [],   _,    Path) :- Path = [].
 ppath(         Here, Move, To,   Stop, Path) :- search(Here, Move, To, Stop, Tmp),
                                                 reverse([To|Tmp], Path).
 
