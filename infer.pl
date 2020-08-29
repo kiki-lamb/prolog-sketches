@@ -17,8 +17,8 @@ ppath(Here, To, Path)                  :- path(start, Here, move, To, stop, Path
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 could(  Person, Action, Thing      )   :- could(Person, Action, Thing, _      ).
 could(  Person, Action, Thing, Path)   :- (would(Person, Action, Thing         ),
-                                               call((ppath(Person,Thing,Path),
-                                                     !))).
+                                           call((ppath(Person,Thing,Path)
+                                                 ))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 could_not(Person, Action, Thing      ) :- could_not(Person, Action, Thing, _   ).
