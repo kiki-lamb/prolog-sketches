@@ -28,6 +28,6 @@ ppaths(W,T,P)  :- ppath(W,T,P),
                   format("~w -> ~w: ~w\n", [W,T,P]),
                   fail.
     
-main           :- possible_paths(boson,_,_,_);
+main           :- possible_paths(_,_,_,_);
                   % ppaths ;
                   true.

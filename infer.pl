@@ -24,7 +24,8 @@ ppath(    Here,   To,     Path              ) :-
     (path(start, Here, move, To, stop, Path),
 %     format("   ... save ~w -> ~w: ~w\n", [Here, To, Path]),
      assert(m_path(Here,To,Path)), !);
-    format("Fail.\n\n", []).
+%    format("Fail.\n\n", []),
+    true.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -32,8 +33,8 @@ ppath(    Here,   To,     Path              ) :-
 could(    Person, Action                    ) :- could(Person, Action, _              ).
 could(    Person, Action, Thing             ) :- could(Person, Action, Thing, _       ).
 could(    Person, Action, Thing, Path       ) :- (would(Person, Action, Thing         ),
-                                                  format("Find ~w -> ~w to ~w.\n",
-                                                         [Person, Thing, Action]),
+%                                                  format("Find ~w -> ~w to ~w.\n",
+%                                                         [Person, Thing, Action]),
                                                   ppath(Person,Thing,Path)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
