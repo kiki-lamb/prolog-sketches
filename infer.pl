@@ -16,13 +16,13 @@ stop(Here, To)                         :- (store(Here) ;
                                           has(Here, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-apath(Here, To)                        :- apath(Here, To, _).
-apath(Here, To, Path)                  :- path(start, Here, move, To, stop, Path).
+ppath(Here, To)                        :- ppath(Here, To, _).
+ppath(Here, To, Path)                  :- path(start, Here, move, To, stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 could(  Person, Action, Thing      )   :- could(Person, Action, Thing, _      ).
 could(  Person, Action, Thing, Path)   :- would(Person, Action, Thing         ),
-                                          call((apath(Person,Thing,Path),   !)).
+                                          call((ppath(Person,Thing,Path),   !)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 couldnt(Person, Action, Thing      )   :- couldnt(Person, Action, Thing, _    ).
@@ -30,7 +30,7 @@ couldnt(Person, Action, Thing, Path)   :- \+ could(Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 would(Person,    shower,    Person)    :- human(Person),
-                                          apath(Person, water).
+                                          ppath(Person, water).
 would(Person,    starve,    Person)    :- couldnt(Person, eat, _).
 would(Appliance, break,     Appliance) :- appliance(Appliance),
                                           couldnt(_,  repair, Appliance).
@@ -46,7 +46,7 @@ would(Person,    smoke,     X)         :- thing(X),
                                           smoke(Person, X).
 would(Person,    repair,    X)         :- human(Person),
                                           appliance(X),
-                                          apath(Person, screw).
+                                          ppath(Person, screw).
 would(Person,    pet,       X)         :- human(Person),
                                           cat(X),                                        
                                           (like(Person,X) ; like(X,Person)).

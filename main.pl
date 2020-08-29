@@ -23,11 +23,12 @@ desires(P,A,X) :- would(P,A,X),
                   format("~w would ~w ~w.\n", [P,A,X]),
                   fail.  
 
-apaths         :- apaths(_,_,_).
-apaths(W,T,P)  :- apath(W,T,P),
+ppaths         :- ppaths(_,_,_).
+ppaths(W,T,P)  :- ppath(W,T,P),
                   format("~w -> ~w: ~w\n", [W,T,P]),
                   fail.
     
-main           :- apaths ;
+main           :- ppaths ;
+                  nl ,
                   possible ;
                   true.
