@@ -30,7 +30,7 @@ thing(cigarette).
 soft_drink(X)           :-
     beverage(X), 
     \+ alcohol(X),
-    X \== water.
+    X \= water.
 
 food(X)                 :- vegetable(X); meat(X).
 
