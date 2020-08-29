@@ -39,19 +39,19 @@ cat(higgy).
 cat(boson).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%store(freshco).
+store(freshco).
 store(home_hardware).
 store(lcbo).
-% store(mr_meat).
+store(mr_meat).
 store(dave).
 store(chicken_freak).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 shop_at(kiki,  lcbo).
-shop_at(kiki,  chicken_freak).
+%shop_at(kiki,  chicken_freak).
 shop_at(kiki,  freshco).
 shop_at(sybil, home_hardware).
-shop_at(sybil, mr_meat).
+% shop_at(sybil, mr_meat).
 shop_at(sybil, dave).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
