@@ -10,7 +10,7 @@ possible(W,A,T) :- could(W,A,T),
                          [W, A, T]),
                   fail.
 
-possible_paths          :- possible_paths(_,_,_,_).
+       :- possible_paths(_,_,_,_).
 possible_paths(P)       :- possible_paths(_,_,_,P).
 possible_paths(W,A,T,P) :-
     person(W),
