@@ -1,8 +1,9 @@
 path(   Start, Here, Move, To,   Stop      ) :- path(Start, Here, Move, To, Stop, _).
+path(   _,     _,    _,   [],    _,    Path) :- Path = [].
 path(   Start, Here, Move, To,   Stop, Path) :- call(Start, Here),
-                                                qpath(Here, Move, To, Stop, Path).
-qpath(  _,     _,    [],   _,    Path      ) :- Path = [].
-qpath(         Here, Move, To,   Stop, Path) :- search([], Here, Move, To, Stop, Tmp),
+                                                search(Here, Move, To, Stop, Tmp),
+                                                reverse([To|Tmp], Path).
+search(        Here, Move, To,   Stop, Path) :- search([], Here, Move, To, Stop, Tmp),
                                                 reverse([To|Tmp], Path).
 search( Build, Here, Move, To,   Stop, Path) :- found(Build, Here, Move, To, Stop, Path) ;
                                                 descend([Here|Build], Here, Move, To, Stop, Path).
