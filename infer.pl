@@ -17,30 +17,20 @@ ppath(    Here,   To                        ) :- ppath(Here, To, _).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 :- dynamic m_path/3.
 
-recover(Here, To, Path) :-
+recover_m_path(Here, To, Path) :-
     (m_path(Here, To, Path);
-     (m_path(To, Here, Tmp),
-      format("   ... flip!\n", []),
-      reverse(Tmp, Path))),
-    !,
-    format("   ... recover ~w -> ~w: ~w.\n", [Here, To, Path]).
+     m_path(To, Here, Tmp),
+%     format("   ... flip!\n", []),
+     reverse(Tmp, Path)),
+%    format("   ... recover_m_path ~w -> ~w: ~w.\n", [Here, To, Path]),
+    !.
 
 ppath(    Here,   To,     Path              ) :-
-%    format("Find ~w -> ~w.\n", [Here, To]),
-    (
-
-        recover(Here,To, Path)
-
-
-
-
-,
-     true);
+    recover_m_path(Here,To, Path);
     (path(start, Here, move, To, stop, Path),
 %     format("   ... save ~w -> ~w: ~w\n", [Here, To, Path]),
-     assert(m_path(Here,To,Path)), !);
+     assert(m_path(Here,To,Path)), !).
 %    format("Fail.\n\n", []),
-    true.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -50,7 +40,7 @@ could(    Person, Action, Thing             ) :- could(Person, Action, Thing, _ 
 could(    Person, Action, Thing, Path       ) :- (would(Person, Action, Thing         ),
 %                                                  format("Find ~w -> ~w to ~w.\n",
 %                                                         [Person, Thing, Action]),
-                                                  ppath(Person,Thing,Path)).
+                                                  call((ppath(Person,Thing,Path), !))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 could_not(Person, Action, Thing             ) :- could_not(Person, Action, Thing, _   ).
