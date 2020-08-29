@@ -15,11 +15,10 @@ apath(Here, To)        :- apath(Here, To, _).
 apath(Here, To, Path)  :- path(start, Here, move, To, stop, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-could(  Person, Action, Thing      ) :- could(Person, Action, Thing, _).
-could(  Person, Action, Thing, Path) :- a(   Person, Action, Thing      ),
-                                        call((apath(Person,Thing,Path), !)).
-
-couldnt(Person, Action, Thing      ) :- couldnt(Person, Action, Thing, _).
+could(  Person, Action, Thing      ) :- could(Person, Action, Thing, _      ).
+could(  Person, Action, Thing, Path) :- a(    Person, Action, Thing         ),
+                                        call((apath(Person,Thing,Path),   !)).
+couldnt(Person, Action, Thing      ) :- couldnt(Person, Action, Thing, _    ).
 couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
