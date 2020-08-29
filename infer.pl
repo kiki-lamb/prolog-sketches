@@ -41,7 +41,8 @@ wwould(Person,    help,      P2         ) :- person(Person),
                                               like(P2,Person)).
 
 wwould(Appliance, break,     Appliance  ) :- appliance(Appliance),
-                                             could_not(_,  repair, Appliance).
+                                             human(Human),
+                                             could_not(Human,repair, Appliance).
 
 wwould(Person,    buy,       Object     ) :- object(Object),
                                              has(Store, Object),
