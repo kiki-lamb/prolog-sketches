@@ -21,13 +21,8 @@ desires :-
     fail.  
 
 loop_paths :-
-    apath(_,_,P),
-    format("~w\n", [P]),
-    fail.
-
-ploop_paths :-
-    apath(W,T,P), 
+    apath(W,T,P),
     format("~w -> ~w: ~w\n", [W,T,P]),
     fail.
     
-main :- ploop_paths; true. % halt.
+main :- loop_paths; true. % halt.

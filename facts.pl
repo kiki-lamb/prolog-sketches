@@ -27,21 +27,24 @@ thing(nail).
 thing(weed).
 thing(cigarette).
 
+soft_drink(X)           :-
+    beverage(X), 
+    \+ alcohol(X),
+    X \== water.
+
 food(X)                 :- vegetable(X); meat(X).
 
 has(freshco, X)         :- vegetable(X).
 has(mr_meat, X)         :- meat(X).
 has(lcbo, X)            :- alcohol(X).
-
-has(chicken_freak, X) :-
-    beverage(X), \+ alcohol(X), X \= water.
+has(chicken_freak, X)   :- soft_drink(X).
 
 has(chicken_freak,         cat_food).
 has(chicken_freak,         cigarette).
 has(home_hardware,         nail).
 has(dave,                  weed).
 
-has(kiki, water)        :-
+has(sink, water)        :-
     could(_, repair, sink),
     !.
 
