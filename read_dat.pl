@@ -1,4 +1,6 @@
+:- initialization(main).
 :- use_module(library(pio)).
+:- consult("file_reader.pl").
 
 lliness([])                              --> call(eos), !.
 lliness([CLine|Lliness])                 --> cline(CLine), lliness(Lliness).

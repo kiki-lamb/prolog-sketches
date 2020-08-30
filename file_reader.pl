@@ -21,7 +21,7 @@ aasertify_lines([], Build, Out)           :- collect(Build, Out), !.
 aasertify_lines([Line|Lines], Build, Out) :-
   split_string(Line, " ", " ", Words),
   atomize(Words, [A1, A2, A3 | Atoms]),
-  Term =.. [r, A1, A2, A3, [Atoms],
+  Term =.. [r, A1, A2, A3, Atoms],
   assertz(Term),
   aasertify_lines(Lines, Build, Out).
 
