@@ -2,13 +2,16 @@ alcohol a beverage.
 alive drink water.
 alive starve unless drink beverage.
 alive starve unless eat food.
+appliance a thing.
 appliance break unless repair by human.
 beer a alcohol.
-boson like higgy.
+beverage a thing.
 boson a cat.
+boson like higgy.
 cabbage a vegetable.
 cat a cute.
 cat a mammal.
+cat a person.
 cat eat cat_food.
 cat_food a meat.
 chicke freak doesnt sell alcohol.
@@ -17,17 +20,19 @@ chicken_freak a store.
 chicken_freak sell beverage.
 chicken_freak sell cat_food.
 chicken_freak sell cigarette.
+cigarette a thing.
 dave a man.
 dave sell weed.
 dishwasher a appliance.
 energy_drink a beverage.
+food a thing.
 freshco a store.
 freshco sell vegetable.
 higgy a cat.
 home_hardware a store.
 home_hardware sell screw.
-mammal a animal.
 human a mammal.
+human a person.
 human drink beer.
 human repair appliance with screw.
 human shower with water.
@@ -45,6 +50,7 @@ kiki smoke cigarette.
 lcbo a store.
 lcbo sell alcohol.
 mammal a alive.
+mammal a animal.
 man a human.
 meat a food.
 mr_meat a store.
@@ -53,6 +59,7 @@ pepperoni a meat.
 potato a vegetable.
 sink a appliance.
 sink give water.
+store a location.
 sybil a woman.
 sybil drink tequila.
 sybil eat vegetable.
@@ -64,11 +71,6 @@ tequila a alcohol.
 turkey a meat.
 turnip a vegetable.
 vegetable a food.
-vodka a alcool.
+vodka a alchool.
 water a beverage.
 woman a human.
-food a thing.
-beverage a thing.
-cigarette a thing.
-appliance a thing.
-store a location.

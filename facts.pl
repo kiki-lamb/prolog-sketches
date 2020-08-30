@@ -14,9 +14,9 @@ soft_drink(X)         :- beverage(X),
                          \+ alcohol(X).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-food(X)               :- vegetable(X) ;
-                         meat(X).
-
+% food(X)               :- vegetable(X) ;
+%                          meat(X).
+% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 has(freshco, X)       :- vegetable(X).
 has(mr_meat, X)       :- meat(X).
@@ -32,9 +32,9 @@ has(sink, water)      :- could(_, repair, sink),
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 eat(sybil,               turkey).
 eat(sybil, X)         :- vegetable(X).
-eat(kiki,  X)         :- food(X),
-                         \+ eat(sybil, X),
-                         \+ dislike(kiki, X).
+% eat(kiki,  X)         :- food(X),
+%                          \+ eat(sybil, X),
+%                          \+ dislike(kiki, X).
 eat(Cat,   X)         :- cat(Cat),
                          meat(X).
 
@@ -52,12 +52,12 @@ smoke(X, weed)        :- human(X).
 smoke(kiki,              cigarette).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-human(X)              :- person(X),
-                         \+ cat(X).
-
+% human(X)              :- person(X),
+%                          \+ cat(X).
+% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-location(X)           :- store(X).
-
+% location(X)           :- store(X).
+% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 exist(X)              :- person(X) ;
                          object(X) ;
