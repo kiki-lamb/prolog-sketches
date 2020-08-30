@@ -28,8 +28,3 @@ ppaths         :- ppaths(_,_,_).
 ppaths(W,T,P)  :- ppath(W,T,P),
                   format("~w -> ~w: ~w\n", [W,T,P]),
                   fail.
-
-rs             :- r(Q, W, E, R),
-                  format("+=> r(~w, ~w, ~w, ~w.\n",
-                         [Q, W, E, R]),
-                  fail.

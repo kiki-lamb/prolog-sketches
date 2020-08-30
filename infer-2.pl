@@ -25,10 +25,13 @@
 %          [Q, W, E, R]),
 %   fail.
 
+loop_rs   :- r(Q, W, E, R),
+             format("+=> r(~w, ~w, ~w, ~w.\n",
+                    [Q, W, E, R]),
+             fail.
 
-
-setup       :- assertify_lines('dat.ssv'),
-                  rs;
-                  true.
+setup     :- assertify_lines('dat.ssv'),
+             loop_rs;
+             true.
 
 
