@@ -35,7 +35,8 @@ is_a(Thing, Class) :-
 
 loop_as :-
   is_a(Thing, Class),
-  declarify(Class, Thing).
+  declarify(Class, Thing),
+  fail.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -43,10 +44,10 @@ loop_as :-
 combine(Left, Right, Out) :-
   bagof([ L, R ], (member(L, Left), member(R, Right)), Out).
 
-
-
-bind_list(Self, Other, Zipped) :-
-
+bind_list(Left, Right, Out) :-
+  bagof(L, (is_a(L, Left )), Lefts ),
+  bagof(R, (is_a(R, Right)), Rights),
+  combine([Left | Lefts], [Right | Rights], Out).
 
 bind_to(Class, Action, Subject) :-
   format("[~w ~w ~w]\n", [Class, Action, Subject]),
@@ -61,7 +62,7 @@ bind_to(Class, Action, Subject) :-
   
   maplist(derp(Action, SubClasses), SubjectSubClasses).
 
-derp(Action, SubClasses, X) :- maplist(ddeclarify(Action,X), SubClasses).
+
 
 magic_loop(Action) :- 
   r(Class, Action, Subject, _),
@@ -76,12 +77,15 @@ magic_loop(Action) :-
 
 loop_binary(Action) :-
   r(Thing, Action, Thing2, _),
-  declarify(Action, Thing, Thing2).
+  declarify(Action, Thing, Thing2),
+  fail.
 
 loop_reflex(Action) :-
   r(Thing, Action, Thing2, _),
   (declarify(Action, Thing, Thing2);
    declarify(Action, Thing2, Thing)).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 declarify(Action, Thing) :-
   G1 =.. [ Action, Thing ],
@@ -91,15 +95,7 @@ declarify(Action, Thing, Subject) :-
   G1 =.. [ Action, Thing, Subject ],
   aassertz(Action, G1).
 
-
-ddeclarify(Action, Subject, Thing) :-
-  declarify(Action, Thing, Subject);
-  true.
-
-dddeclarify(Action, Subject, Thing) :-
-  declarify(Action, Thing, Subject);
-  true.
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 aassertz(Action, G1) :-
   assertz(G1),
   format("=+~w> ~w.\n",
@@ -109,16 +105,16 @@ aassertz(Action, G1) :-
 setup :-
   clean_up,
   assertify_lines('dat2.ssv'),
-  loop_as;
-  loop_reflex(like);
-  magic_loop(eat);
-  magic_loop(drink);
-  magic_loop(give);
-  magic_loop(has);
-  magic_loop(smoke);
-  magic_loop(shop_at);
-  magic_loop(dislike);
-  retract(r(_,_,_,_));
+%  loop_as;
+%  loop_reflex(like);
+%  magic_loop(eat);
+%  magic_loop(drink);
+%  magic_loop(give);
+%  magic_loop(has);
+%  magic_loop(smoke);
+%  magic_loop(shop_at);
+%  magic_loop(dislike);
+%  retract(r(_,_,_,_));
   true.
 
 

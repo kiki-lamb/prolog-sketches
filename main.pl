@@ -1,4 +1,4 @@
-%:- initialization(setup).
+:- initialization(setup).
 :- consult("exists.pl").
 %:- consult("infer.pl").
 :- consult("graph.pl").
