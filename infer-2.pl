@@ -26,11 +26,11 @@
 %   fail.
 
 manifest(X) :-
-  format("Manifest ~s.\n",
+  format("    Manifest ~w.\n",
          [X]).
 
 loop_rs   :- r(Thing, Verb, Noun, Options),
-             format("+=> r(~w, ~w, ~w, ~w.\n",
+             format("\n+=> r(~w, ~w, ~w, ~w.\n",
                     [Thing, Verb, Noun, Options]),
              manifest((r(Thing, Verb, Noun, Options))),
              fail.
