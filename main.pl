@@ -1,4 +1,4 @@
-:- initialization(manifest).
+:- initialization(setup).
 :- consult("facts.pl").
 :- consult("exists.pl").
 :- consult("infer.pl").
@@ -33,8 +33,3 @@ rs             :- r(Q, W, E, R),
                   format("+=> r(~w, ~w, ~w, ~w.\n",
                          [Q, W, E, R]),
                   fail.
-
-manifest       :- assertify_lines('dat.ssv'),
-                  rs;
-                  true.
-
