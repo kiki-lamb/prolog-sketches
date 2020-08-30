@@ -38,14 +38,15 @@ bind_classes :-
   fail.
 
 bind_classes(Left, Action, Right, Out) :-
+  format("[ Bind ~w ~w ~w ]:\n", [Left, Action, Right]),
   findall(L, (L is_a Left),  Lefts ),
-  %format("Lefts: ~w.\n",    [Lefts]),
+  format("Lefts: ~w.\n",    [Lefts]),
   findall(R, (R is_a Right), Rights ),
-  %format("Rights: ~w.\n",   [Rights]),
+  format("Rights: ~w.\n",   [Rights]),
   combine([Left | Lefts], [Right | Rights], Tmp),
-  %format("Tmp: ~w.\n",   [Tmp]),
+  % format("Tmp: ~w.\n",   [Tmp]),
   findall([Action, L, R], (member([L, R], Tmp)), Out).
-  %format("Tmp2: ~w.\n",   [Tmp2]),
+  % format("Tmp2: ~w.\n",   [Tmp2]),
   
 bind_classes(Left, Action, Right) :-
   bind_classes(Left, Action, Right, Out),
@@ -54,7 +55,7 @@ bind_classes(Left, Action, Right) :-
 bind_actions :-
   r(Actor, Action, Subject, _),
   Action \== is_a,
-  % format("Binding ~w(~w, ~w)...\n", [Action, Actor, Subject]),
+  format("[[ Binding ~w... ]]\n", [Action]),
   bind_classes(Actor, Action, Subject),
   fail.   
 
