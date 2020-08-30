@@ -55,13 +55,18 @@ actions(Out) :-
 
 subjects(Out) :-
   actors(Actors),
+  findall(Subject, ((r(_, _, Subject, _))), Tmp),
+  sort(Tmp, Out).
+
+non_actor_subjects(Out) :-
+  actors(Actors),
   findall(Subject, ((r(_, _, Subject, _), not(member(Subject, Actors))   )), Tmp),
   sort(Tmp, Out).
 
 bind :-
   r(Actor, Action, Subject, _),
   Action \== a,
-  format("Binding ~w(~w, ~w)...\n", [Action, Actor, Subject]),
+  % format("Binding ~w(~w, ~w)...\n", [Action, Actor, Subject]),
   bind_classes(Actor, Action, Subject),
   fail.   
 
@@ -73,8 +78,8 @@ assert1(G) :-
 
 declarify(L) :-
   G1 =..  L,
-  assert(G1),
-  format("-=> ~w\n", [G1]).
+  %format("-=> ~w\n", [G1]),
+  assert(G1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -87,7 +92,7 @@ setup :-
   actions(Actions),
   maplist(assert, Actions),
 
-  subjects(Subjects),
+  non_actor_subjects(Subjects),
   maplist(assert, Subjects),
   
   loop_as;
