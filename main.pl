@@ -34,6 +34,7 @@ rs             :- r(Q, W, E, R),
                          [Q, W, E, R]),
                   fail.
 
-manifest       :- assertify_lines('dat.ssv') ;
-                  rs ;
-                  !.
+manifest       :- assertify_lines('dat.ssv'),
+                  rs;
+                  true.
+
