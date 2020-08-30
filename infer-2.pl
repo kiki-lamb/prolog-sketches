@@ -29,16 +29,16 @@ loop_as :-
   declarify([Class, Thing]),
   fail.
 
-
 :- op(300, xfy, isnt).
 isnt(Thing, Class) :-
   \+( is_a(Thing, Class)).
 
 :- op(300, xfy, is_a).
 is_a(Thing, Class) :-
-  r(Thing, a,  Class, _) ;
-  r(Thing, a,  ActualType, _),
-  is_a(ActualType, Class).
+  (r(Thing, a,  Class, _) ;
+   r(Thing, a,  ActualType, _),
+   is_a(ActualType, Class)),
+  !.
 
 unique(Thing) :-
   \+ is_a(_, Thing).
@@ -68,7 +68,8 @@ actions(Out) :-
   sort(Tmp, Out).
 
 subjects(Out) :-
-  findall(Subject, ((r(_, _, Subject, _))), Tmp),
+  actors(Actors),
+  findall(Subject, ((r(_, _, Subject, _), not(member(Subject, Actors))   )), Tmp),
   sort(Tmp, Out).
 
 bind :-
