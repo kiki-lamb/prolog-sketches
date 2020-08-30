@@ -20,6 +20,7 @@
 %   format("+=> r(~w, ~w, ~w, ~w.\n",
 %          [Thing, Verb, Noun, Options]),
 %   fail.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clean_up  :- retractall(person2(_)).
 
@@ -43,23 +44,24 @@ a(  Obj,             SoughtType) :-
   a(ActualType,      SoughtType   ).
 
 
-loop_as   :- a(Obj, Thing),
-             G =.. [ Thing, Obj ],
-             format(">=> ~w.\n",
-                    [G]),
-             assertz(G),
-             fail.
+loop_def_as :- a(Obj, Thing),
+               G =.. [ Thing, Obj ],
+               format(">=> ~w.\n",
+                      [G]),                 
+               assertz(G),
+               fail.
 
-loop_rs   :- r(Thing, Verb, Noun, Options),
-             format("\n+=> r(~w, ~w, ~w, ~w.\n",
-                    [Thing, Verb, Noun, Options]),
-             manifest((r(Thing, Verb, Noun, Options))),
-             fail.
 
-setup     :- clean_up,
-             assertify_lines('dat2.ssv'),
-             %loop_rs;
-             loop_as;
-             true.
+loop_rs     :- r(Thing, Verb, Noun, Options),
+               format("\n+=> r(~w, ~w, ~w, ~w.\n",
+                      [Thing, Verb, Noun, Options]),
+               manifest((r(Thing, Verb, Noun, Options))),
+               fail.
+
+setup       :- clean_up,
+               assertify_lines('dat2.ssv'),
+               %loop_rs;
+               loop_def_as;
+               true.
 
 
