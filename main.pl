@@ -33,10 +33,10 @@ rs             :- r(Q, W, E, R),
                          [Q, W, E, R]),
                   fail.
 
-main           :- assertify_lines('dat.ssv'),
+main           :- % assertify_lines('dat.ssv'),
                   % ppaths(_,_,_) ;
                   % nl,
-                  % possible_paths(_,_,_,_) ;
-                  rs;
+                  possible_paths(_,_,_,_) ;
+                  % rs;
                   true.
 
