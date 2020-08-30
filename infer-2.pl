@@ -44,9 +44,8 @@ a(  Obj,             SoughtType) :-
 
 
 loop_as   :- a(Obj, Thing),
-             G =.. [ Obj, Thing ],
-
-             format("Establish ~w.\n",
+             G =.. [ Thing, Obj ],
+             format(">=> ~w.\n",
                     [G]),
 
              assertz(G),

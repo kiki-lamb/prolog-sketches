@@ -9,8 +9,8 @@ boson2 a2 cat2.
 cabbage2 a2 vegetable2.
 cat2 a2 cute2.
 cat2 a2 mammal2.
-cat2 eat2 cat2_food.
-cat2_food2 a2 meat.
+cat2 eat2 cat_food2.
+cat_food2 a2 meat2.
 chicken2 freak2 doesnt2 sell alcohol.
 chicken2 freak2 doesnt2 sell water.
 chicken2_freak2 a2 store.
