@@ -1,4 +1,5 @@
 :- initialization(main).
+:- consult("read_dat.pl").
 :- consult("facts.pl").
 :- consult("exists.pl").
 :- consult("infer.pl").
@@ -28,7 +29,13 @@ ppaths(W,T,P)  :- ppath(W,T,P),
                   format("~w -> ~w: ~w\n", [W,T,P]),
                   fail.
     
-main           :- ppaths(_,_,_) ;
+main           :- assertify_lines('dat.ssv'),
+                  ppaths(_,_,_) ;
                   nl,
                   possible_paths(_,_,_,_);
                   true.
+
+rs             :- r(Q, W, E, R),
+                  format("+=> r(~w, ~w, ~w, ~w.\n",
+                         [Q, W, E, R]),
+                  fail.
