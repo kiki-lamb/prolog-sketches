@@ -68,6 +68,18 @@ loop_shop_at :- r(Thing, shop_at, Thing2, _),
                 assertz(G1),
                 fail.
 
+
+
+
+
+loop_binary(Type) :- r(Thing, Type, Thing2, _),
+                     G1 =.. [ Type, Thing,  Thing2 ],
+                     format("=+~w> ~w.\n",
+                            [Type, G1]),                 
+                     assertz(G1),
+                     fail.
+
+
 loop_dislike :- r(Thing, dislike, Thing2, _),
                 G1 =.. [ dislike, Thing,  Thing2 ],
                 format("=dislike> ~w.\n",
@@ -85,8 +97,8 @@ setup       :- clean_up,
                assertify_lines('dat2.ssv'),
                loop_as;
                loop_likes;
-               loop_shop_at;
-               loop_dislike;
+               loop_binary(shop_at);
+               loop_binary(dislike);
                true.
 
 

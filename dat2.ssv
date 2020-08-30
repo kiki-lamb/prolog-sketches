@@ -14,23 +14,23 @@ cat a mammal.
 cat a person.
 cat eat cat_food.
 cat_food a meat.
-chicke freak doesnt sell alcohol.
-chicke freak doesnt sell water.
+chicke freak doesnt has alcohol.
+chicke freak doesnt has water.
 chicken_freak a store.
-chicken_freak sell beverage.
-chicken_freak sell cat_food.
-chicken_freak sell cigarette.
+chicken_freak has beverage.
+chicken_freak has cat_food.
+chicken_freak has cigarette.
 cigarette a thing.
 dave a man.
-dave sell weed.
+dave has weed.
 dishwasher a appliance.
 energy_drink a beverage.
 food a thing.
 freshco a store.
-freshco sell vegetable.
+freshco has vegetable.
 higgy a cat.
 home_hardware a store.
-home_hardware sell screw.
+home_hardware has screw.
 human a mammal.
 human a person.
 human drink beer.
@@ -49,13 +49,13 @@ kiki shop_at freshco.
 kiki shop_at lcbo.
 kiki smoke cigarette.
 lcbo a store.
-lcbo sell alcohol.
+lcbo has alcohol.
 mammal a alive.
 mammal a animal.
 man a human.
 meat a food.
 mr_meat a store.
-mr_meat sell meat.
+mr_meat has meat.
 pepperoni a meat.
 potato a vegetable.
 sink a appliance.
