@@ -37,10 +37,10 @@ manifest(Term) :-
 
 
 
-a(  Obj,          SoughtType) :-
-  r(Obj,       a, SoughtType, _);
-  r(Obj,       a, ActualType, _),
-  a(ActualType,   SoughtType, _).
+a(  Obj,             SoughtType) :-
+  r(Obj,         a2, SoughtType, _);
+  r(Obj,         a2, ActualType, _),
+  a(ActualType,      SoughtType   ).
 
 
 loop_as   :- a(Obj, Thing),
