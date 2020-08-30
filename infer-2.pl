@@ -26,16 +26,6 @@ clean_up  :- retractall(person2(_)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-manifest(r(Thing, a, person, _)) :-
-  format("    Manifest person ~w.\n",
-         [Thing]),
-  assertz(person(Thing)).
-
-
-manifest(Term) :-
-  format("    Manifest nothing ~w.\n",
-         [Term]).  
-
 a(  Obj,             SoughtType) :-
   r(Obj,         a,  SoughtType, _);
   r(Obj,         a,  ActualType, _),
@@ -73,5 +63,3 @@ setup :- clean_up,
          loop_binary(shop_at);
          loop_binary(dislike);
          true.
-
-
