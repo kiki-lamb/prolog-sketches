@@ -36,6 +36,16 @@ loop_as :-
   is_a(Obj, Thing),
   declarify(Thing, Obj).
 
+
+loop_binary(Action) :-
+  r(Thing, Action, Thing2, _),
+  declarify(Action, Thing, Thing2).
+
+loop_reflex(Action) :-
+  r(Thing, Action, Thing2, _),
+  (declarify(Action, Thing, Thing2);
+   declarify(Action, Thing2, Thing)).
+
 declarify(Type, Thing) :-
   G1 =.. [ Type, Thing ],
   aassertz(Type, G1).
@@ -49,15 +59,6 @@ aassertz(Type, G1) :-
   format("=+~w> ~w.\n",
          [Type, G1]),
   fail.
-
-loop_binary(Action) :-
-  r(Thing, Action, Thing2, _),
-  declarify(Action, Thing, Thing2).
-
-loop_reflex(Action) :-
-  r(Thing, Action, Thing2, _),
-  (declarify(Action, Thing, Thing2);
-   declarify(Action, Thing2, Thing)).
 
 setup :-
   clean_up,
