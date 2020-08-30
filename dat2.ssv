@@ -38,14 +38,15 @@ human repair appliance with screw.
 human shower with water.
 human smoke weed.
 kiki a woman.
+kiki dislike cat_food.
+kiki dislike tequila.
 kiki drink energy_drink.
 kiki drink vodka.
-kiki eat meat.
 kiki eat pepperoni.
 kiki like boson.
-kiki shop chicken_freak.
-kiki shop freshco.
-kiki shop lcbo.
+kiki shop_at chicken_freak.
+kiki shop_at freshco.
+kiki shop_at lcbo.
 kiki smoke cigarette.
 lcbo a store.
 lcbo sell alcohol.
@@ -64,9 +65,9 @@ sybil a woman.
 sybil drink tequila.
 sybil eat vegetable.
 sybil like kiki.
-sybil shop dave.
-sybil shop home_hardware.
-sybil shop mr_meat.
+sybil shop_at dave.
+sybil shop_at home_hardware.
+sybil shop_at mr_meat.
 tequila a alcohol.
 turkey a meat.
 turnip a vegetable.

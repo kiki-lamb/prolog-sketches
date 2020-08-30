@@ -43,14 +43,37 @@ a(  Obj,             SoughtType) :-
   r(Obj,         a,  ActualType, _),
   a(ActualType,      SoughtType   ).
 
-
-loop_def_as :- a(Obj, Thing),
-               G =.. [ Thing, Obj ],
-               format(">=> ~w.\n",
-                      [G]),                 
-               assertz(G),
+loop_as     :- a(Obj, Thing),
+               G1 =.. [ Thing, Obj ],
+               format("=a>       ~w.\n",
+                      [G1]),                 
+               assertz(G1),
                fail.
 
+loop_likes  :- r(Thing, like, Thing2, _),
+               G1 =.. [ like, Thing,  Thing2 ],
+               G2 =.. [ like, Thing2, Thing  ],
+               format("=like>    ~w.\n",
+                      [G1]),                 
+               assertz(G1),
+               format("=like>    ~w.\n",
+                      [G2]),                 
+               assertz(G2),
+               fail.
+
+loop_shop_at :- r(Thing, shop_at, Thing2, _),
+                G1 =.. [ shop_at, Thing,  Thing2 ],
+                format("=shop_at> ~w.\n",
+                       [G1]),                 
+                assertz(G1),
+                fail.
+
+loop_dislike :- r(Thing, dislike, Thing2, _),
+                G1 =.. [ dislike, Thing,  Thing2 ],
+                format("=dislike> ~w.\n",
+                       [G1]),                 
+                assertz(G1),
+                fail.
 
 loop_rs     :- r(Thing, Verb, Noun, Options),
                format("\n+=> r(~w, ~w, ~w, ~w.\n",
@@ -60,8 +83,10 @@ loop_rs     :- r(Thing, Verb, Noun, Options),
 
 setup       :- clean_up,
                assertify_lines('dat2.ssv'),
-               %loop_rs;
-               loop_def_as;
+               loop_as;
+               loop_likes;
+               loop_shop_at;
+               loop_dislike;
                true.
 
 
