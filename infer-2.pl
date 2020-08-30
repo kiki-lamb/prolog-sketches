@@ -79,7 +79,13 @@ subjects(Out) :-
 
 non_actor_subjects(Out) :-
   actors(Actors),
-  findall(Subject, ((r(_, _, Subject, _), not(member(Subject, Actors))   )), Tmp),
+  findall(
+     Subject, ((
+                    r(_, _, Subject, _),
+                    not(member(Subject, Actors))
+                 )),
+     Tmp
+  ),
   sort(Tmp, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
