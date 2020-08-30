@@ -1,16 +1,17 @@
 :- dynamic cache/3.         
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-stash(Here, To, Path)                        :- assert(cache(Here, To, Path)).
+stash(Here, To, Path) :- assert(cache(Here, To, Path)).
 
-recover(Here, To, Path)                      :- ((cache(Here, To, Path) ;
-                                                  (cache(To, Here, Tmp),
-                                                   reverse(Tmp,Path))),
-                                                 
-                                                 format("... grab ~w -> ~w: ~w.\n",
-                                                        [Here, To, Path]),
-                                                
-                                                !).
+recover(Here, To, Path) :-
+   ((cache(Here, To, Path) ;
+     (cache(To, Here, Tmp),
+      reverse(Tmp,Path))),
+    
+    format("... grab ~w -> ~w: ~w.\n",
+           [Here, To, Path]),    
+    !).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(   Start, Here, Move, To,   Stop      ) :- path(Start, Here, Move, To, Stop, _).
