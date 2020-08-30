@@ -91,24 +91,16 @@ declarify(L) :-
 
 setup :-
   assertify_lines('dat2.ssv'),
-
-  actors(Actors),
-  maplist(assert, Actors),
-  
-  % actions(Actions),
-  % maplist(assert, Actions),
-
-  non_actor_subjects(Subjects),
-  maplist(assert, Subjects),
-  
-  loop_as;
-  
+  (actors(Actors),
+   maplist(assert, Actors)),  
+  (actions(Actions),
+   maplist(assert, Actions)),
+  (non_actor_subjects(Subjects),
+   maplist(assert, Subjects)),  
+  loop_as;  
   bind;
-
-  bind_mutual_likes;
-
+  bind_mutual_likes;  
   %retract(r(_,_,_,_));
-  
   true.
 
 
