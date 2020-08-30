@@ -40,18 +40,29 @@ unique(Thing) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 combine(Left, Right, Out) :-
-  bagof([ L, R ], (member(L, Left), member(R, Right)), Out).
+  findall([ L, R ], (member(L, Left), member(R, Right)), Out).
 
 bind_classes(Left, Action, Right) :-
-  bagof(L, (is_a(L, Left )), Lefts ),
-  format("Lefts: ~w.\n",    [Lefts]),
-  bagof(R, (is_a(R, Right)), Rights ),
-  format("Rights: ~w.\n",   [Rights]),
+  findall(L, (is_a(L, Left )), Lefts ),
+  %format("Lefts: ~w.\n",    [Lefts]),
+  findall(R, (is_a(R, Right)), Rights ),
+  %format("Rights: ~w.\n",   [Rights]),
   combine([Left | Lefts], [Right | Rights], Tmp),
-  format("Tmp: ~w.\n",   [Tmp]),
-  bagof([Action, L, R], (member([L, R], Tmp)), Tmp2),
+  %format("Tmp: ~w.\n",   [Tmp]),
+  findall([Action, L, R], (member([L, R], Tmp)), Tmp2),
   format("Tmp2: ~w.\n",   [Tmp2]),
   maplist(declarify, Tmp2).
+
+actions(Out) :-
+  findall(Action, ((r(_, Action, _, _))), Tmp),
+  sort(Tmp, Out).
+
+bind :-
+  r(Subject, Action, Target, _),
+  Action \== a,
+  format("Binding ~w(~w, ~w)...\n", [Action, Subject, Target]),
+  bind_classes(Subject, Action, Target),
+  fail.    
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -61,33 +72,15 @@ assert1(G) :-
 
 declarify(L) :-
   G1 =..  L,
-  assert1(G1),
+  assert(G1),
   format("-=> ~w\n", [G1]).
-
-% declarify(Action, Thing) :-
-%   G1 =.. [ Action, Thing ],
-%   aassertz(Action, G1).
-% 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
-% aassertz(Action, G1) :-
-%   assertz(G1),
-%   format("=+~w> ~w.\n",
-%          [Action, G1]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
   assertify_lines('dat2.ssv'),
   loop_as;
-%  loop_reflex(like);
-%  magic_loop(eat);
-%  magic_loop(drink);
-%  magic_loop(give);
-%  magic_loop(has);
-%  magic_loop(smoke);
-%  magic_loop(shop_at);
-%  magic_loop(dislike);
+  bind;
 %  retract(r(_,_,_,_));
   true.
 
