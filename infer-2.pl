@@ -26,16 +26,25 @@ clean_up  :- retractall(person2(_)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-is_a(Thing, SoughtType) :-
-  r(Thing, a,  SoughtType, _);
+is_a(Thing, Class) :-
+  r(Thing, a,  Class, _);
   r(Thing, a,  ActualType, _),
   is_a(ActualType,
-             SoughtType).
+             Class).
 
 loop_as :-
   is_a(Obj, Thing),
   declarify(Thing, Obj).
 
+magic_loop(Action) :-
+  r(Class, Action, Subject, _),
+  format("[ ~w ~w ~w ]\n", [Class, Action, Subject]),
+  declarify(Action, Class, Subject),
+
+  is_a(Thing, Class),
+  format("[ ~w ~w ~w ]\n", [Thing, Action, Subject]),
+  declarify(Action, Thing, Subject).
+ 
 
 loop_binary(Action) :-
   r(Thing, Action, Thing2, _),
@@ -46,18 +55,18 @@ loop_reflex(Action) :-
   (declarify(Action, Thing, Thing2);
    declarify(Action, Thing2, Thing)).
 
-declarify(Type, Thing) :-
-  G1 =.. [ Type, Thing ],
-  aassertz(Type, G1).
+declarify(Action, Thing) :-
+  G1 =.. [ Action, Thing ],
+  aassertz(Action, G1).
 
-declarify(Type, Thing, Thing2) :-
-  G1 =.. [ Type, Thing, Thing2 ],
-  aassertz(Type, G1).
+declarify(Action, Thing, Thing2) :-
+  G1 =.. [ Action, Thing, Thing2 ],
+  aassertz(Action, G1).
 
-aassertz(Type, G1) :-
+aassertz(Action, G1) :-
   assertz(G1),
   format("=+~w> ~w.\n",
-         [Type, G1]),
+         [Action, G1]),
   fail.
 
 setup :-
@@ -65,12 +74,12 @@ setup :-
   assertify_lines('dat2.ssv'),
   loop_as;
   loop_reflex(like);
-  loop_binary(eat);
-  loop_binary(drink);
-  loop_binary(give);
-  loop_binary(has);
-  loop_binary(smoke);
-  loop_binary(shop_at);
-  loop_binary(dislike);
+%   loop_binary(eat);
+%   loop_binary(drink);
+%   loop_binary(give);
+%   loop_binary(has);
+  magic_loop(smoke);
+%   loop_binary(shop_at);
+%   loop_binary(dislike);
   retract(r(_,_,_,_));
   true.
