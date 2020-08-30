@@ -5,7 +5,7 @@
 :- dynamic r/3.
 :- dynamic iz/2.
 
-a(  Obj,           SoughtType) :-
+a(   Obj,           SoughtType) :-
   r( Obj,       a, SoughtType);
   r( Obj,       a, ActualType),
   a(ActualType,    SoughtType).
@@ -20,3 +20,7 @@ main :-
   assertify_lines('dat.ssv'),
   listing(r).
 
+loop :-
+  r(Q, W, E, R),
+  format("+=> r(~w, ~w, ~w, ~w).\n", [Q, W, E, R]),
+  fail.
