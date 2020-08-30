@@ -23,8 +23,7 @@ isnt(Thing, Class) :-
 is_a(Thing, Class) :-
   (r(Thing, a,  Class, _) ;
    r(Thing, a,  ActualType, _),
-   is_a(ActualType, Class)),
-  !.
+   is_a(ActualType, Class)).
 
 unique(Thing) :-
   \+( _ is_a Thing).
@@ -35,9 +34,9 @@ combine(Left, Right, Out) :-
   findall([ L, R ], (member(L, Left), member(R, Right)), Out).
 
 bind_classes(Left, Action, Right, Out) :-
-  findall(L, (is_a(L, Left )), Lefts ),
+  findall(L, (L is_a Left),  Lefts ),
   %format("Lefts: ~w.\n",    [Lefts]),
-  findall(R, (is_a(R, Right)), Rights ),
+  findall(R, (R is_a Right), Rights ),
   %format("Rights: ~w.\n",   [Rights]),
   combine([Left | Lefts], [Right | Rights], Tmp),
   %format("Tmp: ~w.\n",   [Tmp]),

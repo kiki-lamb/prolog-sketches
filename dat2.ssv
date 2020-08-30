@@ -42,7 +42,7 @@ kiki dislike cat_food.
 kiki dislike tequila.
 kiki drink energy_drink.
 kiki drink vodka.
-kiki eat pepperoni.
+kiki eat meat.
 kiki like boson.
 kiki shop_at chicken_freak.
 kiki shop_at freshco.
@@ -61,6 +61,7 @@ pepsi a beverage.
 potato a vegetable.
 sink a appliance.
 sink give water.
+steak a meat.
 store a location.
 sybil a woman.
 sybil drink tequila.
