@@ -24,19 +24,18 @@
 %   fail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-clean_up  :- retractall(person2(_)).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+loop_as :-
+  is_a(Thing, Class),
+  declarify([Class, Thing]),
+  fail.
 
 is_a(Thing, Class) :-
   r(Thing, a,  Class, _) ;
   r(Thing, a,  ActualType, _),
   is_a(ActualType, Class).
 
-loop_as :-
-  is_a(Thing, Class),
-  declarify(Class, Thing),
-  fail.
+unique(Thing) :-
+  \+ is_a(_, Thing).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -46,43 +45,40 @@ combine(Left, Right, Out) :-
 bind_classes(Left, Action, Right) :-
   bagof(L, (is_a(L, Left )), Lefts ),
   format("Lefts: ~w.\n",    [Lefts]),
-  
   bagof(R, (is_a(R, Right)), Rights ),
   format("Rights: ~w.\n",   [Rights]),
-  
   combine([Left | Lefts], [Right | Rights], Tmp),
   format("Tmp: ~w.\n",   [Tmp]),
-
   bagof([Action, L, R], (member([L, R], Tmp)), Tmp2),
   format("Tmp2: ~w.\n",   [Tmp2]),
-  
-  maplist((declarify(Action)), Tmp2, _).
+  maplist(declarify, Tmp2).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-declarify([Action, Thing, Subject]) :-
-  G1 =..  [Action, Thing, Subject],
-  aassertz(Action, G1).
+assert1(G) :-
+  \+( G ),
+  !,
+  assert(G).
 
-declarify(Action, Thing, Subject) :-
-  G1 =.. [ Action, Thing, Subject ],
-  aassertz(Action, G1).
+declarify(L) :-
+  G1 =..  L,
+  assert1(G1),
+  format("-=> ~w\n", [G1]).
 
-declarify(Action, Thing) :-
-  G1 =.. [ Action, Thing ],
-  aassertz(Action, G1).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-aassertz(Action, G1) :-
-  assertz(G1),
-  format("=+~w> ~w.\n",
-         [Action, G1]).
+% declarify(Action, Thing) :-
+%   G1 =.. [ Action, Thing ],
+%   aassertz(Action, G1).
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% aassertz(Action, G1) :-
+%   assertz(G1),
+%   format("=+~w> ~w.\n",
+%          [Action, G1]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
-  clean_up,
   assertify_lines('dat2.ssv'),
   loop_as;
 %  loop_reflex(like);
