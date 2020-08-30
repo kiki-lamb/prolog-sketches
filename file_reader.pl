@@ -21,7 +21,7 @@ aasertify_lines([], Build, Out)           :- collect(Build, Out), !.
 aasertify_lines([Line|Lines], Build, Out) :-
   split_string(Line, " ", " ", Words),
   atomize(Words, [A1, A2, A3 | Atoms]),
-  Term =.. [r, A1, A2, A3, Atoms],
+  Term =.. [r, A1, A2, A3, [Atoms],
   assertz(Term),
   aasertify_lines(Lines, Build, Out).
 
@@ -30,29 +30,4 @@ aatomize([], Build, Out)                  :- collect(Build, Out), !.
 aatomize([In|Ins], Build, Out)            :-
   atom_codes(Atomic, In),
   aatomize(Ins, [Atomic|Build], Out).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-:- dynamic r/3.
-:- dynamic iz/2.
-
-a(  Obj,           SoughtType) :-
-  r( Obj,       a, SoughtType);
-  r( Obj,       a, ActualType),
-  a(ActualType,    SoughtType).
-
-does(_,   a) :- fail.
-does(Obj, Action) :-
-  Action \== a,
-  r( Obj, Action, _);
-  r( Obj, a, Actual), r(Actual, Action, _).
-  
-main :-
-  clines(Ls, 'dat.ssv'),
-  retractall(r(_,_,_)),
-  retractall(r(_,_,_,_)),
-  retractall(r(_,_,_,_,_)),
-  retractall(r(_,_,_,_,_,_)),
-  assertify_lines(Ls, _),
-  listing(r).
 
