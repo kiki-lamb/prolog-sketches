@@ -1,3 +1,5 @@
+:- consult("file_reader.pl").
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 :- table object/1.
 object(X)              :- food(X) ;
