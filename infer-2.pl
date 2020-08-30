@@ -34,16 +34,19 @@ unique(Thing) :-
 combine(Left, Right, Out) :-
   findall([ L, R ], (member(L, Left), member(R, Right)), Out).
 
-bind_classes(Left, Action, Right) :-
+bind_classes(Left, Action, Right, Out) :-
   findall(L, (is_a(L, Left )), Lefts ),
   %format("Lefts: ~w.\n",    [Lefts]),
   findall(R, (is_a(R, Right)), Rights ),
   %format("Rights: ~w.\n",   [Rights]),
   combine([Left | Lefts], [Right | Rights], Tmp),
   %format("Tmp: ~w.\n",   [Tmp]),
-  findall([Action, L, R], (member([L, R], Tmp)), Tmp2),
+  findall([Action, L, R], (member([L, R], Tmp)), Out).
   %format("Tmp2: ~w.\n",   [Tmp2]),
-  maplist(declarify, Tmp2).
+  
+bind_classes(Left, Action, Right) :-
+  bind_classes(Left, Action, Right, Out),
+  maplist(declarify, Out).
 
 actors(Out) :-
   findall(Actor, ((r(Actor, _, _, _))), Tmp),
