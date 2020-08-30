@@ -18,14 +18,16 @@ path(Start, Here, Move, To, Stop) :-
    path(Start, Here, Move, To, Stop, _).
 
 path(Start, Here, Move, To, Stop, Path) :-
-   %recover(Here, To),
-   recover(Here, To, Path); 
-   call(Start, Here),
-   search([], Here, Move, To, Stop, Tmp),
-   reverse([To|Tmp], Path),   
-   format("... stash ~w -> ~w: ~w.\n",
-          [Here, To, Path]),   
-   stash(Here, To, Path).
+   (
+      %recover(Here, To),
+      recover(Here, To, Path); 
+      call(Start, Here),
+      search([], Here, Move, To, Stop, Tmp),
+      reverse([To|Tmp], Path),   
+      format("... stash ~w -> ~w: ~w.\n",
+             [Here, To, Path]),   
+      stash(Here, To, Path)
+   ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 search( Build, Here, Move, To, Stop, Path) :-
