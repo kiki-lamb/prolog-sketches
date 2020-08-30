@@ -1,28 +1,28 @@
 :- dynamic cache/3.         
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-recover(Here, To)                            :- cache(Here, To, _) ;
-                                                cache(To, Here, _).
-    
+stash(Here, To, Path)                        :- assert(cache(Here, To, Path)).
+
 recover(Here, To, Path)                      :- ((cache(Here, To, Path) ;
                                                   (cache(To, Here, Tmp),
                                                    reverse(Tmp,Path)))
-                                                 %format("... grab ~w -> ~w: ~w.\n",
-                                                 %       [Here, To, Path]),
-                                                ).
-
-stash(Here, To, Path)                        :- assert(cache(Here, To, Path)).
+                                                 
+%                                                 format("... grab ~w -> ~w: ~w.\n",
+%                                                        [Here, To, Path])
+                                                
+                                                ), !.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(   Start, Here, Move, To,   Stop      ) :- path(Start, Here, Move, To, Stop, _).
-path(   Start, Here, Move, To,   Stop, Path) :- recover(Here, To),
+path(   Start, Here, Move, To,   Stop, Path) :- %recover(Here, To),
                                                 recover(Here, To, Path);
                                                 
                                                 call(Start, Here),
                                                 search([], Here, Move, To, Stop, Tmp),
                                                 reverse([To|Tmp], Path),
                                                 
-                                               %format("... stash ~w -> ~w: ~w.\n",
-                                               %       [Here, To, Path]),
+%                                                format("... stash ~w -> ~w: ~w.\n",
+%                                                      [Here, To, Path]),
 
                                                 stash(Here, To, Path).
 
