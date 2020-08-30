@@ -1,20 +1,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-start_2(X)              :- fail.
-move_2( Here, To)       :- fail.
-stop_2( Here, To)       :- fail.
-ppath_2(Here, To)       :- ppath_2(Here, To, _).
-ppath_2(Here, To, Path) :- fail.
-
+% start_2(X)              :- fail.
+% move_2( Here, To)       :- fail.
+% stop_2( Here, To)       :- fail.
+% ppath_2(Here, To)       :- ppath_2(Here, To, _).
+% ppath_2(Here, To, Path) :- fail.
+% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-a(   Obj,           SoughtType) :-
-  r( Obj,       a, SoughtType);
-  r( Obj,       a, ActualType),
-  a(ActualType,    SoughtType).
+% a(   Obj,           SoughtType, _) :-
+%   r( Obj,       a, SoughtType,  _);
+%   r( Obj,       a, ActualType,  _),
+%   a(ActualType,    SoughtType,  _).
+% 
+% does(_,   a) :- fail.
+% does(Obj, Action) :-
+%   Action \== a,
+%   r( Obj, Action, _, _);
+%   r( Obj, a, Actual, _), r(Actual, Action, _, _).
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% manifest :-
+%   r(Q, W, E, R),
+%   format("+=> r(~w, ~w, ~w, ~w.\n",
+%          [Q, W, E, R]),
+%   fail.
 
-does(_,   a) :- fail.
-does(Obj, Action) :-
-  Action \== a,
-  r( Obj, Action, _);
-  r( Obj, a, Actual), r(Actual, Action, _).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

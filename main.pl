@@ -28,16 +28,18 @@ ppaths         :- ppaths(_,_,_).
 ppaths(W,T,P)  :- ppath(W,T,P),
                   format("~w -> ~w: ~w\n", [W,T,P]),
                   fail.
-    
+
+manifest       :- rs, !.
+
 rs             :- r(Q, W, E, R),
                   format("+=> r(~w, ~w, ~w, ~w.\n",
                          [Q, W, E, R]),
                   fail.
 
 main           :- assertify_lines('dat.ssv'),
+                  manifest,
                   % ppaths(_,_,_) ;
                   % nl,
                   % possible_paths(_,_,_,_) ;
-                  rs;
                   true.
 
