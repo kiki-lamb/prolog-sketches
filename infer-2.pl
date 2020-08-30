@@ -50,23 +50,26 @@ aassertz(Type, G1) :-
          [Type, G1]),
   fail.
 
-loop_binary(Action) :- r(Thing, Action, Thing2, _),
-                       declarify(Action, Thing, Thing2).
+loop_binary(Action) :-
+  r(Thing, Action, Thing2, _),
+  declarify(Action, Thing, Thing2).
 
-loop_reflex(Action) :- r(Thing, Action, Thing2, _),
-                       (declarify(Action, Thing, Thing2);
-                        declarify(Action, Thing2, Thing)).
+loop_reflex(Action) :-
+  r(Thing, Action, Thing2, _),
+  (declarify(Action, Thing, Thing2);
+   declarify(Action, Thing2, Thing)).
 
-setup :- clean_up,
-         assertify_lines('dat2.ssv'),
-         loop_as;
-         loop_reflex(like);
-         loop_binary(eat);
-         loop_binary(drink);
-         loop_binary(give);
-         loop_binary(has);
-         loop_binary(smoke);
-         loop_binary(shop_at);
-         loop_binary(dislike);
-         retract(r(_,_,_,_));
-         true.
+setup :-
+  clean_up,
+  assertify_lines('dat2.ssv'),
+  loop_as;
+  loop_reflex(like);
+  loop_binary(eat);
+  loop_binary(drink);
+  loop_binary(give);
+  loop_binary(has);
+  loop_binary(smoke);
+  loop_binary(shop_at);
+  loop_binary(dislike);
+  retract(r(_,_,_,_));
+  true.
