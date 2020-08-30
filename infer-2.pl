@@ -1,3 +1,5 @@
+:- consult("file_reader.pl").
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % start_2(X)              :- fail.
 % move_2( Here, To)       :- fail.
@@ -27,24 +29,50 @@ clean_up  :- retractall(person2(_)).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 is_a(Thing, Class) :-
-  r(Thing, a,  Class, _);
+  r(Thing, a,  Class, _) ;
   r(Thing, a,  ActualType, _),
-  is_a(ActualType,
-             Class).
+  is_a(ActualType, Class).
 
 loop_as :-
-  is_a(Obj, Thing),
-  declarify(Thing, Obj).
-
-magic_loop(Action) :-
-  r(Class, Action, Subject, _),
-  format("[ ~w ~w ~w ]\n", [Class, Action, Subject]),
-  declarify(Action, Class, Subject),
-
   is_a(Thing, Class),
-  format("[ ~w ~w ~w ]\n", [Thing, Action, Subject]),
-  declarify(Action, Thing, Subject).
- 
+  declarify(Class, Thing).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+combine(Left, Right, Out) :-
+  bagof([ L, R ], (member(L, Left), member(R, Right)), Out).
+
+
+
+bind_list(Self, Other, Zipped) :-
+
+
+bind_to(Class, Action, Subject) :-
+  format("[~w ~w ~w]\n", [Class, Action, Subject]),
+  dddeclarify(Action, Class, Subject);
+  bagof(SubjectSubClass, (is_a(SubjectSubClass, Subject)), SubjectSubClasses),
+  maplist(dddeclarify(Action, Class), SubjectSubClasses),
+
+  bagof(SubClass,        (is_a(SubClass,        Class)),   SubClasses),
+  
+  format("~w actors:  ~w.\n", [ Class, SubClasses ]),
+  format("~w targets: ~w.\n", [ Subject, SubjectSubClasses ]),
+  
+  maplist(derp(Action, SubClasses), SubjectSubClasses).
+
+derp(Action, SubClasses, X) :- maplist(ddeclarify(Action,X), SubClasses).
+
+magic_loop(Action) :- 
+  r(Class, Action, Subject, _),
+  bind_to(Class, Action, Subject).
+  
+%  format("[ ~w ~w ~w ]\n", [Class, Action, Subject]),
+%  declarify(Action, Class, Subject),
+%
+%  is_a(Thing, Class),
+%  format("[ ~w ~w ~w ]\n", [Thing, Action, Subject]),
+%  declarify(Action, Thing, Subject). 
 
 loop_binary(Action) :-
   r(Thing, Action, Thing2, _),
@@ -59,9 +87,18 @@ declarify(Action, Thing) :-
   G1 =.. [ Action, Thing ],
   aassertz(Action, G1).
 
-declarify(Action, Thing, Thing2) :-
-  G1 =.. [ Action, Thing, Thing2 ],
+declarify(Action, Thing, Subject) :-
+  G1 =.. [ Action, Thing, Subject ],
   aassertz(Action, G1).
+
+
+ddeclarify(Action, Subject, Thing) :-
+  declarify(Action, Thing, Subject);
+  true.
+
+dddeclarify(Action, Subject, Thing) :-
+  declarify(Action, Thing, Subject);
+  true.
 
 aassertz(Action, G1) :-
   assertz(G1),
@@ -74,12 +111,17 @@ setup :-
   assertify_lines('dat2.ssv'),
   loop_as;
   loop_reflex(like);
-%   loop_binary(eat);
-%   loop_binary(drink);
-%   loop_binary(give);
-%   loop_binary(has);
+  magic_loop(eat);
+  magic_loop(drink);
+  magic_loop(give);
+  magic_loop(has);
   magic_loop(smoke);
-%   loop_binary(shop_at);
-%   loop_binary(dislike);
+  magic_loop(shop_at);
+  magic_loop(dislike);
   retract(r(_,_,_,_));
   true.
+
+
+
+    
+    
