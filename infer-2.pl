@@ -29,6 +29,12 @@ loop_as :-
   declarify([Class, Thing]),
   fail.
 
+
+:- op(300, xfy, isnt).
+isnt(Thing, Class) :-
+  \+( is_a(Thing, Class)).
+
+:- op(300, xfy, is_a).
 is_a(Thing, Class) :-
   r(Thing, a,  Class, _) ;
   r(Thing, a,  ActualType, _),
@@ -50,19 +56,27 @@ bind_classes(Left, Action, Right) :-
   combine([Left | Lefts], [Right | Rights], Tmp),
   %format("Tmp: ~w.\n",   [Tmp]),
   findall([Action, L, R], (member([L, R], Tmp)), Tmp2),
-  format("Tmp2: ~w.\n",   [Tmp2]),
+  %format("Tmp2: ~w.\n",   [Tmp2]),
   maplist(declarify, Tmp2).
+
+actors(Out) :-
+  findall(Actor, ((r(Actor, _, _, _))), Tmp),
+  sort(Tmp, Out).
 
 actions(Out) :-
   findall(Action, ((r(_, Action, _, _))), Tmp),
   sort(Tmp, Out).
 
+subjects(Out) :-
+  findall(Subject, ((r(_, _, Subject, _))), Tmp),
+  sort(Tmp, Out).
+
 bind :-
-  r(Subject, Action, Target, _),
+  r(Actor, Action, Subject, _),
   Action \== a,
-  format("Binding ~w(~w, ~w)...\n", [Action, Subject, Target]),
-  bind_classes(Subject, Action, Target),
-  fail.    
+  format("Binding ~w(~w, ~w)...\n", [Action, Actor, Subject]),
+  bind_classes(Actor, Action, Subject),
+  fail.   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -79,6 +93,9 @@ declarify(L) :-
 
 setup :-
   assertify_lines('dat2.ssv'),
+  maplist(assert, actors),
+  maplist(assert, actions),
+  maplist(assert, sunjects),
   loop_as;
   bind;
 %  retract(r(_,_,_,_));
