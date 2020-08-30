@@ -41,10 +41,10 @@ meat(pepperoni).
 meat(steak).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-person(sybil).
-person(kiki).
-person(higgy).
-person(boson).
+ person(sybil).
+ person(kiki).
+ person(higgy).
+ person(boson).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 cat(higgy).

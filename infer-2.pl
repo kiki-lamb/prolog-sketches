@@ -6,10 +6,6 @@
 % ppath_2(Here, To, Path) :- fail.
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% a(   Obj,           SoughtType, _) :-
-%   r( Obj,       a, SoughtType,  _);
-%   r( Obj,       a, ActualType,  _),
-%   a(ActualType,    SoughtType,  _).
 % 
 % does(_,   a) :- fail.
 % does(Obj, Action) :-
@@ -17,7 +13,7 @@
 %   r( Obj, Action, _, _);
 %   r( Obj, a, Actual, _), r(Actual, Action, _, _).
 % 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 % setup :-
 %   r(Thing, Verb, Noun, Options),
@@ -25,9 +21,36 @@
 %          [Thing, Verb, Noun, Options]),
 %   fail.
 
-manifest(X) :-
-  format("    Manifest ~w.\n",
-         [X]).
+clean_up  :- retractall(person2(_)).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+manifest(r(Thing, a, person, _)) :-
+  format("    Manifest person ~w.\n",
+         [Thing]),
+  assertz(person(Thing)).
+
+
+manifest(Term) :-
+  format("    Manifest nothing ~w.\n",
+         [Term]).  
+
+
+
+a(  Obj,          SoughtType) :-
+  r(Obj,       a, SoughtType, _);
+  r(Obj,       a, ActualType, _),
+  a(ActualType,   SoughtType, _).
+
+
+loop_as   :- a(Obj, Thing),
+             G =.. [ Obj, Thing ],
+
+             format("Establish ~w.\n",
+                    [G]),
+
+             assertz(G),
+             fail.
 
 loop_rs   :- r(Thing, Verb, Noun, Options),
              format("\n+=> r(~w, ~w, ~w, ~w.\n",
@@ -35,8 +58,10 @@ loop_rs   :- r(Thing, Verb, Noun, Options),
              manifest((r(Thing, Verb, Noun, Options))),
              fail.
 
-setup     :- assertify_lines('dat.ssv'),
-             loop_rs;
+setup     :- clean_up,
+             assertify_lines('dat2.ssv'),
+             %             loop_rs;
+             loop_as;
              true.
 
 
