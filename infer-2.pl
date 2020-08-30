@@ -16,9 +16,11 @@ isnt(Thing, Class) :-
 
 :- op(300, xfy, is_a).
 is_a(Thing, Class) :-
-  (r(Thing, a,  Class, _) ;
-   r(Thing, a,  ActualType, _),
-   is_a(ActualType, Class)).
+   (
+      r(Thing, a,  Class, _)
+   ;  r(Thing, a,  ActualType, _),
+      is_a(ActualType, Class)
+   ).
 
 unique(Thing) :-
   \+( _ is_a Thing).
@@ -103,11 +105,14 @@ setup :-
       non_actor_subjects(Subjects),
       maplist(assert, Subjects)
   ),  
-  bind_classes;  
-  bind_actions;
-  bind_mutual_likes;  
+  (
+     bind_classes
+  ;  bind_actions
+  ;  bind_mutual_likes
+  ;  true
+  ).
   %retract(r(_,_,_,_));
-  true.
+  
 
 
 
