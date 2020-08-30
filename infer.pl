@@ -101,7 +101,7 @@ wwould(Person, help, P2) :-
    person(P2),
    Person \== P2,
    (
-      like(Person,P2),
+      like(Person,P2)
    ;  like(P2,Person)
    ).
 
