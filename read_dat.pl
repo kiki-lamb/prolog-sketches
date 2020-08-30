@@ -55,7 +55,7 @@ does(Obj, Action) :-
   
 main :-
   retractall(r(_,_,_)),
-  clines(Ls, 'dat2.ssv'),
+  clines(Ls, 'dat.ssv'),
   assertify_lines(Ls, _),
   listing(r),
   go.
