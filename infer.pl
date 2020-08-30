@@ -102,7 +102,7 @@ wwould(Person, help, P2) :-
    Person \== P2,
    (
       like(Person,P2),
-   ;  like(P2,P erson)
+   ;  like(P2,Person)
    ).
 
 wwould(Human, operate, Appliance) :-
