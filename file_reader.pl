@@ -7,7 +7,6 @@ eos([], []).
 
 cline([])                                --> ( ".\n" ; call(eos) ), !.
 cline([L|Ls])                            --> [L], cline(Ls).
-
 clines(Ls, File)                          :- phrase_from_file(lliness(Ls), File).
 
 collect(Build, Out)                       :- Out = Build.
@@ -16,7 +15,14 @@ collect(Using, In, Out)                   :-
   call(G),
   reverse(Tmp, Out).
 
-assertify_lines(In, Out)                  :- collect(aasertify_lines, In, Out).
+assertify_lines(File)                     :-
+  clines(Ls, File),
+  assertify_lines(Ls, _).
+
+assertify_lines(In, Out)                  :-
+  retractall(r(_,_,_,_)),
+  collect(aasertify_lines, In, Out).
+
 aasertify_lines([], Build, Out)           :- collect(Build, Out), !.
 aasertify_lines([Line|Lines], Build, Out) :-
   split_string(Line, " ", " ", Words),

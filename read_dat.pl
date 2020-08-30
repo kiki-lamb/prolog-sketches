@@ -17,11 +17,6 @@ does(Obj, Action) :-
   r( Obj, a, Actual), r(Actual, Action, _).
   
 main :-
-  clines(Ls, 'dat.ssv'),
-  retractall(r(_,_,_)),
-  retractall(r(_,_,_,_)),
-  retractall(r(_,_,_,_,_)),
-  retractall(r(_,_,_,_,_,_)),
-  assertify_lines(Ls, _),
+  assertify_lines('dat.ssv'),
   listing(r).
 
