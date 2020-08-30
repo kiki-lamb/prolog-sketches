@@ -1,6 +1,7 @@
 :- initialization(setup).
 :- consult("graph.pl").
 :- consult("infer-2.pl").
+:- consult("infer.pl").
 
 % possible        :- possible(_,_,_).
 % possible(W,A,T) :- could(W,A,T),
