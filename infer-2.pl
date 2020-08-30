@@ -17,8 +17,8 @@ isnt(Thing, Class) :-
 :- op(300, xfy, is_a).
 is_a(Thing, Class) :-
    (
-      r(Thing, a,  Class, _)
-   ;  r(Thing, a,  ActualType, _),
+      r(Thing, is_a, Class, _)
+   ;  r(Thing, is_a, ActualType, _),
       is_a(ActualType, Class)
    ).
 
@@ -53,7 +53,7 @@ bind_classes(Left, Action, Right) :-
 
 bind_actions :-
   r(Actor, Action, Subject, _),
-  Action \== a,
+  Action \== is_a,
   % format("Binding ~w(~w, ~w)...\n", [Action, Actor, Subject]),
   bind_classes(Actor, Action, Subject),
   fail.   
