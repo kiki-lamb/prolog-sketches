@@ -56,8 +56,7 @@ bind_classes(Left, Action, Right) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 assert1(G) :-
-  \+( G ),
-  !,
+  catch((\+( G ), !), _, fail);
   assert(G).
 
 declarify(L) :-
