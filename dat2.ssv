@@ -1,74 +1,74 @@
-alcohol2 a2 beverage2.
-alive2 drink2 water2.
-alive2 starve2 unless2 drink beverage.
-alive2 starve2 unless2 eat food.
-appliance2 break2 unless2 repair by human.
-beer2 a2 alcohol2.
-boson2 like2 higgy2.
-boson2 a2 cat2.
-cabbage2 a2 vegetable2.
-cat2 a2 cute2.
-cat2 a2 mammal2.
-cat2 eat2 cat_food2.
-cat_food2 a2 meat2.
-chicken freak2 doesnt2 sell alcohol.
-chicken freak2 doesnt2 sell water.
-chicken_freak2 a2 store2.
-chicken_freak2 sell2 beverage2.
-chicken_freak2 sell2 cat_food2.
-chicken_freak2 sell2 cigarette2.
-dave2 a2 man2.
-dave2 sell2 weed2.
-dishwasher2 a2 appliance2.
-energy_drink2 a2 beverage2.
-freshco2 a2 store2.
-freshco2 sell2 vegetable2.
-higgy2 a2 cat2.
-home_hardware2 a2 store2.
-home_hardware2 sell2 screw2.
-mammal2 a2 animal2.
-human2 a2 mammal2.
-human2 drink2 beer2.
-human2 repair2 appliance2 with screw.
-human2 shower2 with2 water.
-human2 smoke2 weed2.
-kiki2 a2 woman2.
-kiki2 drink2 energy_drink.
-kiki2 drink2 vodka2.
-kiki2 eat2 meat2.
-kiki2 eat2 pepperoni2.
-kiki2 like2 boson2.
-kiki2 shop2 chicken_freak.
-kiki2 shop2 freshco2.
-kiki2 shop2 lcbo2.
-kiki2 smoke2 cigarette2.
-lcbo2 a2 store2.
-lcbo2 sell2 alcohol2.
-mammal2 a2 alive2.
-man2 a2 human2.
-meat2 a2 food2.
-mr_meat2 a2 store2.
-mr_meat2 sell2 meat2.
-pepperoni2 a2 meat2.
-potato2 a2 vegetable2.
-sink2 a2 appliance2.
-sink2 give2 water2.
-sybil2 a2 woman2.
-sybil2 drink2 tequila2.
-sybil2 eat2 vegetable2.
-sybil2 like2 kiki2.
-sybil2 shop2 dave2.
-sybil2 shop2 home_hardware2.
-sybil2 shop2 mr_meat2.
-tequila2 a2 alcohol2.
-turkey2 a2 meat2.
-turnip2 a2 vegetable2.
-vegetable2 a2 food2.
-vodka2 a2 alcool2.
-water2 a2 beverage2.
-woman2 a2 human2.
-food2 a2 thing2.
-beverage2 a2 thing2.
-cigarette2 a2 thing2.
-appliance2 a2 thing2.
-store2 a2 location2.
+alcohol a beverage.
+alive drink water.
+alive starve unless drink beverage.
+alive starve unless eat food.
+appliance break unless repair by human.
+beer a alcohol.
+boson like higgy.
+boson a cat.
+cabbage a vegetable.
+cat a cute.
+cat a mammal.
+cat eat cat_food.
+cat_food a meat.
+chicke freak doesnt sell alcohol.
+chicke freak doesnt sell water.
+chicken_freak a store.
+chicken_freak sell beverage.
+chicken_freak sell cat_food.
+chicken_freak sell cigarette.
+dave a man.
+dave sell weed.
+dishwasher a appliance.
+energy_drink a beverage.
+freshco a store.
+freshco sell vegetable.
+higgy a cat.
+home_hardware a store.
+home_hardware sell screw.
+mammal a animal.
+human a mammal.
+human drink beer.
+human repair appliance with screw.
+human shower with water.
+human smoke weed.
+kiki a woman.
+kiki drink energy_drink.
+kiki drink vodka.
+kiki eat meat.
+kiki eat pepperoni.
+kiki like boson.
+kiki shop chicken_freak.
+kiki shop freshco.
+kiki shop lcbo.
+kiki smoke cigarette.
+lcbo a store.
+lcbo sell alcohol.
+mammal a alive.
+man a human.
+meat a food.
+mr_meat a store.
+mr_meat sell meat.
+pepperoni a meat.
+potato a vegetable.
+sink a appliance.
+sink give water.
+sybil a woman.
+sybil drink tequila.
+sybil eat vegetable.
+sybil like kiki.
+sybil shop dave.
+sybil shop home_hardware.
+sybil shop mr_meat.
+tequila a alcohol.
+turkey a meat.
+turnip a vegetable.
+vegetable a food.
+vodka a alcool.
+water a beverage.
+woman a human.
+food a thing.
+beverage a thing.
+cigarette a thing.
+appliance a thing.
+store a location.

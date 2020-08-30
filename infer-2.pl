@@ -38,8 +38,8 @@ manifest(Term) :-
 
 
 a(  Obj,             SoughtType) :-
-  r(Obj,         a2, SoughtType, _);
-  r(Obj,         a2, ActualType, _),
+  r(Obj,         a,  SoughtType, _);
+  r(Obj,         a,  ActualType, _),
   a(ActualType,      SoughtType   ).
 
 
@@ -47,7 +47,6 @@ loop_as   :- a(Obj, Thing),
              G =.. [ Thing, Obj ],
              format(">=> ~w.\n",
                     [G]),
-
              assertz(G),
              fail.
 
@@ -59,7 +58,7 @@ loop_rs   :- r(Thing, Verb, Noun, Options),
 
 setup     :- clean_up,
              assertify_lines('dat2.ssv'),
-             %             loop_rs;
+             %loop_rs;
              loop_as;
              true.
 
