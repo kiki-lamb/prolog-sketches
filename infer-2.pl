@@ -88,8 +88,8 @@ setup :-
   actors(Actors),
   maplist(assert, Actors),
   
-  actions(Actions),
-  maplist(assert, Actions),
+  % actions(Actions),
+  % maplist(assert, Actions),
 
   non_actor_subjects(Subjects),
   maplist(assert, Subjects),
