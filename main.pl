@@ -1,5 +1,4 @@
 :- initialization(setup).
-:- consult("facts.pl").
 :- consult("exists.pl").
 :- consult("infer.pl").
 :- consult("graph.pl").
