@@ -54,7 +54,6 @@ actions(Out) :-
   sort(Tmp, Out).
 
 subjects(Out) :-
-  actors(Actors),
   findall(Subject, ((r(_, _, Subject, _))), Tmp),
   sort(Tmp, Out).
 
