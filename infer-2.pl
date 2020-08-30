@@ -26,14 +26,14 @@ clean_up  :- retractall(person2(_)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-recurse_up(Thing, SoughtType) :-
+is_a(Thing, SoughtType) :-
   r(Thing, a,  SoughtType, _);
   r(Thing, a,  ActualType, _),
-  recurse_up(ActualType,
+  is_a(ActualType,
              SoughtType).
 
 loop_as :-
-  recurse_up(Obj, Thing),
+  is_a(Obj, Thing),
   declarify(Thing, Obj).
 
 declarify(Type, Thing) :-
