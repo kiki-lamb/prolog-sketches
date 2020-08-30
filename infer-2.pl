@@ -91,12 +91,18 @@ assert_list(L) :-
 
 setup :-
   assertify_lines('dat2.ssv'),
-  (actors(Actors),
-   maplist(assert, Actors)),  
-  (actions(Actions),
-   maplist(assert, Actions)),
-  (non_actor_subjects(Subjects),
-   maplist(assert, Subjects)),  
+  (
+      actors(Actors),
+      maplist(assert, Actors)
+  ),  
+  (
+      actions(Actions),
+      maplist(assert, Actions)
+  ),
+  (
+      non_actor_subjects(Subjects),
+      maplist(assert, Subjects)
+  ),  
   bind_classes;  
   bind_actions;
   bind_mutual_likes;  
