@@ -10,11 +10,6 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-loop_as :-
-  is_a(Thing, Class),
-  declarify([Class, Thing]),
-  fail.
-
 :- op(300, xfy, isnt).
 isnt(Thing, Class) :-
   \+( is_a(Thing, Class)).
@@ -33,6 +28,13 @@ unique(Thing) :-
 combine(Left, Right, Out) :-
   findall([ L, R ], (member(L, Left), member(R, Right)), Out).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+bind_classes :-
+  is_a(Thing, Class),
+  assert_list([Class, Thing]),
+  fail.
+
 bind_classes(Left, Action, Right, Out) :-
   findall(L, (L is_a Left),  Lefts ),
   %format("Lefts: ~w.\n",    [Lefts]),
@@ -45,7 +47,21 @@ bind_classes(Left, Action, Right, Out) :-
   
 bind_classes(Left, Action, Right) :-
   bind_classes(Left, Action, Right, Out),
-  maplist(declarify, Out).
+  maplist(assert_list, Out).
+
+bind_actions :-
+  r(Actor, Action, Subject, _),
+  Action \== a,
+  % format("Binding ~w(~w, ~w)...\n", [Action, Actor, Subject]),
+  bind_classes(Actor, Action, Subject),
+  fail.   
+
+bind_mutual_likes :-
+  r(Actor, like, Subject, _),
+  bind_classes(Subject, like, Actor),
+  fail.   
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 actors(Out) :-
   findall(Actor, ((r(Actor, _, _, _))), Tmp),
@@ -64,25 +80,9 @@ non_actor_subjects(Out) :-
   findall(Subject, ((r(_, _, Subject, _), not(member(Subject, Actors))   )), Tmp),
   sort(Tmp, Out).
 
-bind :-
-  r(Actor, Action, Subject, _),
-  Action \== a,
-  % format("Binding ~w(~w, ~w)...\n", [Action, Actor, Subject]),
-  bind_classes(Actor, Action, Subject),
-  fail.   
-
-bind_mutual_likes :-
-  r(Actor, like, Subject, _),
-  bind_classes(Subject, like, Actor),
-  fail.   
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-assert1(G) :-
-  catch((\+( G ), !), _, fail);
-  assert(G).
-
-declarify(L) :-
+assert_list(L) :-
   G1 =..  L,
   %format("-=> ~w\n", [G1]),
   assert(G1).
@@ -97,8 +97,8 @@ setup :-
    maplist(assert, Actions)),
   (non_actor_subjects(Subjects),
    maplist(assert, Subjects)),  
-  loop_as;  
-  bind;
+  bind_classes;  
+  bind_actions;
   bind_mutual_likes;  
   %retract(r(_,_,_,_));
   true.
