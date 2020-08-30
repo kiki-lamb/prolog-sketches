@@ -69,6 +69,11 @@ bind :-
   bind_classes(Actor, Action, Subject),
   fail.   
 
+bind_mutual_likes :-
+  r(Actor, likes, Subject, _),
+  bind_classes(Subject, Action, Actor),
+  fail.   
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 assert1(G) :-
@@ -97,6 +102,8 @@ setup :-
   loop_as;
   
   bind;
+
+  bind_mutual_likes;
 
   %retract(r(_,_,_,_));
   
