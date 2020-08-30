@@ -1,4 +1,4 @@
-:- initialization(main).
+:- initialization(manifest).
 :- consult("facts.pl").
 :- consult("exists.pl").
 :- consult("infer.pl").
@@ -29,17 +29,11 @@ ppaths(W,T,P)  :- ppath(W,T,P),
                   format("~w -> ~w: ~w\n", [W,T,P]),
                   fail.
 
-manifest       :- assertify_lines('dat.ssv') ;
-                  rs, !.
-
 rs             :- r(Q, W, E, R),
                   format("+=> r(~w, ~w, ~w, ~w.\n",
                          [Q, W, E, R]),
                   fail.
 
-main           :- manifest,
-                  % ppaths(_,_,_) ;
-                  % nl,
-                  % possible_paths(_,_,_,_) ;
-                  true.
-
+manifest       :- assertify_lines('dat.ssv') ;
+                  rs ;
+                  !.
