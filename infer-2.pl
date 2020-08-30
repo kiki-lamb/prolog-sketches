@@ -27,7 +27,7 @@ is_a(Thing, Class) :-
   !.
 
 unique(Thing) :-
-  \+ is_a(_, Thing).
+  \+( _ is_a Thing).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -70,8 +70,8 @@ bind :-
   fail.   
 
 bind_mutual_likes :-
-  r(Actor, likes, Subject, _),
-  bind_classes(Subject, Action, Actor),
+  r(Actor, like, Subject, _),
+  bind_classes(Subject, like, Actor),
   fail.   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
