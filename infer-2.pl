@@ -20,14 +20,19 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 % setup :-
-%   r(Q, W, E, R),
+%   r(Thing, Verb, Noun, Options),
 %   format("+=> r(~w, ~w, ~w, ~w.\n",
-%          [Q, W, E, R]),
+%          [Thing, Verb, Noun, Options]),
 %   fail.
 
-loop_rs   :- r(Q, W, E, R),
+manifest(X) :-
+  format("Manifest ~s.\n",
+         [X]).
+
+loop_rs   :- r(Thing, Verb, Noun, Options),
              format("+=> r(~w, ~w, ~w, ~w.\n",
-                    [Q, W, E, R]),
+                    [Thing, Verb, Noun, Options]),
+             manifest((r(Thing, Verb, Noun, Options))),
              fail.
 
 setup     :- assertify_lines('dat.ssv'),
