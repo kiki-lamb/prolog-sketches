@@ -8,7 +8,7 @@ move(     Here,   To                        ) :- would(Here, operate,  To);
                                                  would(Here, shop_at,  To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-stop(     Here,   To                        ) :- provider(Here, To).
+stop(     Here,   To                        ) :- has(Here, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ppath(    Here,   To                        ) :- ppath(Here, To, _).
@@ -28,19 +28,26 @@ could(    Person, Action, Thing, Path       ) :- (would(Person, Action, Thing   
                                                   call((ppath(Person,Thing,Path), !))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-could_not(Person, Action, Thing             ) :- could_not(Person, Action, Thing, _   ).
-could_not(Person, Action, Thing, Path       ) :- \+ could( Person, Action, Thing, Path).
+:- op(200, xfy, couldnt).
+couldnt(Person, Action, Thing             ) :- couldnt(Person, Action, Thing, _   ).
+couldnt(Person, Action, Thing, Path       ) :- \+ could( Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- op(200, xfy, would).
+would(    Start,     Action                 ) :- would(Start, Action, _).
 would(    Start,     Action,     X          ) :- start(Start), % bind early for ordering.
                                                  wwould(Start, Action, X).
 
-would_not(X,         Action,     Y          ) :- \+ would(X, Action, Y).
+
+:- op(200, xfy, wouldnt).
+wouldnt(X,         Action                 ) :- \+ would(X, Action, _).
+
+wouldnt(X,         Action,     Y          ) :- \+ would(X, Action, Y).
 
 wwould(   Appliance, break,      Appliance  ) :- appliance(Appliance),
                                                  human(Human),
-                                                 could_not(Human, repair, Appliance).
+                                                 couldnt(Human, repair, Appliance).
 
 wwould(   Person,    buy,        Object     ) :- object(Object),
                                                  has(Store, Object),
@@ -78,7 +85,7 @@ wwould(   Human,     repair,     Appliance  ) :- human(Human),
 wwould(   Person,    scare_off,  Cat        ) :- person(Person),
                                                  cat(Cat),
                                                  Person \== Cat,
-                                                 would_not(Person, help, Cat).
+                                                 wouldnt(Person, help, Cat).
 
 wwould(   Person,    smoke,      Thing      ) :- thing(Thing),
                                                  smoke(Person, Thing).
@@ -89,10 +96,10 @@ wwould(   Human,     shop_at,    Store      ) :- human(Human),
 
 wwould(   Human,     shower,     Appliance  ) :- human(Human),
                                                  appliance(Appliance),
-                                                 provider(Appliance, water).
+                                                 give(Appliance, water).
 
 wwould(   Person,    starve_for, food       ) :- person(Person),
-                                                 could_not(Person, eat, _).
+                                                 couldnt(Person, eat, _).
 
 wwould(   Person,    starve_for, water      ) :- person(Person),
-                                                 could_not(Person, drink, water).
+                                                 couldnt(Person, drink, water).
