@@ -11,21 +11,21 @@ cat2 a2 cute2.
 cat2 a2 mammal2.
 cat2 eat2 cat_food2.
 cat_food2 a2 meat2.
-chicken2 freak2 doesnt2 sell alcohol.
-chicken2 freak2 doesnt2 sell water.
-chicken2_freak2 a2 store.
-chicken2_freak2 sell2 beverage.
-chicken2_freak2 sell2 cat_food.
-chicken2_freak2 sell2 cigarette.
+chicken freak2 doesnt2 sell alcohol.
+chicken freak2 doesnt2 sell water.
+chicken_freak2 a2 store2.
+chicken_freak2 sell2 beverage2.
+chicken_freak2 sell2 cat_food2.
+chicken_freak2 sell2 cigarette2.
 dave2 a2 man2.
 dave2 sell2 weed2.
 dishwasher2 a2 appliance2.
-energy2_drink2 a2 beverage.
+energy_drink2 a2 beverage2.
 freshco2 a2 store2.
 freshco2 sell2 vegetable2.
 higgy2 a2 cat2.
-home2_hardware2 a2 store.
-home2_hardware2 sell2 screw.
+home_hardware2 a2 store2.
+home_hardware2 sell2 screw2.
 mammal2 a2 animal2.
 human2 a2 mammal2.
 human2 drink2 beer2.
@@ -33,12 +33,12 @@ human2 repair2 appliance2 with screw.
 human2 shower2 with2 water.
 human2 smoke2 weed2.
 kiki2 a2 woman2.
-kiki2 drink2 energy2_drink.
+kiki2 drink2 energy_drink.
 kiki2 drink2 vodka2.
 kiki2 eat2 meat2.
 kiki2 eat2 pepperoni2.
 kiki2 like2 boson2.
-kiki2 shop2 chicken2_freak.
+kiki2 shop2 chicken_freak.
 kiki2 shop2 freshco2.
 kiki2 shop2 lcbo2.
 kiki2 smoke2 cigarette2.
@@ -58,7 +58,7 @@ sybil2 drink2 tequila2.
 sybil2 eat2 vegetable2.
 sybil2 like2 kiki2.
 sybil2 shop2 dave2.
-sybil2 shop2 home2_hardware.
+sybil2 shop2 home_hardware2.
 sybil2 shop2 mr_meat2.
 tequila2 a2 alcohol2.
 turkey2 a2 meat2.
