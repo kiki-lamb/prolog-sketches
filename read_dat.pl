@@ -19,16 +19,10 @@ collect(Using, In, Out)                   :-
 assertify_lines(In, Out)                  :- collect(aasertify_lines, In, Out).
 aasertify_lines([], Build, Out)           :- collect(Build, Out), !.
 aasertify_lines([Line|Lines], Build, Out) :-
-  split_string(Line, " ", " ", [First, Second | Others]),
-  atomize([First, Second | Others], RAtoms),
-  RTerm =.. [r | RAtoms],
-  assertz(RTerm),
-
-% atomize([Second, First | Others], Atoms),
-% Term  =.. Atoms,
-% format("~~=> ~w\n", [Term]),
-% assertz(Term),
-
+  split_string(Line, " ", " ", Words),
+  atomize(Words, Atoms),
+  Term =.. [r | Atoms],
+  assertz(Term),
   aasertify_lines(Lines, Build, Out).
 
 atomize(In, Out)                          :- collect(aatomize, In, Out).
@@ -54,25 +48,11 @@ does(Obj, Action) :-
   r( Obj, a, Actual), r(Actual, Action, _).
   
 main :-
-  retractall(r(_,_,_)),
   clines(Ls, 'dat.ssv'),
+  retractall(r(_,_,_)),
+  retractall(r(_,_,_,_)),
+  retractall(r(_,_,_,_,_)),
+  retractall(r(_,_,_,_,_,_)),
   assertify_lines(Ls, _),
-  listing(r),
-  go.
-
-go :-
-  (a(kiki, human),
-   format("... human.\n", []));
-%  spy(r/3),
-%  spy(iz/2),
-%  trace,
-  (a(kiki, animal),
-   format("... animal.\n", [])), !, false.
-
-
-
-loop :-
-  a(X, Y),
-  format("~s, ~s.\n", [X, Y]),
-  fail.
+  listing(r).
 
