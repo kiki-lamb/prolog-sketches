@@ -26,13 +26,14 @@ clean_up  :- retractall(person2(_)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-a(  Obj,             SoughtType) :-
-  r(Obj,         a,  SoughtType, _);
-  r(Obj,         a,  ActualType, _),
-  a(ActualType,      SoughtType   ).
+recurse_up(Thing, SoughtType) :-
+  r(Thing, a,  SoughtType, _);
+  r(Thing, a,  ActualType, _),
+  recurse_up(ActualType,
+             SoughtType).
 
 loop_as :-
-  a(Obj, Thing),
+  recurse_up(Obj, Thing),
   declarify(Thing, Obj).
 
 declarify(Type, Thing) :-
@@ -52,14 +53,20 @@ aassertz(Type, G1) :-
 loop_binary(Action) :- r(Thing, Action, Thing2, _),
                        declarify(Action, Thing, Thing2).
 
-loop_reflexive(Action) :- r(Thing, Action, Thing2, _),
-                          (declarify(Action, Thing, Thing2);
-                           declarify(Action, Thing2, Thing)).
+loop_reflex(Action) :- r(Thing, Action, Thing2, _),
+                       (declarify(Action, Thing, Thing2);
+                        declarify(Action, Thing2, Thing)).
 
 setup :- clean_up,
          assertify_lines('dat2.ssv'),
          loop_as;
-         loop_reflexive(like);
+         loop_reflex(like);
+         loop_binary(eat);
+         loop_binary(drink);
+         loop_binary(give);
+         loop_binary(has);
+         loop_binary(smoke);
          loop_binary(shop_at);
          loop_binary(dislike);
+         retract(r(_,_,_,_));
          true.

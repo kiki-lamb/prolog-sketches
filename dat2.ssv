@@ -57,12 +57,14 @@ meat a food.
 mr_meat a store.
 mr_meat has meat.
 pepperoni a meat.
+pepsi a beverage.
 potato a vegetable.
 sink a appliance.
 sink give water.
 store a location.
 sybil a woman.
 sybil drink tequila.
+sybil eat turkey.
 sybil eat vegetable.
 sybil like kiki.
 sybil shop_at dave.
