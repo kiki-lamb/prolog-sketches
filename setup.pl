@@ -104,25 +104,28 @@ logged_assert(G1) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
-   File = 'dat.ssv',
-   % File = 'small_world.ssv',
-   assertify_lines(File),
-   format("[[Setup]] Loaded lines from '~w'.\n",[File]),
+   % File = 'dat.ssv',
+   File = 'small_world.ssv',   
+   (
+      assertify_lines(File),
+      format("[[Setup]] Loaded lines from '~w'.\n",[File]);
+      format("[[Setup]] ERROR: Could nod load lines from '~w'.\n",[File])
+   ),      
    (
       format("[[Setup]] Defining Actors...\n",[]),
       actors(Actors),
       maplist(logged_assert, Actors)
-   ),
+   ),  
    (
       format("[[Setup]] Defining Actions...\n",[]),
       actions(Actions),
       maplist(logged_assert, Actions)
-   ),
+   ),   
    (
       format("[[Setup]] Defining Subjects...\n",[]),
       non_actor_subjects(Subjects),
       maplist(logged_assert, Subjects)
-   ),  
+   ),   
    (
       format("[[Setup]] Binding Classes...\n",[]),
       bind_classes      
