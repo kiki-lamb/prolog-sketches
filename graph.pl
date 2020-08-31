@@ -5,7 +5,8 @@
 move( Here, Here ) :- fail.
 move( Here, There) :-
    concrete(There), person(There),
-   concrete(Here ), person(Here ).
+   concrete(Here ), person(Here ),
+   There \= Here.
 
 start(Here)       :-
    concrete(Here),  person(Here ).
@@ -56,6 +57,5 @@ descend(_, Here, Here,  _) :-
 
 descend(Build, Here, There,  Path) :-
    move(Here, Next), 
-   Here \== Next,
    not(member(Next, Build)),
    search(Build, Next, There, Path).
