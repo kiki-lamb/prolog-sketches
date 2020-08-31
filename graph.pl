@@ -6,6 +6,9 @@ move( _,   There) :- human(There).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+path(Here, Here) :-
+   fail.
+
 path(Here, There) :-
    path(Here, There, _).
 
@@ -28,6 +31,9 @@ path(Here, There, Path) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+search( _, Here, Here, _) :-
+   false.
+
 search( Build, Here, There, Path) :-
    (
       found(Build, Here, There, Path)
@@ -44,7 +50,7 @@ descend(_, Here, Here,  _) :-
    false.
 
 descend(Build, Here, There,  Path) :-
-   human(Next),
+   move(Here, Next), 
    Here \== Next,
    not(member(Next, Build)),
    search(Build, Next, There, Path).
