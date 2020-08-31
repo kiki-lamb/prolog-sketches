@@ -24,5 +24,5 @@ desires(P,A,X) :- would(P,A,X),
 
  paths         :- paths(_,_,_).
  paths(W,T,P)  :- path(W,T,P),
-                  format("~w -> ~w: ~w\n", [W,T,P]),
+                  % format("~w -> ~w: ~w\n", [W,T,P]),
                   fail.
