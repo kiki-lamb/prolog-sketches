@@ -2,9 +2,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-move( Here, Here) :- fail.
-move( _,   There) :- concrete(There), person(There).
-start(Here)       :- concrete(Here),  person(Here).
+move( Here, Here ) :- fail.
+move( Here, There) :-
+   concrete(There), person(There),
+   concrete(Here ), person(Here ).
+
+start(Here)       :-
+   concrete(Here),  person(Here ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -31,8 +35,8 @@ path(Here, There, Path) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-search( _, Here, Here, _) :-
-   fail.
+% search( _, Here, Here, _) :-
+%   fail.
 
 search( Build, Here, There, Path) :-
    (
@@ -42,7 +46,8 @@ search( Build, Here, There, Path) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-found(Path, Here, Here, Path).
+found(Build, Here, Here, Path) :-
+   Path = Build.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
