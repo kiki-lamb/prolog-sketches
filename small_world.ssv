@@ -1,5 +1,4 @@
 human isa  person.
-man   isa  human.
 woman isa  human.
 kiki  isa  woman.
 kiki  like boson.
@@ -9,3 +8,5 @@ cat   isa  person.
 higgy isa  cat.
 boson isa  cat.
 higgy like kiki.
+human isa  creature.
+cat   isa  creature.

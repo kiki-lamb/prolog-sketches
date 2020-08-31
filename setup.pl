@@ -1,16 +1,16 @@
 :- consult("file_reader.pl").
 
 
-isa(Thing, Class) :-
+memberof(Thing, Class) :-
    (
       r(Thing, isa, Class, _)
    ;  r(Thing, isa, ActualType, _),
-      isa(ActualType, Class)
+      memberof(ActualType, Class)
    ).
 
 reify(Thing) :-
    (
-      isa(_, Thing),
+      memberof(_, Thing),
       logged_assert(abstract(Thing))
    ;  logged_assert(concrete(Thing))
    ).
@@ -24,15 +24,15 @@ combine(Left, Right, Out) :-
 
 bind_classes :-
 %   concrete(Thing),
-   isa(Thing, Class),
+   memberof(Thing, Class),
    logged_assert_list([Class, Thing]),
    fail.
 
 bind_classes(Left, Action, Right, Out) :-
    % format("[ Bind ~w ~w ~w ]:\n", [Left, Action, Right]),
-   findall(L, (isa(L, Left)),  Lefts ),
+   findall(L, (memberof(L, Left)),  Lefts ),
    % format("Lefts: ~w.\n",    [Lefts]),
-   findall(R, (isa(R, Right)), Rights ),
+   findall(R, (memberof(R, Right)), Rights ),
    % format("Rights: ~w.\n",   [Rights]),
    combine([Left | Lefts], [Right | Rights], Tmp),
    % format("Tmp: ~w.\n",   [Tmp]),
@@ -133,5 +133,5 @@ setup :-
       bind_mutual_likes
    ;  format("[[Setup]] Complete.\n",[]),
       true
-   ).
+   ), !.
 %retract(r(_,_,_,_));

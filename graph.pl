@@ -2,9 +2,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-start(Here)       :- concrete(Here), human(Here).
 move( Here, Here) :- fail.
-move( _,   There) :- concrete(There), human(There).
+move( _,   There) :- /* concrete(There), */ person(There).
+start(Here)       :- /* concrete(Here),  */ person(Here).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -30,7 +30,7 @@ path(Here, There, Path) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 search( _, Here, Here, _) :-
-   false.
+   fail.
 
 search( Build, Here, There, Path) :-
    (
@@ -45,7 +45,7 @@ found(Path, Here, Here, Path).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 descend(_, Here, Here,  _) :-
-   false.
+   fail.
 
 descend(Build, Here, There,  Path) :-
    move(Here, Next), 
