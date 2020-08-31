@@ -7,7 +7,7 @@ path(Here, To) :-
 path(Here, Here, [Here]) :-
    human(Here),
       format("   .> path(~w, ~w, ~w)\n",
-             [Here, Here, [Path]]).
+             [Here, Here, [Here]]).
 
 path(Here, To, Path) :-
    (
