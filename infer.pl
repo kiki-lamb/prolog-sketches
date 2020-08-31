@@ -3,7 +3,7 @@
 start(X) :-
    (
       person(X)
-   ;  appliance(X)
+%   ;  appliance(X)
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -18,7 +18,8 @@ move(Here, To) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 stop(Here, To) :-
-   has(Here, To).
+   fail.
+%   has(Here, To).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -73,28 +74,28 @@ wouldnt(X, Action) :-
 wouldnt(X, Action, Y) :-
    \+ would(X, Action, Y).
 
-wwould(Appliance, break, Appliance) :-
-   appliance(Appliance),
-   human(Human),
-   couldnt(Human, repair, Appliance).
+% wwould(Appliance, break, Appliance) :-
+%    appliance(Appliance),
+%    human(Human),
+%    couldnt(Human, repair, Appliance).
 
-wwould(Person, buy, Object) :-
-   object(Object),
-   has(Store, Object),
-   would(Person, shop_at, Store).
+% wwould(Person, buy, Object) :-
+%    object(Object),
+%    has(Store, Object),
+%    would(Person, shop_at, Store).
 
-wwould(Cat, chase, C2) :-
-   cat(Cat),
-   cat(C2),
-   Cat \== C2.
+% wwould(Cat, chase, C2) :-
+%    cat(Cat),
+%    cat(C2),
+%    Cat \== C2.
 
-wwould(Person, drink, Drink) :-
-   object(Drink),
-   drink(Person, Drink).
+% wwould(Person, drink, Drink) :-
+%    object(Drink),
+%    drink(Person, Drink).
 
-wwould(Person, eat, Food) :-
-   food(Food),
-   eat(Person, Food).
+% wwould(Person, eat, Food) :-
+%    food(Food),
+%    eat(Person, Food).
 
 wwould(Person, get_help, P2) :-
    would(P2, help, Person).
@@ -108,30 +109,30 @@ wwould(Person, help, P2) :-
    ;  like(P2,Person)
    ).
 
-wwould(Human, operate, Appliance) :-
-   human(Human), 
-   appliance(Appliance).
+% wwould(Human, operate, Appliance) :-
+%    human(Human), 
+%    appliance(Appliance).
 
-wwould(Person, pet, Cat) :-
-   human(Person),
-   cat(Cat),
-   would(Person, help, Cat).
+% wwould(Person, pet, Cat) :-
+%    human(Person),
+%    cat(Cat),
+%    would(Person, help, Cat).
 
-wwould(Human, repair, Appliance) :-
-   human(Human),
-   appliance(Appliance),
-   ppath(Human, screw).
+% wwould(Human, repair, Appliance) :-
+%    human(Human),
+%    appliance(Appliance),
+%    ppath(Human, screw).
 
-wwould(Person, scare_off, Cat) :-
-   person(Person),
-   cat(Cat),
-   Person \== Cat,
-   wouldnt(Person, help, Cat).
+% wwould(Person, scare_off, Cat) :-
+%    person(Person),
+%    cat(Cat),
+%    Person \== Cat,
+%    wouldnt(Person, help, Cat).
 
-wwould(Person, smoke, Thing) :-
-   thing(Thing),
-   smoke(Person, Thing).
-
+% wwould(Person, smoke, Thing) :-
+%    thing(Thing),
+%    smoke(Person, Thing).
+ 
 % wwould(Human, shop_at, Store) :-
 %    human(Human),
 %    store, store(Store),
