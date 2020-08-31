@@ -1,54 +1,49 @@
 :- dynamic cache/3.         
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-stash(Here, To, Path) :-
-   assert(cache(Here, To, Path)).
+start(X) :- human(X). 
 
-recover(_, _, _) :- fail.
+move(To, To) :- fail.
+move(From,  To) :- human(To), From \== To.
 
-% recover(Here, To, Path) :- fail.
-%    (
-%       cache(Here, To, Path)
-%    ;  cache(To, Here, Tmp),
-%       reverse(Tmp,Path)
-%    ),
-%     % format("... grab ~w -> ~w: ~w.\n",
-%            % [Here, To, Path]),
-%    !.
+stop(To, To).
+stop(_,   _) :- fail.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(Start, Here, Move, To, Stop) :-
    path(Start, Here, Move, To, Stop, _).
 
 path(Start, Here, Move, To, Stop, Path) :-
    (
-      % recover(Here, To),
-      recover(Here, To, Path)
-   ;  call(Start, Here),
+      call(Start, Here),
       search([], Here, Move, To, Stop, Tmp),
-      reverse([To|Tmp], Path),   
-      % format("... stash ~w -> ~w: ~w.\n",
-             % [Here, To, Path]),   
-      stash(Here, To, Path)
+      reverse([To|Tmp], Path)
    ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 search( Build, Here, Move, To, Stop, Path) :-
    (
       found(Build, Here, To, Stop, Path)
    ;  descend([Here|Build], Here, Move, To, Stop, Path)
    ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 found(Build, Here, Here, _, Path) :-
+   format("Found Final.\n", []),
+
    Path = Build.
 
 found(Build, Here, To, Stop, Path) :-
+   format("Found.\n", []),
+
    call(Stop, Here, To),
    found([Here|Build], Here, Here, Stop, Path).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 descend(Build, Here, Move, To,   Stop, Path) :-
    call(Move, Here, Next),
    not(member(Next, Build)),

@@ -22,7 +22,7 @@ desires(P,A,X) :- would(P,A,X),
                   format("~w would ~w ~w.\n", [P,A,X]),
                   fail.  
 
-ppaths         :- ppaths(_,_,_).
-ppaths(W,T,P)  :- ppath(W,T,P),
-                  format("~w -> ~w: ~w\n", [W,T,P]),
-                  fail.
+paths         :- paths(_,_,_).
+paths(W,T,P)  :- path(W,T,P),
+                 format("~w -> ~w: ~w\n", [W,T,P]),
+                 fail.

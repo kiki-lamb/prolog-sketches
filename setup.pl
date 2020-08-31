@@ -1,15 +1,5 @@
 :- consult("file_reader.pl").
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% start_2(X)              :- fail.
-% move_2( Here, To)       :- fail.
-% stop_2( Here, To)       :- fail.
-% ppath_2(Here, To)       :- ppath_2(Here, To, _).
-% ppath_2(Here, To, Path) :- fail.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 :- op(300, xfy, isnt).
 isnt(Thing, Class) :-
    \+( isa(Thing, Class)).

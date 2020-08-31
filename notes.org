@@ -11,3 +11,14 @@
 ).
 #+END_SRC
 
+
+
+#+BEGIN_SRC prolog
+
+:- format("Hello world.\n",[]), fail.
+
+#+END_SRC
+
+#+RESULTS:
+: Hello world.
+
