@@ -33,11 +33,11 @@ path(Here, There, Path) :-
       start(There),
       search([], Here, There, Tmp),
       reverse([There|Tmp], Path),
+      reverse(Path, Rev),
 
       format(" .oO> path(~w, ~w, ~w)\n",
              [Here, There, Path]),
 
-      reverse(Path, Rev),
       
       assertz(cached_path(Here, There, Path)),
       assertz(cached_path(There, Here, Rev))
@@ -51,7 +51,6 @@ spath(Here, There, Path) :-
       cached_path(Here, There, Path),
       format(" ...> path(~w, ~w, ~w)\n",
              [Here, There, Path])
-      
    )
    -> true
    ;
