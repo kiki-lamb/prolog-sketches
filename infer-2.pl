@@ -100,7 +100,7 @@ assert_list(L) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
-   assertify_lines('dat2.ssv'),
+   assertify_lines('dat.ssv'),
    (
       actors(Actors),
       maplist(assert, Actors)
