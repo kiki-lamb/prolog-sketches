@@ -1,8 +1,6 @@
 human isa person.
 boson isa human.
-higgy isa human.
 kiki isa human.
 sybil isa human.
 sybil like kiki.
 kiki like boson.
-kiki like higgy.

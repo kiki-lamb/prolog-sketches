@@ -87,11 +87,14 @@ non_actor_subjects(Out) :-
 
 logged_assert_list(L) :-
    G1 =..  L,
-   format("    ~~=> ~w.\n", [G1]),
-   assert(G1).
+   logged_assert(G1).
 
 logged_assert(G1) :-
    format("    ~~=> ~w.\n", [G1]),
+   (
+      retract(G1)
+   ;  true
+   ),
    assert(G1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
