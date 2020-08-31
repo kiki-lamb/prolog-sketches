@@ -1,7 +1,9 @@
-:- initialization((setup, paths)).
+:- initialization(main).
 :- consult("graph.pl").
 :- consult("setup.pl").
 :- consult("infer.pl").
+
+main :- (setup, paths; true).
 
 possible        :- possible(_,_,_).
 possible(W,A,T) :- could(W,A,T),
