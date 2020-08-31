@@ -30,7 +30,7 @@ path(Here, There, Path) :-
       start(Here),
       start(There),
       search([], Here, There, Tmp),
-      reverse([Here|Tmp], Path),
+      reverse([There|Tmp], Path),
       format(" .oO> path(~w, ~w, ~w)\n",
              [Here, There, Path])
    ).
