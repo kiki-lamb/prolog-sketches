@@ -19,11 +19,6 @@ path(Here, There) :-
 
 path(Here, Here, [Here]) :-
    fail.
-%   start(Here),
-%      format("   .> path(~w, ~w, ~w)\n",
-%             [Here, Here, [Here]]).
-
-% path(Here, , Path) :-
 
 :- dynamic cached_path/3. 
 
@@ -58,9 +53,6 @@ stash_path(Here, There, Path) :-
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% search( _, Here, Here, _) :-
-%   fail.
 
 search( Build, Here, There, Path) :-
    (
