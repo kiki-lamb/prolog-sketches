@@ -4,6 +4,7 @@
 :- consult("infer.pl").
 
 main :-
+   set_prolog_flag(answer_write_options,[max_depth(100)]),
    setup. %,
 %   paths;
 %   true.
