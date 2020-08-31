@@ -1,21 +1,14 @@
 mammal is_a alive.
 mammal is_a animal.
-
 cat is_a mammal.
 cat is_a person.
-
 human is_a mammal.
 human is_a person.
-
 man is_a human.
-
 woman is_a human.
-
 boson is_a cat.
-
 kiki is_a woman.
 kiki like boson.
-
 sybil is_a woman.
 sybil like kiki.
 
