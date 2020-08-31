@@ -1,27 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-untraced(G) :-
-   T = tracing,
-   (
-      (tracing, format("Disable tracing.\n", []))
-   ;  true
-   ),
-   
-   R = call(G), 
-   
-   (
-      (T, format("Resume tracing.\n", []))
-   ;  true
-   ),               
-
-   R.
-
 start(X) :-
-   untraced(
-      (
-         person(X)
-      ;  appliance(X)
-      )
+   (
+      person(X)
+   ;  appliance(X)
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
