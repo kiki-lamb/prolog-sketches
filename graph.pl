@@ -27,9 +27,8 @@ path(Here, Here, [Here]) :-
 
 path(Here, There, Path) :-
    (
-      start(Here),
-      search([], Here, There, Tmp),
-      reverse([There|Tmp], Path),
+      start(There),
+      search([], Tere, Here, Path),
       format(" .oO> path(~w, ~w, ~w)\n",
              [Here, There, Path])
    ).
