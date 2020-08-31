@@ -12,14 +12,14 @@
 
 :- op(300, xfy, isnt).
 isnt(Thing, Class) :-
-   \+( is_a(Thing, Class)).
+   \+( isa(Thing, Class)).
 
-:- op(300, xfy, is_a).
-is_a(Thing, Class) :-
+:- op(300, xfy, isa).
+isa(Thing, Class) :-
    (
-      r(Thing, is_a, Class, _)
-   ;  r(Thing, is_a, ActualType, _),
-      is_a(ActualType, Class)
+      r(Thing, isa, Class, _)
+   ;  r(Thing, isa, ActualType, _),
+      isa(ActualType, Class)
    ).
 
 concrete(Thing) :-
@@ -27,7 +27,7 @@ concrete(Thing) :-
 
 abstract(Thing) :-
    Something \==  Thing,
-   Something is_a Thing.
+   Something isa Thing.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -38,15 +38,15 @@ combine(Left, Right, Out) :-
 
 bind_classes :-
 %   concrete(Thing),
-   is_a(Thing, Class),
+   isa(Thing, Class),
    logged_assert_list([Class, Thing]),
    fail.
 
 bind_classes(Left, Action, Right, Out) :-
    % format("[ Bind ~w ~w ~w ]:\n", [Left, Action, Right]),
-   findall(L, (L is_a Left),  Lefts ),
+   findall(L, (L isa Left),  Lefts ),
    % format("Lefts: ~w.\n",    [Lefts]),
-   findall(R, (R is_a Right), Rights ),
+   findall(R, (R isa Right), Rights ),
    % format("Rights: ~w.\n",   [Rights]),
    combine([Left | Lefts], [Right | Rights], Tmp),
    % format("Tmp: ~w.\n",   [Tmp]),
@@ -59,7 +59,7 @@ bind_classes(Left, Action, Right) :-
 
 bind_actions :-
    r(Actor, Action, Subject, _),
-   Action \== is_a,
+   Action \== isa,
    % format("[[ Binding ~w... ]]\n", [Action]),
    bind_classes(Actor, Action, Subject),
    fail.   

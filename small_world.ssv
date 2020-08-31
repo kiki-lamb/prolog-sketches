@@ -1,14 +1,15 @@
-mammal is_a alive.
-mammal is_a animal.
-cat is_a mammal.
-cat is_a person.
-human is_a mammal.
-human is_a person.
-man is_a human.
-woman is_a human.
-boson is_a cat.
-kiki is_a woman.
+mammal isa alive.
+mammal isa animal.
+cat isa mammal.
+cat isa person.
+human isa mammal.
+human isa person.
+man isa human.
+woman isa human.
+boson isa cat.
+kiki isa woman.
 kiki like boson.
-sybil is_a woman.
+sybil isa woman.
 sybil like kiki.
-
+sybil has paint.
+stove isa appliance.
