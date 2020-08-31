@@ -103,30 +103,30 @@ setup :-
    File = 'dat.ssv',
    % File = 'small_world.ssv',
    assertify_lines(File),
-   format("[Setup] Loaded lines from '~w'.\n",[File]),
+   format("[<[Setup]>] Loaded lines from '~w'.\n",[File]),
    (
       actors(Actors),
       maplist(assert, Actors)
    ),
-   format("[Setup] Defined Actors.\n",[]),
+   format("[<[Setup]>] Defined Actors.\n",[]),
    (
       actions(Actions),
       maplist(assert, Actions)
    ),
-   format("[Setup] Defined Actions.\n",[]),
+   format("[<[Setup]>] Defined Actions.\n",[]),
    (
       non_actor_subjects(Subjects),
       maplist(assert, Subjects)
    ),  
-   format("[Setup] Defined Subjects.\n",[]),
+   format("[<[Setup]>] Defined Subjects.\n",[]),
    (
       bind_classes,
-      format("[Setup] Bound classes.\n",[])
+      format("[<[Setup]>] Bound classes.\n",[])
    ;  bind_actions,
-      format("[Setup] Bound actions.\n",[])
+      format("[<[Setup]>] Bound actions.\n",[])
    ;  bind_mutual_likes,
-      format("[Setup] Bound mutual likes.\n",[])
-   ;  format("[Setup] Complete.\n",[]),
+      format("[<[Setup]>] Bound mutual likes.\n",[])
+   ;  format("[<[Setup]>] Complete.\n",[]),
       true
    ).
 %retract(r(_,_,_,_));
