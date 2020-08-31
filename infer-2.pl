@@ -94,36 +94,39 @@ non_actor_subjects(Out) :-
 
 assert_list(L) :-
    G1 =..  L,
-   %format("-=> ~w\n", [G1]),
+   format("    Assert ~w.\n", [G1]),
    assert(G1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
-%   assertify_lines('dat.ssv'),
-   assertify_lines('small_world.ssv'),
+   File = 'dat.ssv',
+   % File = 'small_world.ssv',
+   assertify_lines(File),
+   format("[Setup] Loaded lines from '~w'.\n",[File]),
    (
       actors(Actors),
       maplist(assert, Actors)
-   ),  
+   ),
+   format("[Setup] Defined Actors.\n",[]),
    (
       actions(Actions),
       maplist(assert, Actions)
    ),
+   format("[Setup] Defined Actions.\n",[]),
    (
       non_actor_subjects(Subjects),
       maplist(assert, Subjects)
    ),  
+   format("[Setup] Defined Subjects.\n",[]),
    (
-      bind_classes
-   ;  bind_actions
-   ;  bind_mutual_likes
-   ;  true
+      bind_classes,
+      format("[Setup] Bound classes.\n",[])
+   ;  bind_actions,
+      format("[Setup] Bound actions.\n",[])
+   ;  bind_mutual_likes,
+      format("[Setup] Bound mutual likes.\n",[])
+   ;  format("[Setup] Complete.\n",[]),
+      true
    ).
 %retract(r(_,_,_,_));
-
-
-
-
-
-
