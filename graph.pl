@@ -1,4 +1,9 @@
 :- dynamic cache/3.         
+
+start(Here) :- human(Here).
+
+move(Here, To)  :- human(To).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(Here, To) :-
@@ -31,10 +36,12 @@ search( Build, Here, To, Path) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-found(Build, Here, Here, Path) :-
-   Path = Build.
+found(Path, Here, Here, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+descend(_, Here, Here,  _) :-
+   false.
 
 descend(Build, Here, To,  Path) :-
    human(Next),
