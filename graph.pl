@@ -31,8 +31,6 @@ path(Here, There, Path) :-
 
 stash_path(Here, There, Path) :-
    (
-      start(Here),
-      start(There),
       search([], Here, There, Tmp),
       reverse([There|Tmp], Path),
       reverse(Path, Rev),
@@ -53,6 +51,8 @@ stash_path(Here, There, Path) :-
 
 search( Build, Here, There, Path) :-
    (
+      start(Here),
+      start(There),
       found(Build, Here, There, Path)
    ;  descend([Here|Build], Here, There, Path)
    ).
