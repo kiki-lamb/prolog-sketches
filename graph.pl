@@ -27,32 +27,42 @@ path(Here, Here, [Here]) :-
 
 :- dynamic cached_path/3. 
 
-%cached_path(_,_,_) :- false.
-
 path(Here, There, Path) :-
    (
-      cached_path(Here, There, Path),
-      format(" ..O> path(~w, ~w, ~w)\n",
-             [Here, There, Path])
-   ;
       start(Here),
       start(There),
       search([], Here, There, Tmp),
       reverse([There|Tmp], Path),
-      reverse(Path, RevPath),
 
-      length(Path, Length),
-
-      Length > 1, !, 
-      
       format(" .oO> path(~w, ~w, ~w)\n",
              [Here, There, Path]),
+
+      reverse(Path, Rev),
       
-      once((retractall(cached_path(Here, There, Path   )),
-            assertz(cached_path(   Here, There, Path   )),
-            retractall(cached_path(There, Here, RevPath)),
-            assertz(cached_path(   There, Here, RevPath))))
+      assertz(cached_path(Here, There, Path)),
+      assertz(cached_path(There, Here, Rev))
    ).
+
+sspath(Here, There, Path) :-
+   spath(Here, There, Path).
+
+spath(Here, There, Path) :-
+   (
+      cached_path(Here, There, Path),
+      format(" ...> path(~w, ~w, ~w)\n",
+             [Here, There, Path])
+      
+   )
+   -> true
+   ;
+   once(
+      (
+         reverse(Path, Rev),
+         path(Here, There, Path),
+         assertz(cached_path(Here, There, Path)),
+         assertz(cached_path(There, Here, Rev))
+      )).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
