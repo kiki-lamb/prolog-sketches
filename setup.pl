@@ -102,7 +102,7 @@ logged_assert(G1) :-
 
 setup :-
    % File = 'dat.ssv',
-   File = 'small_world.ssv',   
+   File = 'dat.ssv',   
    (
       assertify_lines(File),
       format("[[Setup]] Loaded lines from '~w'.\n",[File]);
