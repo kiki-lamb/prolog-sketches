@@ -11,40 +11,40 @@ stop(_,   _) :- fail.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-path(Start, Here, Move, To, Stop) :-
-   path(Start, Here, Move, To, Stop, _).
+path(Here, To, Stop) :-
+   path(Here, To, _).
 
-path(Start, Here, Move, To, Stop, Path) :-
+path(Here, To, Path) :-
    (
       call(Start, Here),
-      search([], Here, Move, To, Stop, Tmp),
+      search([], Here, To, Tmp),
       reverse([To|Tmp], Path)
    ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-search( Build, Here, Move, To, Stop, Path) :-
+search( Build, Here, To, Path) :-
    (
-      found(Build, Here, To, Stop, Path)
-   ;  descend([Here|Build], Here, Move, To, Stop, Path)
+      found(Build, Here, To, Path)
+   ;  descend([Here|Build], Here, To, Path)
    ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 found(Build, Here, Here, _, Path) :-
    format("Found Final.\n", []),
 
    Path = Build.
 
-found(Build, Here, To, Stop, Path) :-
+found(Build, Here, To, Path) :-
    format("Found.\n", []),
 
-   call(Stop, Here, To),
-   found([Here|Build], Here, Here, Stop, Path).
+   call(Here, To),
+   found([Here|Build], Here, Here, Path).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-descend(Build, Here, Move, To,   Stop, Path) :-
-   call(Move, Here, Next),
+descend(Build, Here, To,   Path) :-
+   call(Here, Next),
    not(member(Next, Build)),
-   search(Build, Next, Move, To, Stop, Path).
+   search(Build, Next, To, Path).
