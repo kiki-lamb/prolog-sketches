@@ -1,7 +1,7 @@
 :- dynamic cache/3.         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-path(Here, To, Stop) :-
+path(Here, To) :-
    path(Here, To, _).
 
 path(Here, To, Path) :-
