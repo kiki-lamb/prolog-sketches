@@ -35,7 +35,6 @@ path(Here, There, Path) :-
       format(" ..O> path(~w, ~w, ~w)\n",
              [Here, There, Path])
    ;
-      
       start(Here),
       start(There),
       search([], Here, There, Tmp),
@@ -44,7 +43,8 @@ path(Here, There, Path) :-
       format(" .oO> path(~w, ~w, ~w)\n",
              [Here, There, Path]),
       assertz(cached_path(Here, There, Path   )),
-      assertz(cached_path(There, Here, RevPath))
+      assertz(cached_path(There, Here, RevPath)),
+      !
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
