@@ -40,11 +40,18 @@ path(Here, There, Path) :-
       search([], Here, There, Tmp),
       reverse([There|Tmp], Path),
       reverse(Path, RevPath),
+
+      length(Path, Length),
+
+      Length > 1, !, 
+      
       format(" .oO> path(~w, ~w, ~w)\n",
              [Here, There, Path]),
-      assertz(cached_path(Here, There, Path   )),
-      assertz(cached_path(There, Here, RevPath)),
-      !
+      
+      once((retractall(cached_path(Here, There, Path   )),
+            assertz(cached_path(   Here, There, Path   )),
+            retractall(cached_path(There, Here, RevPath)),
+            assertz(cached_path(   There, Here, RevPath))))
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
