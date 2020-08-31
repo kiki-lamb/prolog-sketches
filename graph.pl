@@ -7,6 +7,9 @@ path(Here, To) :-
 path(Here, To, Path) :-
    (
       human(Here),
+      human(To),
+      Here \== To,
+      
       search([], Here, To, Tmp),
       reverse([To|Tmp], Path)
    ).
@@ -22,8 +25,6 @@ search( Build, Here, To, Path) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 found(Build, Here, Here, Path) :-
-   format("Found Final.\n", []),
-
    Path = [Here|Build].
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
