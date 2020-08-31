@@ -35,7 +35,7 @@ combine(Left, Right, Out) :-
 bind_classes :-
    is_a(Thing, Class),
    
-   assert_list([Class, Thing]),
+   logged_assert_list([Class, Thing]),
    fail.
 
 bind_classes(Left, Action, Right, Out) :-
@@ -51,7 +51,7 @@ bind_classes(Left, Action, Right, Out) :-
 
 bind_classes(Left, Action, Right) :-
    bind_classes(Left, Action, Right, Out),
-   maplist(assert_list, Out).
+   maplist(logged_assert_list, Out).
 
 bind_actions :-
    r(Actor, Action, Subject, _),
@@ -92,8 +92,12 @@ non_actor_subjects(Out) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-assert_list(L) :-
+logged_assert_list(L) :-
    G1 =..  L,
+   format("    ~~=> ~w.\n", [G1]),
+   assert(G1).
+
+logged_assert(G1) :-
    format("    ~~=> ~w.\n", [G1]),
    assert(G1).
 
@@ -105,27 +109,27 @@ setup :-
    assertify_lines(File),
    format("[[Setup]] Loaded lines from '~w'.\n",[File]),
    (
+      format("[[Setup]] Defining Actors...\n",[]),
       actors(Actors),
-      maplist(assert, Actors)
+      maplist(logged_assert, Actors)
    ),
-   format("[[Setup]] Defined Actors.\n",[]),
    (
+      format("[[Setup]] Defining Actions...\n",[]),
       actions(Actions),
-      maplist(assert, Actions)
+      maplist(logged_assert, Actions)
    ),
-   format("[[Setup]] Defined Actions.\n",[]),
    (
+      format("[[Setup]] Defining Subjects...\n",[]),
       non_actor_subjects(Subjects),
-      maplist(assert, Subjects)
+      maplist(logged_assert, Subjects)
    ),  
-   format("[[Setup]] Defined Subjects.\n",[]),
    (
-      bind_classes,
-      format("[[Setup]] Bound classes.\n",[])
-   ;  bind_actions,
-      format("[[Setup]] Bound actions.\n",[])
-   ;  bind_mutual_likes,
-      format("[[Setup]] Bound mutual likes.\n",[])
+      format("[[Setup]] Binding Classes...\n",[]),
+      bind_classes      
+   ;  format("[[Setup]] Binding Actions...\n",[]),
+      bind_actions      
+   ;  format("[[Setup]] Binding mutual Likes.\n",[]),
+      bind_mutual_likes
    ;  format("[[Setup]] Complete.\n",[]),
       true
    ).
