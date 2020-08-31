@@ -1,21 +1,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-move( Here, Here ) :- fail.
+move( Here, Here ) :-
+   fail.
+
 move( Here, There) :-
-   concrete(There), person(There),
    concrete(Here ), person(Here ),
+   concrete(There), person(There),
    There \= Here.
 
 start(Here)       :-
-   concrete(Here),  person(Here ).
+   concrete(Here),  human(Here ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(Here, There) :-
    path(Here, There, _).
 
-%path(Here, Here, [Here]) :-
-%   fail.
+% path(Here, Here, [Here]) :-
+%    fail.
 
 :- dynamic cached_path/3. 
 
@@ -45,14 +47,14 @@ stash_path(Here, There, Path) :-
              [Here, There, Path]),
       
       retractall(cached_path(Here, There, Path)),
-      assertz(cached_path(Here, There, Path)),
+      assertz(cached_path(Here, There, Path))%,
 
-      Here \== There,
-      (
-         reverse(Path, Rev),
-         retractall(cached_path(There, Here, Rev)),
-         assertz(cached_path(There, Here, Rev))
-      )   
+%      Here \== There,
+%      (
+%         reverse(Path, Rev),
+%         retractall(cached_path(There, Here, Rev)),
+%         assertz(cached_path(There, Here, Rev))
+%      )   
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
