@@ -10,9 +10,9 @@ start(X) :-
 
 move(Here, To) :-
    (
-      would(Here, operate, To)
-   ;  would(Here, get_help, To)
-   ;  would(Here, shop_at, To)
+%      would(Here, operate, To)
+/*  ;*/  would(Here, get_help, To)
+%   ;  would(Here, shop_at, To)
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,6 +59,15 @@ couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- op(200, xfy, wouldnt).
+wouldnt(X, Action) :-
+   \+ would(X, Action).
+
+wouldnt(X, Action, Y) :-
+   \+ would(X, Action, Y).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 :- op(200, xfy, would).
 would(Start, Action) :-
    would(Start, Action).
@@ -67,12 +76,17 @@ would(Start, Action, X) :-
    start(Start), % bind early for ordering.
    wwould(Start, Action, X).
 
-:- op(200, xfy, wouldnt).
-wouldnt(X, Action) :-
-   \+ would(X, Action).
+wwould(Person, get_help, P2) :-
+   would(P2, help, Person).
 
-wouldnt(X, Action, Y) :-
-   \+ would(X, Action, Y).
+wwould(Person, help, P2) :-
+   person(Person),
+   person(P2),
+   Person \== P2,
+   (
+      like(Person,P2)
+   ;  like(P2,Person)
+   ).
 
 % wwould(Appliance, break, Appliance) :-
 %    appliance(Appliance),
@@ -96,18 +110,6 @@ wouldnt(X, Action, Y) :-
 % wwould(Person, eat, Food) :-
 %    food(Food),
 %    eat(Person, Food).
-
-wwould(Person, get_help, P2) :-
-   would(P2, help, Person).
-
-wwould(Person, help, P2) :-
-   person(Person),
-   person(P2),
-   Person \== P2,
-   (
-      like(Person,P2)
-   ;  like(P2,Person)
-   ).
 
 % wwould(Human, operate, Appliance) :-
 %    human(Human), 
