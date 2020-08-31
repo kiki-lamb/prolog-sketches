@@ -1,3 +1,8 @@
+
+start(Here)       :- human(Here).
+move( Here, Here) :- fail.
+move( _,   There) :- human(There).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- op(200, xfy, could).

@@ -1,9 +1,5 @@
 :- dynamic cache/3.         
 
-start(Here)       :- human(Here).
-move( Here, Here) :- fail.
-move( _,   There) :- human(There).
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(Here, Here) :-
