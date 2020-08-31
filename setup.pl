@@ -1,9 +1,5 @@
 :- consult("file_reader.pl").
 
-:- op(300, xfy, isnt).
-isnt(Thing, Class) :-
-   \+( isa(Thing, Class)).
-
 :- op(300, xfy, isa).
 isa(Thing, Class) :-
    (
@@ -12,11 +8,12 @@ isa(Thing, Class) :-
       isa(ActualType, Class)
    ).
 
-concrete(Thing) :-
-   \+( abstract(Thing)).
-
-abstract(Thing) :-
-   _ isa Thing.
+reify(Thing) :-
+   (
+      isa(_, Thing),
+      logged_assert(abstract(Thing))
+   ;  logged_assert(concrete(Thing))
+   ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -111,17 +108,21 @@ setup :-
    (
       format("[[Setup]] Defining Actors...\n",[]),
       actors(Actors),
-      maplist(logged_assert, Actors)
+      maplist(logged_assert, Actors) ,
+      maplist(reify, Actors)
     ),  
    (
       format("[[Setup]] Defining Actions...\n",[]),
       actions(Actions),
-      maplist(logged_assert, Actions)
+      maplist(logged_assert, Actions),
+      bagof([action, Action], (member(Action, Actions)), Tmp),
+      maplist(logged_assert_list, Tmp)
    ),   
    (
       format("[[Setup]] Defining Subjects...\n",[]),
       non_actor_subjects(Subjects),
-      maplist(logged_assert, Subjects)
+      maplist(logged_assert, Subjects),
+      maplist(reify, Subjects)
    ),   
    (
       format("[[Setup]] Binding Classes...\n",[]),
