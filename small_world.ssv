@@ -1,13 +1,7 @@
-mammal isa alive.
-mammal isa animal.
-cat isa mammal.
 cat isa person.
-human isa mammal.
 human isa person.
-man isa human.
-woman isa human.
 boson isa cat.
-kiki isa woman.
+kiki isa human.
 kiki like boson.
-sybil isa woman.
+sybil isa human.
 sybil like kiki.
