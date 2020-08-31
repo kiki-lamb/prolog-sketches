@@ -1,9 +1,13 @@
+* Misc Notes.
+
 #+BEGIN_SRC prolog
-make,
-set_prolog_flag(debugger_write_options, [max_depth(12)]),
-set_prolog_flag(backtrace_depth, 12),
-set_prolog_flag(backtrace_goal_depth, 12),
-trace,
-notrace,
-path(start, sybil, move, higgy, stop, Path).
+[main.pl].
+(set_prolog_flag(debugger_write_options, [max_depth(12)]),
+ set_prolog_flag(backtrace_depth, 12),
+ set_prolog_flag(backtrace_goal_depth, 12),
+ trace,
+ notrace,
+ path(start, sybil, move, higgy, stop, Path)
+).
 #+END_SRC
+

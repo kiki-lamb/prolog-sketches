@@ -43,11 +43,14 @@ could(Person, Action, Thing, Path) :-
    (would(Person, Action, Thing),
     % format(Find ~w -> ~w to ~w.\n",
     %        [Person, Thing, Action),
-    call(ppath(Person, Thing, Path), !)).
+    call((ppath(Person, Thing, Path), !))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- op(200, xfy, couldnt).
+couldnt(Person, Action) :-
+   couldnt(Person, Action, _).
+
 couldnt(Person, Action, Thing) :-
    couldnt(Person, Action, Thing).
 
