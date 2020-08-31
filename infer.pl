@@ -132,20 +132,20 @@ wwould(Person, smoke, Thing) :-
    thing(Thing),
    smoke(Person, Thing).
 
-wwould(Human, shop_at, Store) :-
-   human(Human),
-   store(Store),
-   shop_at(Human, Store).
+% wwould(Human, shop_at, Store) :-
+%    human(Human),
+%    store, store(Store),
+%    shop_at(Human, Store).
 
-wwould(Human, shower, Appliance) :-
-   human(Human),
-   appliance(Appliance),
-   give(Appliance, water).
+% wwould(Human, shower, Appliance) :-
+%    human(Human),
+%    appliance(Appliance),
+%    give(Appliance, water).
 
-wwould(Person, starve_for, food) :-
-   person(Person),
-   couldnt(Person, eat).
+% wwould(Person, starve_for, food) :-
+%    person(Person),
+%    couldnt(Person, eat).
 
-wwould(Person, starve_for, water) :-
-   person(Person),
-   couldnt(Person, drink, water).
+% wwould(Person, starve_for, water) :-
+%    person(Person),
+%    couldnt(Person, drink, water).
