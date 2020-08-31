@@ -22,7 +22,7 @@ path(Here, There) :-
 path(Here, There, Path) :-
    (
       cached_path(Here, There, Path),
-      format(" ...> cached_path(~ws, ~w, ~w)\n",
+      format("    ...> cached_path(~ws, ~w, ~w)\n",
              [Here, There, Path])
    )
    -> true
@@ -41,7 +41,7 @@ stash_path(Here, There, Path) :-
    (
       search(Here, There, Path),
       
-      format(" .oO> cached_path(~w, ~w, ~w)\n",
+      format("    .oO> cached_path(~w, ~w, ~w)\n",
              [Here, There, Path]),
       
       retractall(cached_path(Here, There, Path)),

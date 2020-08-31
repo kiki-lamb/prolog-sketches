@@ -2,7 +2,11 @@ human isa   person.
 woman isa   human.
 kiki  isa   woman.
 kiki  like  boson.
+kiki  like higgy.
 sybil isa   woman.
 sybil like  kiki.
 cat   isa   person.
 higgy isa   cat.
+boson isa   cat.
+gwen  isa   woman.
+gwen  like  sybil.
