@@ -100,7 +100,8 @@ assert_list(L) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
-   assertify_lines('dat.ssv'),
+%   assertify_lines('dat.ssv'),
+   assertify_lines('small_world.ssv'),
    (
       actors(Actors),
       maplist(assert, Actors)
