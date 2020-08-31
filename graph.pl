@@ -3,8 +3,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 move( Here, Here) :- fail.
-move( _,   There) :- /* concrete(There), */ person(There).
-start(Here)       :- /* concrete(Here),  */ person(Here).
+move( _,   There) :- concrete(There), person(There).
+start(Here)       :- concrete(Here),  person(Here).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -15,12 +15,14 @@ path(Here, There) :-
    path(Here, There, _).
 
 path(Here, Here, [Here]) :-
-   start(Here),
-      format("   .> path(~w, ~w, ~w)\n",
-             [Here, Here, [Here]]).
+   fail.
+%   start(Here),
+%      format("   .> path(~w, ~w, ~w)\n",
+%             [Here, Here, [Here]]).
 
 path(Here, There, Path) :-
    (
+      start(Here),
       search([], Here, There, Tmp),
       reverse([There|Tmp], Path),
       format(" .oO> path(~w, ~w, ~w)\n",
