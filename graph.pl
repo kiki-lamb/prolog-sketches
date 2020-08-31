@@ -6,8 +6,8 @@ path(Here, To) :-
 
 path(Here, Here, [Here]) :-
    human(Here),
-      format(" -~~-> path(~w, ~w, ~w)\n",
-             [Here, To, Path]).
+      format("   .> path(~w, ~w, ~w)\n",
+             [Here, Here, [Path]]).
 
 path(Here, To, Path) :-
    (
@@ -17,7 +17,7 @@ path(Here, To, Path) :-
       
       search([], Here, To, Tmp),
       reverse([To|Tmp], Path),
-      format(" -~~=> path(~w, ~w, ~w)\n",
+      format(" .oO> path(~w, ~w, ~w)\n",
              [Here, To, Path])
    ).
 
