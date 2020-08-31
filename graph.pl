@@ -4,14 +4,20 @@
 path(Here, To) :-
    path(Here, To, _).
 
+path(Here, Here, [Here]) :-
+   human(Here),
+   format(" ~~-=> Give minimal path.\n", []).
+   
 path(Here, To, Path) :-
    (
-      human(Here),
+      human(Here),                  
       human(To),
       Here \== To,
       
       search([], Here, To, Tmp),
-      reverse([To|Tmp], Path)
+      reverse([To|Tmp], Path),
+      format(" ~~-=> path(~w, ~w, ~w)\n",
+             [Here, To, Path]).
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -25,7 +31,7 @@ search( Build, Here, To, Path) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 found(Build, Here, Here, Path) :-
-   Path = [Here|Build].
+   Path = Build.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

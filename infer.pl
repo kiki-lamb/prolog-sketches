@@ -40,15 +40,14 @@ would(Start, Action) :-
    would(Start, Action).
 
 would(Start, Action, X) :-
-   start(Start), % bind early for ordering.
    wwould(Start, Action, X).
 
 wwould(Person, get_help, P2) :-
    would(P2, help, Person).
 
 wwould(Person, help, P2) :-
-   person(Person),
-   person(P2),
+   human(Person),
+   human(P2),
    Person \== P2,
    (
       like(Person,P2)
