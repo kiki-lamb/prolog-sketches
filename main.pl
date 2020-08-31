@@ -28,6 +28,6 @@ desires(P,A,X) :- would(P,A,X),
                   format("~w would ~w ~w.\n", [P,A,X]),
                   fail.  
 
-paths         :- paths(_,_,_).
-paths(W,T,P)  :- path(W,T,P),
-                 fail.
+stash_paths        :- stash_paths(_,_,_).
+stash_paths(W,T,P) :- stash_path(W,T,P),
+                      fail.

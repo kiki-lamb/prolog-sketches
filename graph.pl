@@ -29,38 +29,40 @@ path(Here, Here, [Here]) :-
 
 path(Here, There, Path) :-
    (
-      start(Here),
-      start(There),
-      search([], Here, There, Tmp),
-      reverse([There|Tmp], Path),
-      reverse(Path, Rev),
-
-      format(" .oO> path(~w, ~w, ~w)\n",
-             [Here, There, Path]),
-
-      
-      assertz(cached_path(Here, There, Path)),
-      assertz(cached_path(There, Here, Rev))
-   ).
-
-sspath(Here, There, Path) :-
-   spath(Here, There, Path).
-
-spath(Here, There, Path) :-
-   (
       cached_path(Here, There, Path),
-      format(" ...> path(~w, ~w, ~w)\n",
+      format(" ...> path(~ws, ~w, ~w)\n",
              [Here, There, Path])
    )
    -> true
    ;
    once(
       (
-         reverse(Path, Rev),
          path(Here, There, Path),
-         assertz(cached_path(Here, There, Path)),
-         assertz(cached_path(There, Here, Rev))
+         stash(Here, There, Path)
       )).
+
+stash_path(Here, There, Path) :-
+   (
+      start(Here),
+      start(There),
+      search([], Here, There, Tmp),
+      reverse([There|Tmp], Path),
+   
+      format(" .oO> path(~w, ~w, ~w)\n",
+             [Here, There, Path]),
+      
+      stash(Here, There, Path)
+   ).
+
+stash(Here, There, Path) :-
+   reverse(Path, Rev),
+   retractall(cached_path(Here, There, Path)),
+   assertz(cached_path(Here, There, Path)),
+   Here \== There,
+   (
+      retractall(cached_path(There, Here, Rev)),
+      assertz(cached_path(There, Here, Rev))
+   ).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
