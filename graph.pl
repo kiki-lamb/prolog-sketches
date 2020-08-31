@@ -4,8 +4,7 @@
 
 start(Here)       :- human(Here).
 move( Here, Here) :- fail.
-move( _,   There) :- human(There),
-                     \+ bitch(There).
+move( _,   There) :- human(There).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

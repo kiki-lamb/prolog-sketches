@@ -1,11 +1,11 @@
 :- use_module(library(pio)).
 
-lliness([]) -->
+lines([]) -->
    call(eos), !.
 
-lliness([CLine|Lliness]) -->
+lines([CLine|Lines]) -->
    cline(CLine),
-   lliness(Lliness).
+   lines(Lines).
 
 eos([], []).
 
@@ -16,7 +16,7 @@ cline([L|Ls]) -->
    [L], cline(Ls).
 
 clines(Ls, File) :-
-   phrase_from_file(lliness(Ls), File).
+   phrase_from_file(lines(Ls), File).
 
 collect(Build, Out) :-
    Out = Build.
