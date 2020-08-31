@@ -2,9 +2,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-start(Here)       :- human(Here).
+start(Here)       :- concrete(Here), human(Here).
 move( Here, Here) :- fail.
-move( _,   There) :- human(There).
+move( _,   There) :- concrete(There), human(There).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -15,7 +15,7 @@ path(Here, There) :-
    path(Here, There, _).
 
 path(Here, Here, [Here]) :-
-   human(Here),
+   start(Here),
       format("   .> path(~w, ~w, ~w)\n",
              [Here, Here, [Here]]).
 

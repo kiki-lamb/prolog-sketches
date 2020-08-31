@@ -1,4 +1,4 @@
-:- initialization(setup).
+:- initialization((setup, paths)).
 :- consult("graph.pl").
 :- consult("setup.pl").
 :- consult("infer.pl").
@@ -22,7 +22,7 @@ desires(P,A,X) :- would(P,A,X),
                   format("~w would ~w ~w.\n", [P,A,X]),
                   fail.  
 
- paths         :- paths(boson,sybil,_).
- paths(W,T,P)  :- path(W,T,P),
-                  % format("~w -> ~w: ~w\n", [W,T,P]),
-                  fail.
+paths         :- paths(boson,sybil,_).
+paths(W,T,P)  :- path(W,T,P),
+                 % format("~w -> ~w: ~w\n", [W,T,P]),
+                 fail.
