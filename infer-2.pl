@@ -94,7 +94,7 @@ non_actor_subjects(Out) :-
 
 assert_list(L) :-
    G1 =..  L,
-   format("    Assert ~w.\n", [G1]),
+   format("    ~~=> ~w.\n", [G1]),
    assert(G1).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
