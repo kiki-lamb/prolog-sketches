@@ -49,6 +49,7 @@ stash_path(Here, There, Path) :-
       
       retractall(cached_path(Here, There, Path)),
       assertz(cached_path(Here, There, Path)),
+
       Here \== There,
       (
          retractall(cached_path(There, Here, Rev)),
