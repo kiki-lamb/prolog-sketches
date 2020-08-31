@@ -1,6 +1,6 @@
 :- consult("file_reader.pl").
 
-:- op(300, xfy, isa).
+
 isa(Thing, Class) :-
    (
       r(Thing, isa, Class, _)
@@ -30,9 +30,9 @@ bind_classes :-
 
 bind_classes(Left, Action, Right, Out) :-
    % format("[ Bind ~w ~w ~w ]:\n", [Left, Action, Right]),
-   findall(L, (L isa Left),  Lefts ),
+   findall(L, (isa(L, Left)),  Lefts ),
    % format("Lefts: ~w.\n",    [Lefts]),
-   findall(R, (R isa Right), Rights ),
+   findall(R, (isa(R, Right)), Rights ),
    % format("Rights: ~w.\n",   [Rights]),
    combine([Left | Lefts], [Right | Rights], Tmp),
    % format("Tmp: ~w.\n",   [Tmp]),
