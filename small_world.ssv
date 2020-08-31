@@ -1,7 +1,4 @@
-cat isa person.
 human isa person.
-boson isa cat.
 kiki isa human.
-kiki like boson.
 sybil isa human.
 sybil like kiki.

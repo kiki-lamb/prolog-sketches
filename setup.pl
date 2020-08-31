@@ -26,8 +26,7 @@ concrete(Thing) :-
    \+( abstract(Thing)).
 
 abstract(Thing) :-
-   Something \==  Thing,
-   Something isa Thing.
+   _ isa Thing.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
