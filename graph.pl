@@ -14,8 +14,8 @@ start(Here)       :-
 path(Here, There) :-
    path(Here, There, _).
 
-path(Here, Here, [Here]) :-
-   fail.
+%path(Here, Here, [Here]) :-
+%   fail.
 
 :- dynamic cached_path/3. 
 
@@ -26,8 +26,7 @@ path(Here, There, Path) :-
              [Here, There, Path])
    )
    -> true
-   ;
-   once((stash_path(Here, There, Path))).
+   ;  once((stash_path(Here, There, Path))).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -40,9 +39,7 @@ stash_paths(W,T,P) :-
 
 stash_path(Here, There, Path) :-
    (
-      search([], Here, There, Tmp),
-      reverse([There|Tmp], Path),
-      reverse(Path, Rev),
+      search(Here, There, Path),
       
       format(" .oO> cached_path(~w, ~w, ~w)\n",
              [Here, There, Path]),
@@ -52,6 +49,7 @@ stash_path(Here, There, Path) :-
 
       Here \== There,
       (
+         reverse(Path, Rev),
          retractall(cached_path(There, Here, Rev)),
          assertz(cached_path(There, Here, Rev))
       )   
@@ -59,7 +57,11 @@ stash_path(Here, There, Path) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-search( Build, Here, There, Path) :-
+search(Here, There, Path) :-
+   search([], Here, There, Tmp),
+   reverse([There|Tmp], Path).
+
+search(Build, Here, There, Path) :-
    (
       start(Here),
       start(There),
