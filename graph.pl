@@ -21,10 +21,6 @@ path(Here, Here, [Here]) :-
 
 path(Here, There, Path) :-
    (
-      human(Here),                  
-      human(There),
-      Here \== There,
-      
       search([], Here, There, Tmp),
       reverse([There|Tmp], Path),
       format(" .oO> path(~w, ~w, ~w)\n",
