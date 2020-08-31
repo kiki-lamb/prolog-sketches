@@ -1,37 +1,37 @@
 :- dynamic cache/3.         
 
-start(Here) :- human(Here).
-
-move(Here, To)  :- human(To).
+start(Here)       :- human(Here).
+move( Here, Here) :- fail.
+move( _,   There) :- human(There).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-path(Here, To) :-
-   path(Here, To, _).
+path(Here, There) :-
+   path(Here, There, _).
 
 path(Here, Here, [Here]) :-
    human(Here),
       format("   .> path(~w, ~w, ~w)\n",
              [Here, Here, [Here]]).
 
-path(Here, To, Path) :-
+path(Here, There, Path) :-
    (
       human(Here),                  
-      human(To),
-      Here \== To,
+      human(There),
+      Here \== There,
       
-      search([], Here, To, Tmp),
-      reverse([To|Tmp], Path),
+      search([], Here, There, Tmp),
+      reverse([There|Tmp], Path),
       format(" .oO> path(~w, ~w, ~w)\n",
-             [Here, To, Path])
+             [Here, There, Path])
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-search( Build, Here, To, Path) :-
+search( Build, Here, There, Path) :-
    (
-      found(Build, Here, To, Path)
-   ;  descend([Here|Build], Here, To, Path)
+      found(Build, Here, There, Path)
+   ;  descend([Here|Build], Here, There, Path)
    ).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,8 +43,8 @@ found(Path, Here, Here, Path).
 descend(_, Here, Here,  _) :-
    false.
 
-descend(Build, Here, To,  Path) :-
+descend(Build, Here, There,  Path) :-
    human(Next),
    Here \== Next,
    not(member(Next, Build)),
-   search(Build, Next, To, Path).
+   search(Build, Next, There, Path).
