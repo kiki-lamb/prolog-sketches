@@ -27,7 +27,3 @@ desires        :- desires(_,_,_).
 desires(P,A,X) :- would(P,A,X),
                   format("~w would ~w ~w.\n", [P,A,X]),
                   fail.  
-
-stash_paths        :- stash_paths(_,_,_).
-stash_paths(W,T,P) :- stash_path(W,T,P),
-                      fail.

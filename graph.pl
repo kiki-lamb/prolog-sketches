@@ -29,6 +29,15 @@ path(Here, There, Path) :-
    ;
    once((stash_path(Here, There, Path))).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+stash_paths        :-
+   stash_paths(_,_,_).
+
+stash_paths(W,T,P) :-
+   stash_path(W,T,P),
+   fail.
+
 stash_path(Here, There, Path) :-
    (
       search([], Here, There, Tmp),
