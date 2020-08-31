@@ -4,3 +4,6 @@ kiki isa human.
 sybil isa human.
 sybil like kiki.
 kiki like boson.
+higgy isa human.
+higgy isa person.
+higgy like kiki.
