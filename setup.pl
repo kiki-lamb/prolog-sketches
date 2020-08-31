@@ -22,8 +22,12 @@ is_a(Thing, Class) :-
       is_a(ActualType, Class)
    ).
 
-unique(Thing) :-
-   \+( _ is_a Thing).
+concrete(Thing) :-
+   \+( abstract(Thing)).
+
+abstract(Thing) :-
+   Something \==  Thing,
+   Something is_a Thing.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -33,8 +37,8 @@ combine(Left, Right, Out) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 bind_classes :-
+%   concrete(Thing),
    is_a(Thing, Class),
-   
    logged_assert_list([Class, Thing]),
    fail.
 
