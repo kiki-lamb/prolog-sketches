@@ -42,6 +42,10 @@ would(Start, Action) :-
 would(Start, Action, X) :-
    wwould(Start, Action, X).
 
+:- op(200, xfy, would_help).
+would_help(Person, P2) :-
+   would(Person, help, P2).
+
 wwould(Person, get_help, P2) :-
    would(P2, help, Person).
 
