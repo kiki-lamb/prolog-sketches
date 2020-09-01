@@ -35,13 +35,14 @@ load_atomized_lines_from_file(File, Out) :-
 
 atomize_and_assert_lines(Lines, Out) :-
    atomize_and_assert_lines([], Lines, Out).
+
 atomize_and_assert_lines(Build, [], Out) :-
    Out = Build, !.
+
 atomize_and_assert_lines(Build, [Line|Lines], Out) :-
    split_string(Line, " ", " ", Words),
-   atomize(Words, [A1, A2, A3 | Atoms]),
-   Term =.. [r, A1, A2, A3, Atoms],
-   assertz(Term),
+   atomize(Words, [A1, A2, A3 | Atoms]),   
+   assertz(r(A1, A2, A3, Atoms)),
    atomize_and_assert_lines(Build, Lines, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -49,8 +50,10 @@ atomize_and_assert_lines(Build, [Line|Lines], Out) :-
 atomize(In, Out) :-
    atomize([], In, TmpOut),
    reverse(TmpOut, Out).
+
 atomize(Build, [], Out) :-
    Out = Build, !.
+
 atomize(Build, [In|Ins], Out) :-
   atom_codes(Atomic, In),
   atomize([Atomic|Build], Ins , Out).
