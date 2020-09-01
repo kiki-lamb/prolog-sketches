@@ -66,8 +66,8 @@ wwould(Person, help, Subject) :-
    person(Subject),
    Person \== Subject,
    (
-      like(Person,Subject)
-   ;  like(Subject,Person)
+      likes(Person,Subject)
+   ;  likes(Subject,Person)
    ).
 
 % wwould(Appliance, break, Appliance) :-
