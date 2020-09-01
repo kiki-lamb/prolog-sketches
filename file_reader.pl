@@ -33,15 +33,15 @@ suspicious_map(Using, In, Out) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-aasertify_lines([], Build, Out) :-
+asertify_lines([], Build, Out) :-
    Out = Build, !.
 
-aasertify_lines([Line|Lines], Build, Out) :-
+asertify_lines([Line|Lines], Build, Out) :-
    split_string(Line, " ", " ", Words),
    atomize(Words, [A1, A2, A3 | Atoms]),
    Term =.. [r, A1, A2, A3, Atoms],
    assertz(Term),
-   aasertify_lines(Lines, Build, Out).
+   asertify_lines(Lines, Build, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -63,5 +63,5 @@ load_atom_lines_from_file(File) :-
 
 load_atom_lines_from_file(In, Out) :-
    retractall(r(_,_,_,_)),
-   suspicious_map(aasertify_lines, In, Out).
+   suspicious_map(asertify_lines, In, Out).
 
