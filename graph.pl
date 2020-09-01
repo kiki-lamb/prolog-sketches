@@ -44,14 +44,14 @@ stash_paths(W,T,P) :-
 
 log_paths :-
    cached_path(Here, There, Path),
-   format(" .oO> cached_path(~w, ~w, ~w)\n",
+   format("   .oO> cached_path(~w, ~w, ~w)\n",
           [Here, There, Path]),
    fail.
    
 log_paths_count :-
    bagof([X,Y,Z], (cached_path(Z,Y,X)), Tmp),
    length(Tmp, Count),
-   format(" Charted ~w paths.\n\n", [Count]).
+   format("        Charted ~w paths.\n\n", [Count]).
 
 stash_path(Here, There, Path) :-
    search(Here, There, Path),

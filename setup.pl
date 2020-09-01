@@ -82,7 +82,7 @@ logged_assert_list(L) :-
 
 logged_assert(G1) :-
    dynamic(G1),
-   format("    ~~=> ~w.\n", [G1]),
+   format("   -~~=> ~w.\n", [G1]),
    (
       retract(G1)
    ;  true
