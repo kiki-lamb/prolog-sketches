@@ -101,7 +101,7 @@ setup :-
    % File = 'dat.ssv',
    File = 'small_world.ssv',   
    (
-      load_atomized_lines_from_file(File),
+      load_atomized_lines_from_file(r, File),
       format("[[Setup]] Loaded lines from '~w'.\n",[File]);
       format("[[Setup]] ERROR: Could nod load lines from '~w'.\n",[File])
    ),
