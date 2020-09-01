@@ -1,4 +1,5 @@
 :- dynamic cached_path/3. 
+
 %path(Here, Here, [Here]) :-
 %   fail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -47,7 +48,6 @@ search(Here, There, Path) :-
 search(Build, Here, There, Path) :-
    (
       start(Here),
-      start(There),
       found(Build, Here, There, Path)
       ;  descend([Here|Build], Here, There, Path)
    ).
@@ -65,17 +65,6 @@ descend(Build, Here, There,  Path) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-move( Here, Here ) :- fail.
-move( Here, There) :-
-   concrete(There), person(There),
-   concrete(Here ), person(Here ),
-   There \= Here.
-
-start(Here)       :-
-   concrete(Here),  person(Here ).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 log_paths :-
    cached_path(Here, There, Path),
    format("   .oO> cached_path(~w, ~w, ~w)\n",
@@ -88,3 +77,16 @@ log_paths_count :-
    format("        Charted ~w paths.\n\n", [Count]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+move( Here, Here ) :- fail.
+
+move( Here, There) :-
+   concrete(Here), concrete(There),
+   person(  Here), person(  There),
+   would(There, help, Here),
+   There \= Here.
+
+start(Here)       :-
+   concrete(Here),  person(Here ).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

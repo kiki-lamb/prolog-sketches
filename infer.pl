@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 could(Person, Action) :-
-   could(Person, Action).
+   could(Person, Action, _).
 
 could(Person, Action, Subject) :-
-   could(Person, Action, Subject).
+   could(Person, Action, Subject, _).
 
 could(Person, Action, Subject, Path) :-
    (would(Person, Action, Subject),
@@ -29,7 +29,7 @@ op_couldnt(Person, Action) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 wouldnt(Person, Action) :-
-   \+ wwould(Person, Action).
+   \+ wwould(Person, Action, _).
 
 wouldnt(Person, Action, Subject) :-
    \+ wwould(Person, Action, Subject).
@@ -41,10 +41,10 @@ op_wouldnt(Person, Action) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 would(Start, Action) :-
-   would(Start, Action).
+   would(Start, Action, _).
 
 would(Start, Action, Subject) :-
-   would(Start, Action, Subject).
+   wwould(Start, Action, Subject).
 
 % :- op(200, xfy, op_would).
 op_would(Person, Action) :-
@@ -53,84 +53,84 @@ op_would(Person, Action) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % :- op(200, xfy, would_help).
-would_help(Person, P2) :-
-   wwould(Person, help, P2).
+would_help(Person, Subject) :-
+   wwould(Person, help, Subject).
 
 %--------------------------------------------------------------------------------------------
 
-wwwould(Person, get_help, P2) :-
-   wwould(P2, help, Person).
+wwould(Person, get_help, Subject) :-
+   wwould(Subject, help, Person).
 
-wwwould(Person, help, P2) :-
-   human(Person),
-   human(P2),
-   Person \== P2,
+wwould(Person, help, Subject) :-
+   person(Person),
+   person(Subject),
+   Person \== Subject,
    (
-      like(Person,P2)
-   ;  like(P2,Person)
+      like(Person,Subject)
+   ;  like(Subject,Person)
    ).
 
-% wwwould(Appliance, break, Appliance) :-
+% wwould(Appliance, break, Appliance) :-
 %    appliance(Appliance),
 %    human(Human),
 %    couldnt(Human, repair, Appliance).
 
-% wwwould(Person, buy, Object) :-
+% wwould(Person, buy, Object) :-
 %    object(Object),
 %    has(Store, Object),
 %    wwould(Person, shop_at, Store).
 
-% wwwould(Cat, chase, C2) :-
+% wwould(Cat, chase, C2) :-
 %    cat(Cat),
 %    cat(C2),
 %    Cat \== C2.
 
-% wwwould(Person, drink, Drink) :-
+% wwould(Person, drink, Drink) :-
 %    object(Drink),
 %    drink(Person, Drink).
 
-% wwwould(Person, eat, Food) :-
+% wwould(Person, eat, Food) :-
 %    food(Food),
 %    eat(Person, Food).
 
-% wwwould(Human, operate, Appliance) :-
+% wwould(Human, operate, Appliance) :-
 %    human(Human), 
 %    appliance(Appliance).
 
-% wwwould(Person, pet, Cat) :-
+% wwould(Person, pet, Cat) :-
 %    human(Person),
 %    cat(Cat),
 %    wwould(Person, help, Cat).
 
-% wwwould(Human, repair, Appliance) :-
+% wwould(Human, repair, Appliance) :-
 %    human(Human),
 %    appliance(Appliance),
 %    path(Human, screw).
 
-% wwwould(Person, scare_off, Cat) :-
+% wwould(Person, scare_off, Cat) :-
 %    person(Person),
 %    cat(Cat),
 %    Person \== Cat,
 %    wwouldnt(Person, help, Cat).
 
-% wwwould(Person, smoke, Thing) :-
+% wwould(Person, smoke, Thing) :-
 %    thing(Thing),
 %    smoke(Person, Thing).
  
-% wwwould(Human, shop_at, Store) :-
+% wwould(Human, shop_at, Store) :-
 %    human(Human),
 %    store, store(Store),
 %    shop_at(Human, Store).
 
-% wwwould(Human, shower, Appliance) :-
+% wwould(Human, shower, Appliance) :-
 %    human(Human),
 %    appliance(Appliance),
 %    give(Appliance, water).
 
-% wwwould(Person, starve_for, food) :-
+% wwould(Person, starve_for, food) :-
 %    person(Person),
 %    couldnt(Person, eat).
 
-% wwwould(Person, starve_for, water) :-
+% wwould(Person, starve_for, water) :-
 %    person(Person),
 %    couldnt(Person, drink, water).
