@@ -1,4 +1,10 @@
 :- consult("file_reader.pl").
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+combine(Left, Right, Out) :-
+   findall([ L, R ], (member(L, Left), member(R, Right)), Out).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 member_of(Thing, Class) :-
    (
@@ -16,11 +22,6 @@ reify(Thing) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-combine(Left, Right, Out) :-
-   findall([ L, R ], (member(L, Left), member(R, Right)), Out).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 bind_classes :-
    member_of(Thing, Class),
    logged_assert_list([Class, Thing]),
@@ -29,9 +30,8 @@ bind_classes :-
 bind_classes(Left, Action, Right, Out) :-
    findall(L, (member_of(L, Left)),  Lefts ),
    findall(R, (member_of(R, Right)), Rights ),
-   combine([Left | Lefts], [Right | Rights], Tmp),
+   findall([ L, R ], (member(L, [Left | Lefts]), member(R, [Right | Rights])), Tmp),
    findall([Action, L, R], (member([L, R], Tmp)), Out).
-
 
 bind_classes(Left, Action, Right) :-
    bind_classes(Left, Action, Right, Out),
