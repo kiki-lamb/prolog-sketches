@@ -47,9 +47,9 @@ kiki drink vodka.
 kiki eat meat.
 kiki is_a woman.
 kiki like boson.
-kiki shop_at chicken_freak.
-kiki shop_at freshco.
-kiki shop_at lcbo.
+kiki shops_at chicken_freak.
+kiki shops_at freshco.
+kiki shops_at lcbo.
 kiki smoke cigarette.
 lcbo has alcohol.
 lcbo is_a store.
@@ -71,9 +71,9 @@ sybil eat turkey.
 sybil eat vegetable.
 sybil is_a woman.
 sybil like kiki.
-sybil shop_at dave.
-sybil shop_at home_hardware.
-sybil shop_at mr_meat.
+sybil shops_at dave.
+sybil shops_at home_hardware.
+sybil shops_at mr_meat.
 tequila is_a alcohol.
 thing is_a object.
 turkey is_a meat.

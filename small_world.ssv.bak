@@ -1,0 +1,14 @@
+human isa   person.
+woman isa   human.
+kiki  isa   woman.
+kiki  like  boson.
+sybil isa   woman.
+sybil like  kiki.
+cat   isa   person.
+higgy isa   cat.
+boson isa   cat.
+higgy like  kiki.
+human isa   creature.
+cat   isa   creature.
+gwen  isa   woman.
+gwen  like  sybil.

@@ -58,10 +58,14 @@ would_help(Person, Subject) :-
 
 %--------------------------------------------------------------------------------------------
 
+:- dynamic help/2.
+
 wwould(Person, get_help, Subject) :-
    wwould(Subject, help, Person).
 
 wwould(Person, help, Subject) :-
+   concrete(Person),
+   concrete(Subject),
    person(Person),
    person(Subject),
    Person \== Subject,
@@ -70,6 +74,15 @@ wwould(Person, help, Subject) :-
    ;  likes(Subject,Person)
    ).
 
+
+wwould(Person, Action, Subject) :-
+%     concrete(Person),
+%     concrete(Subject),
+%     person(Person),
+     call(Action, Person, Subject).
+%
+%    Person \== Subject.
+          
 % wwould(Appliance, break, Appliance) :-
 %    appliance(Appliance),
 %    human(Human),
