@@ -2,23 +2,19 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-eos([], []).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-collect_lines(Ls, File) :-
-   phrase_from_file(lines(Ls), File).
-
 collect_line([]) -->
-   (".\n" ; call(eos)), !.
+   (".\n" ; call(end_of_sequence)), !.
 
 collect_line([L|Ls]) -->
    [L], collect_line(Ls).
 
+collect_lines(Ls, File) :-
+   phrase_from_file(lines(Ls), File).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 lines([]) -->
-   call(eos), !.
+   call(end_of_sequence), !.
 
 lines([CLine|Lines]) -->
    collect_line(CLine),
@@ -26,8 +22,9 @@ lines([CLine|Lines]) -->
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-stop_collecting(Build, Out) :-
-   Out = Build.
+end_of_sequence([], []).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 suspicious_map(Using, In, Out) :-
    G =.. [ Using, In, [], Tmp ],
@@ -37,7 +34,7 @@ suspicious_map(Using, In, Out) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 aasertify_lines([], Build, Out) :-
-   stop_collecting(Build, Out), !.
+   Out = Build, !.
 
 aasertify_lines([Line|Lines], Build, Out) :-
    split_string(Line, " ", " ", Words),
@@ -52,7 +49,7 @@ atomize(In, Out) :-
    suspicious_map(aatomize, In, Out).
 
 aatomize([], Build, Out) :-
-   stop_collecting(Build, Out), !.
+   Out = Build, !.
 
 aatomize([In|Ins], Build, Out) :-
   atom_codes(Atomic, In),
