@@ -2,15 +2,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-lines([]) -->
-   call(eos), !.
-
-lines([CLine|Lines]) -->
-   collect_line(CLine),
-   lines(Lines).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 eos([], []).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -26,7 +17,16 @@ collect_line([L|Ls]) -->
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-suspicious_map(Build, Out) :-
+lines([]) -->
+   call(eos), !.
+
+lines([CLine|Lines]) -->
+   collect_line(CLine),
+   lines(Lines).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+stop_collecting(Build, Out) :-
    Out = Build.
 
 suspicious_map(Using, In, Out) :-
@@ -34,17 +34,10 @@ suspicious_map(Using, In, Out) :-
    call(G),
    reverse(Tmp, Out).
 
-
-load_atom_lines_from_file(File) :-
-   collect_lines(Ls, File),
-   load_atom_lines_from_file(Ls, _).
-
-load_atom_lines_from_file(In, Out) :-
-   retractall(r(_,_,_,_)),
-   suspicious_map(aasertify_lines, In, Out).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 aasertify_lines([], Build, Out) :-
-   suspicious_map(Build, Out), !.
+   stop_collecting(Build, Out), !.
 
 aasertify_lines([Line|Lines], Build, Out) :-
    split_string(Line, " ", " ", Words),
@@ -53,14 +46,25 @@ aasertify_lines([Line|Lines], Build, Out) :-
    assertz(Term),
    aasertify_lines(Lines, Build, Out).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 atomize(In, Out) :-
    suspicious_map(aatomize, In, Out).
 
 aatomize([], Build, Out) :-
-   suspicious_map(Build, Out), !.
+   stop_collecting(Build, Out), !.
 
 aatomize([In|Ins], Build, Out) :-
   atom_codes(Atomic, In),
   aatomize(Ins, [Atomic|Build], Out).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+load_atom_lines_from_file(File) :-
+   collect_lines(Ls, File),
+   load_atom_lines_from_file(Ls, _).
+
+load_atom_lines_from_file(In, Out) :-
+   retractall(r(_,_,_,_)),
+   suspicious_map(aasertify_lines, In, Out).
 
