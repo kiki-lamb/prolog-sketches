@@ -8,7 +8,7 @@ could(Person, Action, Thing) :-
    could(Person, Action, Thing).
 
 could(Person, Action, Thing, Path) :-
-   (wwould(Person, Action, Thing),
+   (would(Person, Action, Thing),
     % format(Find ~w -> ~w to ~w.\n",
     %        [Person, Thing, Action),
     call((path(Person, Thing, Path), !))).
@@ -26,11 +26,11 @@ couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% :- op(200, xfy, wwouldnt).
-wwouldnt(X, Action) :-
+% :- op(200, xfy, wouldnt).
+wouldnt(X, Action) :-
    \+ wwould(X, Action).
 
-wwouldnt(X, Action, Y) :-
+wouldnt(X, Action, Y) :-
    \+ wwould(X, Action, Y).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
