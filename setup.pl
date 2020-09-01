@@ -89,6 +89,12 @@ logged_assert(G1) :-
    ),
    assertz(G1).
 
+unlogged_assert(G1) :-
+   dynamic(G1),
+   retract(G1)
+   ;  true,
+      assertz(G1).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
@@ -98,25 +104,25 @@ setup :-
       assertify_lines(File),
       format("[[Setup]] Loaded lines from '~w'.\n",[File]);
       format("[[Setup]] ERROR: Could nod load lines from '~w'.\n",[File])
-   ),      
+   ),
    (
       format("[[Setup]] Defining Actors...\n",[]),
       actors(Actors),
-      maplist(logged_assert, Actors) ,
+      maplist(unlogged_assert, Actors) ,
       maplist(reify, Actors)
-    ),  
+   ),
+      (
+      format("[[Setup]] Defining Subjects...\n",[]),
+      non_actor_subjects(Subjects),
+      maplist(unlogged_assert, Subjects),
+      maplist(reify, Subjects)
+   ),   
    (
       format("[[Setup]] Defining Actions...\n",[]),
       actions(Actions),
       maplist(logged_assert, Actions),
       bagof([action, Action], (member(Action, Actions)), Tmp),
       maplist(logged_assert_list, Tmp)
-   ),   
-   (
-      format("[[Setup]] Defining Subjects...\n",[]),
-      non_actor_subjects(Subjects),
-      maplist(logged_assert, Subjects),
-      maplist(reify, Subjects)
    ),   
    (
       format("[[Setup]] Binding Classes...\n",[]),
