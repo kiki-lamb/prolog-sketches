@@ -22,10 +22,10 @@ path(Here, There) :-
 path(Here, There, Path) :-
    (try_path(Here, There, Path)) ->
       true
-   ;  once(
+   ;  once((
          (stash_path(Here, There, Path)),
          true
-      ),
+      )),
       try_path(Here, There, Path).
 
 try_path(Here, There, Path) :-
@@ -42,15 +42,18 @@ stash_paths(W,T,P) :-
    stash_path(W,T,P),
    fail.
 
+log_paths :-
+   cached_path(Here, There, Path),
+   format(" .oO> cached_path(~w, ~w, ~w)\n",
+          [Here, There, Path]),
+   fail.
+   
+
 stash_path(Here, There, Path) :-
    search(Here, There, Path),
    Here @> There,
    \+ ( try_path(Here, There, Path)),
-
-   format(" .oO> cached_path(~w, ~w, ~w)\n",
-          [Here, There, Path]),
-   
-   retractall(cached_path(Here, There, _)),
+     retractall(cached_path(Here, There, _)),
    assertz(cached_path(Here, There, Path)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

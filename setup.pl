@@ -126,7 +126,8 @@ setup :-
    ;  format("[[Setup]] Binding mutual Likes.\n",[]),
       bind_mutual_likes
    ;  format("[[Setup]] Charting paths...\n",[]),
-      stash_paths
+      stash_paths;
+      log_paths
    ;  format("[[Setup]] Complete.\n",[]),
       true
    ), !.
