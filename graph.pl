@@ -35,23 +35,12 @@ try_path(Here, There, Path) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-stash_paths        :-
+stash_paths :-
    stash_paths(_,_,_).
 
 stash_paths(W,T,P) :-
    stash_path(W,T,P),
    fail.
-
-log_paths :-
-   cached_path(Here, There, Path),
-   format("   .oO> cached_path(~w, ~w, ~w)\n",
-          [Here, There, Path]),
-   fail.
-   
-log_paths_count :-
-   bagof([X,Y,Z], (cached_path(Z,Y,X)), Tmp),
-   length(Tmp, Count),
-   format("        Charted ~w paths.\n\n", [Count]).
 
 stash_path(Here, There, Path) :-
    search(Here, There, Path),
@@ -74,12 +63,8 @@ search(Build, Here, There, Path) :-
       ;  descend([Here|Build], Here, There, Path)
    ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 found(Build, Here, Here, Path) :-
    Path = Build.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 descend(_, Here, Here,  _) :-
    fail.
@@ -88,3 +73,16 @@ descend(Build, Here, There,  Path) :-
    move(Here, Next), 
    not(member(Next, Build)),
    search(Build, Next, There, Path).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+log_paths :-
+   cached_path(Here, There, Path),
+   format("   .oO> cached_path(~w, ~w, ~w)\n",
+          [Here, There, Path]),
+   fail.
+   
+log_paths_count :-
+   bagof([X,Y,Z], (cached_path(Z,Y,X)), Tmp),
+   length(Tmp, Count),
+   format("        Charted ~w paths.\n\n", [Count]).
