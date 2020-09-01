@@ -8,9 +8,6 @@ collect_line([]) -->
 collect_line([L|Ls]) -->
    [L], collect_line(Ls).
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 lines([]) -->
    call(end_of_sequence), !.
 
@@ -24,15 +21,15 @@ end_of_sequence([], []).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-assertify_lines([], Build, Out) :-
+atomize_and_assert_lines([], Build, Out) :-
    Out = Build, !.
 
-assertify_lines([Line|Lines], Build, Out) :-
+atomize_and_assert_lines([Line|Lines], Build, Out) :-
    split_string(Line, " ", " ", Words),
    atomize(Words, [A1, A2, A3 | Atoms]),
    Term =.. [r, A1, A2, A3, Atoms],
    assertz(Term),
-   assertify_lines(Lines, Build, Out).
+   atomize_and_assert_lines(Lines, Build, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -49,13 +46,12 @@ atomize(Build, [In|Ins], Out) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 load_atom_lines_from_file(File) :-
    phrase_from_file(lines(Ls), File),
    load_atom_lines_from_file(Ls, _).
 
 load_atom_lines_from_file(In, Out) :-
    retractall(r(_,_,_,_)),
-   assertify_lines(In, [], Tmp),
+   atomize_and_assert_lines(In, [], Tmp),
    reverse(Tmp, Out).
 
