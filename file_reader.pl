@@ -23,10 +23,9 @@ end_of_sequence([], []).
 % Preds
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-load_atom_lines_from_file(File) :-
-   load_atom_lines_from_file(File, _).
-
-load_atom_lines_from_file(File, Out) :- 
+load_atomized_lines_from_file(File) :-
+   load_atomized_lines_from_file(File, _).
+load_atomized_lines_from_file(File, Out) :- 
    retractall(r(_,_,_,_)),
    phrase_from_file(lines(In), File),
    atomize_and_assert_lines(In, TmpOut),
