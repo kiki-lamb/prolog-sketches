@@ -48,6 +48,10 @@ log_paths :-
           [Here, There, Path]),
    fail.
    
+log_paths_count :-
+   bagof([X,Y,Z], (cached_path(Z,Y,X)), Tmp),
+   length(Tmp, Count),
+   format(" Charted ~w paths.\n\n", [Count]).
 
 stash_path(Here, There, Path) :-
    search(Here, There, Path),
