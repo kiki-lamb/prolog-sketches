@@ -3,13 +3,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 collect_line([]) -->
-   (".\n" ; call(end_of_sequence)), !.
+   (".\n" ; end_of_sequence), !.
 
 collect_line([L|Ls]) -->
    [L], collect_line(Ls).
 
-collect_lines(Ls, File) :-
-   phrase_from_file(lines(Ls), File).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -51,8 +49,9 @@ atomize(Build, [In|Ins], Out) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 load_atom_lines_from_file(File) :-
-   collect_lines(Ls, File),
+   phrase_from_file(lines(Ls), File),
    load_atom_lines_from_file(Ls, _).
 
 load_atom_lines_from_file(In, Out) :-
