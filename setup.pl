@@ -1,17 +1,14 @@
 :- consult("file_reader.pl").
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-combine(Left, Right, Out) :-
-   findall([ L, R ], (member(L, Left), member(R, Right)), Out).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 member_of(Thing, Class) :-
    (
       raw_lines(Thing, isa, Class, _)
    ;  raw_lines(Thing, isa, ActualType, _),
       member_of(ActualType, Class)
    ).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 reify(Thing) :-
    (
@@ -22,30 +19,32 @@ reify(Thing) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+cross_bind(Left, Action, Right) :-
+   findall(L, (member_of(L, Left)),  Lefts ),
+   findall(R, (member_of(R, Right)), Rights ),
+   findall([ L, R ], (member(L, [Left | Lefts]), member(R, [Right | Rights])), Tmp),
+   findall([Action, L, R], (member([L, R], Tmp)), Tmp2),
+   maplist(logged_assert_list, Tmp2).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 bind_classes :-
    member_of(Thing, Class),
    logged_assert_list([Class, Thing]),
    fail.
 
-bind_classes(Left, Action, Right, Out) :-
-   findall(L, (member_of(L, Left)),  Lefts ),
-   findall(R, (member_of(R, Right)), Rights ),
-   findall([ L, R ], (member(L, [Left | Lefts]), member(R, [Right | Rights])), Tmp),
-   findall([Action, L, R], (member([L, R], Tmp)), Out).
-
-bind_classes(Left, Action, Right) :-
-   bind_classes(Left, Action, Right, Out),
-   maplist(logged_assert_list, Out).
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 bind_actions :-
    raw_lines(Actor, Action, Subject, _),
    Action \== isa,
-   bind_classes(Actor, Action, Subject),
+   cross_bind(Actor, Action, Subject),
    fail.   
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 bind_mutual_likes :-
    raw_lines(Actor, like, Subject, _),
-   bind_classes(Subject, like, Actor),
+   cross_bind(Subject, like, Actor),
    fail.   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -64,13 +63,7 @@ subjects(Out) :-
 
 non_actor_subjects(Out) :-
    actors(Actors),
-   findall(
-      Subject, ((
-                     raw_lines(_, _, Subject, _),
-                     not(member(Subject, Actors))
-                  )),
-      Tmp
-   ),
+   findall(Subject, ((raw_lines(_, _, Subject, _), not(member(Subject, Actors)))), Tmp),
    sort(Tmp, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,9 +79,9 @@ logged_assert(G1) :-
       retract(G1)
    ;  true
    ),
-   assertz(G1).
+   clean_assert(G1).
 
-unlogged_assert(G1) :-
+clean_assert(G1) :-
    dynamic(G1),
    retract(G1)
    ;  true,
@@ -107,13 +100,13 @@ setup :-
    (
       format("[[Setup]] Defining Actors...\n",[]),
       actors(Actors),
-      maplist(unlogged_assert, Actors) ,
+      maplist(clean_assert, Actors) ,
       maplist(reify, Actors)
    ),
       (
       format("[[Setup]] Defining Subjects...\n",[]),
       non_actor_subjects(Subjects),
-      maplist(unlogged_assert, Subjects),
+      maplist(clean_assert, Subjects),
       maplist(reify, Subjects)
    ),   
    (
