@@ -1,25 +1,6 @@
 :- use_module(library(pio)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Grammar.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-collect_line([]) -->
-   (".\n" ; end_of_sequence), !.
-
-collect_line([L|Ls]) -->
-   [L], collect_line(Ls).
-
-lines([]) -->
-   call(end_of_sequence), !.
-
-lines([CLine|Lines]) -->
-   collect_line(CLine),
-   lines(Lines).
-
-end_of_sequence([], []).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Preds
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -60,3 +41,21 @@ atomize(Build, [In|Ins], Out) :-
   atom_codes(Atomic, In),
   atomize([Atomic|Build], Ins , Out).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Grammar.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+collect_line([]) -->
+   (".\n" ; end_of_sequence), !.
+
+collect_line([L|Ls]) -->
+   [L], collect_line(Ls).
+
+lines([]) -->
+   call(end_of_sequence), !.
+
+lines([CLine|Lines]) -->
+   collect_line(CLine),
+   lines(Lines).
+
+end_of_sequence([], []).
