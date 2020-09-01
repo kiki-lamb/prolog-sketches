@@ -1,22 +1,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+:- op(300, xfx, move).
 move( Here, Here ) :- fail.
 
 move( Here, There) :-
    concrete(Here),
-   concrete(There),
-   person(  Here), 
+   person(  Here),
+   (
+      (
+         store(There)
+      ;  person(There)
+      ),
+      would(Here, shop_at, There)
+   )
+   ;
    (
       person(There),
       would(There, help, Here),
       There \= Here
-   )
-   ;
-   (
-      store(There),
-      would(Here, shop_at, There)
-   ).
+   ),
+   concrete(There).
 
+:- op(300, fx, start).
 start(Here)       :-
    concrete(Here),  person(Here ).
 

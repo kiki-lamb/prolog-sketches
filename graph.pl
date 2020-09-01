@@ -42,12 +42,12 @@ stash_path(Here, There, Path) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 search(Here, There, Path) :-
+   start(Here),
    search([], Here, There, Tmp),
    reverse([There|Tmp], Path).
 
 search(Build, Here, There, Path) :-
    (
-      start(Here),
       found(Build, Here, There, Path)
       ;  descend([Here|Build], Here, There, Path)
    ).
@@ -75,3 +75,4 @@ log_paths_count :-
    bagof([X,Y,Z], (cached_path(Z,Y,X)), Tmp),
    length(Tmp, Count),
    format("        Charted ~w paths.\n\n", [Count]).
+

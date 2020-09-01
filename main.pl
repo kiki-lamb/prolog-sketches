@@ -24,6 +24,11 @@ possible_paths(W,A,T,P) :-
            [W, A, T, P]),
     fail.
 
+looperp(Func) :-
+   call(Func, Something),
+   format("  -  ~w.\n", [Something]),
+   fail.
+
 desires        :- desires(_,_,_).
 desires(P,A,X) :- would(P,A,X),
                   format("~w would ~w ~w.\n", [P,A,X]),

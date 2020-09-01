@@ -1,84 +1,16 @@
-alcohol is_a beverage.
 alive drink water.
 alive starve unless drink beverage.
 alive starve unless eat food.
 appliance break unless repair by human.
-appliance is_a object.
-appliance is_a thing.
-beer is_a alcohol.
-beverage is_a object.
-beverage is_a thing.
-boson is_a cat.
+boson isa cat.
 boson like higgy.
-cabbage is_a vegetable.
-cat eat cat_food.
-cat is_a cute.
-cat is_a mammal.
-cat is_a person.
-cat_food is_a meat.
+
+
+
 chicken_freak doesnt has alcohol.
 chicken_freak doesnt has water.
-chicken_freak has beverage.
-chicken_freak has cat_food.
-chicken_freak has cigarette.
-chicken_freak is_a store.
-cigarette is_a thing.
-dave has weed.
-dave is_a man.
-dishwasher is_a appliance.
-energy_drink is_a beverage.
-food is_a object.
-food is_a thing.
-freshco has vegetable.
-freshco is_a store.
-higgy is_a cat.
-home_hardware has screw.
-home_hardware is_a store.
-human drink beer.
-human is_a mammal.
-human is_a person.
 human repair appliance with screw.
 human shower human with water.
 human smoke weed.
-kiki dislike cat_food.
-kiki dislike tequila.
-kiki drink energy_drink.
-kiki drink vodka.
-kiki eat meat.
-kiki is_a woman.
-kiki like boson.
-kiki shops_at chicken_freak.
-kiki shops_at freshco.
-kiki shops_at lcbo.
-kiki smoke cigarette.
-lcbo has alcohol.
-lcbo is_a store.
-mammal is_a alive.
-mammal is_a animal.
-man is_a human.
-meat is_a food.
-mr_meat has meat.
-mr_meat is_a store.
-pepperoni is_a meat.
-pepsi is_a beverage.
-potato is_a vegetable.
-sink give water.
-sink is_a appliance.
-steak is_a meat.
-store is_a location.
-sybil drink tequila.
-sybil eat turkey.
-sybil eat vegetable.
-sybil is_a woman.
-sybil like kiki.
-sybil shops_at dave.
-sybil shops_at home_hardware.
-sybil shops_at mr_meat.
-tequila is_a alcohol.
-thing is_a object.
-turkey is_a meat.
-turnip is_a vegetable.
-vegetable is_a food.
-vodka is_a alcohol.
-water is_a beverage.
-woman is_a human.
+
+

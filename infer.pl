@@ -10,7 +10,7 @@ could(Person, Action, Subject, Path) :-
    (would(Person, Action, Subject),
     call((path(Person, Subject, Path), !))).
 
-%:- op(200, xfy, op_could).
+:- op(200, xfy, op_could).
 op_could(Person, Action) :-
    could(Person, Action).
 
@@ -22,7 +22,7 @@ couldnt(Person, Action) :-
 couldnt(Person, Action, Thing) :-
    \+ could(Person, Action, Thing).
 
-% :- op(200, xfy, op_couldnt).
+ :- op(200, xfy, op_couldnt).
 op_couldnt(Person, Action) :-
    couldnt(Person, Action).
 
@@ -34,7 +34,7 @@ wouldnt(Person, Action) :-
 wouldnt(Person, Action, Subject) :-
    \+ wwould(Person, Action, Subject).
 
-% :- op(200, xfy, op_wouldnt).
+:- op(200, xfy, op_wouldnt).
 op_wouldnt(Person, Action) :-
    wouldnt(Person, Action).
 
@@ -46,13 +46,13 @@ would(Start, Action) :-
 would(Start, Action, Subject) :-
    wwould(Start, Action, Subject).
 
-% :- op(200, xfy, op_would).
+:- op(200, xfy, op_would).
 op_would(Person, Action) :-
    would(Person, Action).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% :- op(200, xfy, would_help).
+:- op(200, xfy, would_help).
 would_help(Person, Subject) :-
    wwould(Person, help, Subject).
 
@@ -76,12 +76,11 @@ wwould(Person, help, Subject) :-
 
 
 wwould(Person, Action, Subject) :-
-%     concrete(Person),
-%     concrete(Subject),
-%     person(Person),
-     call(Action, Person, Subject).
-%
-%    Person \== Subject.
+   format("Checking ~w, ~w, ~w...\n", [Person, Action, Subject]),
+   concrete(Person),
+   concrete(Subject),
+   person(Person),
+   call(Action, Person, Subject).
           
 % wwould(Appliance, break, Appliance) :-
 %    appliance(Appliance),

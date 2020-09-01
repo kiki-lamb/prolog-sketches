@@ -26,7 +26,12 @@ setup :-
       format("[[Setup]] Defining Actions...\n",[]),
       actions(Actions),
       maplist(logged_assert, Actions),
-      bagof([action, Action], (member(Action, Actions)), Tmp),
+      bagof([action, Action], (
+               member(Action, Actions),
+               G1 =.. [Action, _],
+               assert(G1),
+               op(200, xfx, Action)
+            ), Tmp),
       maplist(logged_assert_list, Tmp)
    ),   
    (
@@ -41,7 +46,7 @@ setup :-
       log_paths;
       nl,
       log_paths_count
-   ;  format("[[Setup]] Complete.\n",[]),
+   ,  format("[[Setup]] Complete.\n",[]),
       true
    ), !.
 
