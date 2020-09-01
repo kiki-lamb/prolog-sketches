@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- op(200, xfy, could).
+%:- op(200, xfy, could).
 could(Person, Action) :-
    could(Person, Action).
 
@@ -15,7 +15,7 @@ could(Person, Action, Thing, Path) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- op(200, xfy, couldnt).
+% :- op(200, xfy, couldnt).
 couldnt(Person, Action) :-
    couldnt(Person, Action, _).
 
@@ -26,7 +26,7 @@ couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- op(200, xfy, wouldnt).
+% :- op(200, xfy, wouldnt).
 wouldnt(X, Action) :-
    \+ would(X, Action).
 
@@ -35,14 +35,14 @@ wouldnt(X, Action, Y) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- op(200, xfy, would).
+% :- op(200, xfy, would).
 would(Start, Action) :-
    would(Start, Action).
 
 would(Start, Action, X) :-
    wwould(Start, Action, X).
 
-:- op(200, xfy, would_help).
+% :- op(200, xfy, would_help).
 would_help(Person, P2) :-
    would(Person, help, P2).
 
