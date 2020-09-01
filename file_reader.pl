@@ -1,6 +1,8 @@
 :- use_module(library(pio)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Grammar.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 collect_line([]) -->
    (".\n" ; end_of_sequence), !.
@@ -15,9 +17,19 @@ lines([CLine|Lines]) -->
    collect_line(CLine),
    lines(Lines).
 
+end_of_sequence([], []).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preds
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-end_of_sequence([], []).
+load_atom_lines_from_file(File) :- load_atom_lines_from_file(File, _).
+load_atom_lines_from_file(File, Out) :-
+   phrase_from_file(lines(In), File),
+   retractall(r(_,_,_,_)),
+
+   atomize_and_assert_lines(TmpOut, In, []),
+   reverse(TmpOut, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -34,8 +46,8 @@ atomize_and_assert_lines(Build, [Line|Lines], Out) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 atomize(In, Out) :-
-   atomize([], In, Tmp),
-   reverse(Tmp, Out).
+   atomize([], In, TmpOut),
+   reverse(TmpOut, Out).
 
 atomize(Build, [], Out) :-
    Out = Build, !.
@@ -43,12 +55,4 @@ atomize(Build, [], Out) :-
 atomize(Build, [In|Ins], Out) :-
   atom_codes(Atomic, In),
   atomize([Atomic|Build], Ins , Out).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-load_atom_lines_from_file(File) :- load_atom_lines_from_file(File, _).
-load_atom_lines_from_file(File, Out) :-
-   phrase_from_file(lines(In), File),
-   retractall(r(_,_,_,_)),
-   atomize_and_assert_lines(Tmp, In, []),
-   reverse(Tmp, Out).
 
