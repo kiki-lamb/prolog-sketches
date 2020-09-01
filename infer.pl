@@ -1,50 +1,62 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%:- op(200, xfy, could).
 could(Person, Action) :-
    could(Person, Action).
 
-could(Person, Action, Thing) :-
-   could(Person, Action, Thing).
+could(Person, Action, Subject) :-
+   could(Person, Action, Subject).
 
-could(Person, Action, Thing, Path) :-
-   (would(Person, Action, Thing),
-    % format(Find ~w -> ~w to ~w.\n",
-    %        [Person, Thing, Action),
-    call((path(Person, Thing, Path), !))).
+could(Person, Action, Subject, Path) :-
+   (would(Person, Action, Subject),
+    call((path(Person, Subject, Path), !))).
+
+%:- op(200, xfy, op_could).
+op_could(Person, Action) :-
+   could(Person, Action).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% :- op(200, xfy, couldnt).
 couldnt(Person, Action) :-
-   couldnt(Person, Action, _).
+   \+ could(Person, Action, _).
 
 couldnt(Person, Action, Thing) :-
-   couldnt(Person, Action, Thing).
+   \+ could(Person, Action, Thing).
 
-couldnt(Person, Action, Thing, Path) :- \+ could(Person, Action, Thing, Path).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% :- op(200, xfy, wouldnt).
-wouldnt(X, Action) :-
-   \+ wwould(X, Action).
-
-wouldnt(X, Action, Y) :-
-   \+ wwould(X, Action, Y).
+% :- op(200, xfy, op_couldnt).
+op_couldnt(Person, Action) :-
+   couldnt(Person, Action).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% :- op(200, xfy, wwould).
-wwould(Start, Action) :-
-   wwould(Start, Action).
+wouldnt(Person, Action) :-
+   \+ wwould(Person, Action).
 
-wwould(Start, Action, X) :-
-   wwwould(Start, Action, X).
+wouldnt(Person, Action, Subject) :-
+   \+ wwould(Person, Action, Subject).
 
-% :- op(200, xfy, wwould_help).
-wwould_help(Person, P2) :-
+% :- op(200, xfy, op_wouldnt).
+op_wouldnt(Person, Action) :-
+   wouldnt(Person, Action).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+would(Start, Action) :-
+   would(Start, Action).
+
+would(Start, Action, Subject) :-
+   would(Start, Action, Subject).
+
+% :- op(200, xfy, op_would).
+op_would(Person, Action) :-
+   would(Person, Action).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% :- op(200, xfy, would_help).
+would_help(Person, P2) :-
    wwould(Person, help, P2).
+
+%--------------------------------------------------------------------------------------------
 
 wwwould(Person, get_help, P2) :-
    wwould(P2, help, Person).
