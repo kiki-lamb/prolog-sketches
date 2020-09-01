@@ -25,6 +25,7 @@ end_of_sequence([], []).
 
 load_atomized_lines_from_file(File) :-
    load_atomized_lines_from_file(File, _).
+
 load_atomized_lines_from_file(File, Out) :- 
    retractall(r(_,_,_,_)),
    phrase_from_file(lines(In), File),
