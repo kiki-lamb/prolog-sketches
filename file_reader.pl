@@ -47,10 +47,7 @@ atomize(Build, [In|Ins], Out) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 load_atom_lines_from_file(File) :-
-   phrase_from_file(lines(Ls), File),
-   load_atom_lines_from_file(Ls, _).
-
-load_atom_lines_from_file(In, Out) :-
+   phrase_from_file(lines(In), File),
    retractall(r(_,_,_,_)),
    atomize_and_assert_lines(In, [], Tmp),
    reverse(Tmp, Out).
