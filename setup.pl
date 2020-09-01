@@ -1,16 +1,15 @@
 :- consult("file_reader.pl").
 
-
-memberof(Thing, Class) :-
+member_of(Thing, Class) :-
    (
-      r(Thing, isa, Class, _)
-   ;  r(Thing, isa, ActualType, _),
-      memberof(ActualType, Class)
+      raw_lines(Thing, isa, Class, _)
+   ;  raw_lines(Thing, isa, ActualType, _),
+      member_of(ActualType, Class)
    ).
 
 reify(Thing) :-
    (
-      memberof(_, Thing),
+      member_of(_, Thing),
       logged_assert(abstract(Thing))
    ;  logged_assert(concrete(Thing))
    ).
@@ -23,13 +22,13 @@ combine(Left, Right, Out) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 bind_classes :-
-   memberof(Thing, Class),
+   member_of(Thing, Class),
    logged_assert_list([Class, Thing]),
    fail.
 
 bind_classes(Left, Action, Right, Out) :-
-   findall(L, (memberof(L, Left)),  Lefts ),
-   findall(R, (memberof(R, Right)), Rights ),
+   findall(L, (member_of(L, Left)),  Lefts ),
+   findall(R, (member_of(R, Right)), Rights ),
    combine([Left | Lefts], [Right | Rights], Tmp),
    findall([Action, L, R], (member([L, R], Tmp)), Out).
 
@@ -39,35 +38,35 @@ bind_classes(Left, Action, Right) :-
    maplist(logged_assert_list, Out).
 
 bind_actions :-
-   r(Actor, Action, Subject, _),
+   raw_lines(Actor, Action, Subject, _),
    Action \== isa,
    bind_classes(Actor, Action, Subject),
    fail.   
 
 bind_mutual_likes :-
-   r(Actor, like, Subject, _),
+   raw_lines(Actor, like, Subject, _),
    bind_classes(Subject, like, Actor),
    fail.   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 actors(Out) :-
-   findall(Actor, ((r(Actor, _, _, _))), Tmp),
+   findall(Actor, ((raw_lines(Actor, _, _, _))), Tmp),
    sort(Tmp, Out).
 
 actions(Out) :-
-   findall(Action, ((r(_, Action, _, _))), Tmp),
+   findall(Action, ((raw_lines(_, Action, _, _))), Tmp),
    sort(Tmp, Out).
 
 subjects(Out) :-
-   findall(Subject, ((r(_, _, Subject, _))), Tmp),
+   findall(Subject, ((raw_lines(_, _, Subject, _))), Tmp),
    sort(Tmp, Out).
 
 non_actor_subjects(Out) :-
    actors(Actors),
    findall(
       Subject, ((
-                     r(_, _, Subject, _),
+                     raw_lines(_, _, Subject, _),
                      not(member(Subject, Actors))
                   )),
       Tmp
@@ -101,7 +100,7 @@ setup :-
    % File = 'dat.ssv',
    File = 'small_world.ssv',   
    (
-      load_atomized_lines_from_file(r, File),
+      load_atomized_lines_from_file(raw_lines, File),
       format("[[Setup]] Loaded lines from '~w'.\n",[File]);
       format("[[Setup]] ERROR: Could nod load lines from '~w'.\n",[File])
    ),
@@ -139,4 +138,3 @@ setup :-
    ;  format("[[Setup]] Complete.\n",[]),
       true
    ), !.
-%retract(r(_,_,_,_));

@@ -44,7 +44,6 @@ atomize_and_assert_lines(TagAs, Build, [Line|Lines], Out) :-
    split_string(Line, " ", " ", Words),
    atomize(Words, [A1, A2, A3 | Atoms]),
    G1 =.. [ TagAs, A1, A2, A3, Atoms ],
-   format("THIS IS ~w.\n", [G1]),
    assertz(G1),
    atomize_and_assert_lines(TagAs, Build, Lines, Out).
 
