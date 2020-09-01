@@ -26,6 +26,13 @@ end_of_sequence([], []).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+suspicious_map(Using, In, Out) :-
+   G =.. [ Using, In, [], Tmp ],
+   call(G),
+   reverse(Tmp, Out).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 assertify_lines([], Build, Out) :-
    Out = Build, !.
 
@@ -57,9 +64,5 @@ load_atom_lines_from_file(File) :-
 
 load_atom_lines_from_file(In, Out) :-
    retractall(r(_,_,_,_)),
-   suspicious_map(assertify_lines, In, Out),
-
-   assertify_lines(In, [], Tmp),
-   reverse (Tmp, Out).
-  
+   suspicious_map(assertify_lines, In, Out).
 
