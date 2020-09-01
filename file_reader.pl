@@ -33,27 +33,28 @@ suspicious_map(Using, In, Out) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-asertify_lines([], Build, Out) :-
+assertify_lines([], Build, Out) :-
    Out = Build, !.
 
-asertify_lines([Line|Lines], Build, Out) :-
+assertify_lines([Line|Lines], Build, Out) :-
    split_string(Line, " ", " ", Words),
    atomize(Words, [A1, A2, A3 | Atoms]),
    Term =.. [r, A1, A2, A3, Atoms],
    assertz(Term),
-   asertify_lines(Lines, Build, Out).
+   assertify_lines(Lines, Build, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 atomize(In, Out) :-
-   suspicious_map(aatomize, In, Out).
+   atomize([], In, Tmp),
+   reverse(Tmp, Out).
 
-aatomize([], Build, Out) :-
+atomize(Build, [], Out) :-
    Out = Build, !.
 
-aatomize([In|Ins], Build, Out) :-
+atomize(Build, [In|Ins], Out) :-
   atom_codes(Atomic, In),
-  aatomize(Ins, [Atomic|Build], Out).
+  atomize([Atomic|Build], Ins , Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -63,5 +64,5 @@ load_atom_lines_from_file(File) :-
 
 load_atom_lines_from_file(In, Out) :-
    retractall(r(_,_,_,_)),
-   suspicious_map(asertify_lines, In, Out).
+   suspicious_map(assertify_lines, In, Out).
 
