@@ -1,20 +1,7 @@
 :- dynamic cached_path/3. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-move( Here, Here ) :- fail.
-move( Here, There) :-
-   concrete(There), person(There),
-   concrete(Here ), person(Here ),
-   There \= Here.
-
-start(Here)       :-
-   concrete(Here),  person(Here ).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %path(Here, Here, [Here]) :-
 %   fail.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(Here, There) :-
    path(Here, There, _).
@@ -23,10 +10,12 @@ path(Here, There, Path) :-
    (try_path(Here, There, Path)) ->
       true
    ;  once((
-         (stash_path(Here, There, Path)),
+                (stash_path(Here, There, Path)),
          true
       )),
       try_path(Here, There, Path).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 try_path(Here, There, Path) :-
    cached_path(Here, There, Path)
@@ -74,7 +63,18 @@ descend(Build, Here, There,  Path) :-
    not(member(Next, Build)),
    search(Build, Next, There, Path).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+move( Here, Here ) :- fail.
+move( Here, There) :-
+   concrete(There), person(There),
+   concrete(Here ), person(Here ),
+   There \= Here.
+
+start(Here)       :-
+   concrete(Here),  person(Here ).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 log_paths :-
    cached_path(Here, There, Path),
@@ -86,3 +86,5 @@ log_paths_count :-
    bagof([X,Y,Z], (cached_path(Z,Y,X)), Tmp),
    length(Tmp, Count),
    format("        Charted ~w paths.\n\n", [Count]).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
