@@ -101,7 +101,7 @@ setup :-
    % File = 'dat.ssv',
    File = 'small_world.ssv',   
    (
-      assertify_lines(File),
+      load_atom_lines_from_file(File),
       format("[[Setup]] Loaded lines from '~w'.\n",[File]);
       format("[[Setup]] ERROR: Could nod load lines from '~w'.\n",[File])
    ),
