@@ -1,3 +1,5 @@
+:- dynamic cached_path/3. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 move( Here, Here ) :- fail.
@@ -11,13 +13,11 @@ start(Here)       :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-path(Here, There) :-
-   path(Here, There, _).
-
 %path(Here, Here, [Here]) :-
 %   fail.
 
-:- dynamic cached_path/3. 
+path(Here, There) :-
+   path(Here, There, _).
 
 path(Here, There, Path) :-
    (try_path(Here, There, Path)) ->
@@ -66,7 +66,7 @@ search(Build, Here, There, Path) :-
 found(Build, Here, Here, Path) :-
    Path = Build.
 
-descend(_, Here, Here,  _) :-
+descend(_, Here, Here, _) :-
    fail.
 
 descend(Build, Here, There,  Path) :-
