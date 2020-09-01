@@ -75,18 +75,3 @@ log_paths_count :-
    bagof([X,Y,Z], (cached_path(Z,Y,X)), Tmp),
    length(Tmp, Count),
    format("        Charted ~w paths.\n\n", [Count]).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-move( Here, Here ) :- fail.
-
-move( Here, There) :-
-   concrete(Here), concrete(There),
-   person(  Here), person(  There),
-   would(There, help, Here),
-   There \= Here.
-
-start(Here)       :-
-   concrete(Here),  person(Here ).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

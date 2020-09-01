@@ -2,6 +2,7 @@
 :- consult("graph.pl").
 :- consult("setup.pl").
 :- consult("infer.pl").
+:- consult("moves.pl").
 
 main :-
    set_prolog_flag(answer_write_options,[max_depth(100)]),
