@@ -23,22 +23,21 @@ end_of_sequence([], []).
 % Preds
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-load_atom_lines_from_file(File) :- load_atom_lines_from_file(File, _).
-load_atom_lines_from_file(File, Out) :-
-   phrase_from_file(lines(In), File),
-   retractall(r(_,_,_,_)),
+load_atom_lines_from_file(File) :-
+   load_atom_lines_from_file(File, _).
 
-   atomize_and_assert_lines(TmpOut, In),
+load_atom_lines_from_file(File, Out) :- 
+   retractall(r(_,_,_,_)),
+   phrase_from_file(lines(In), File),
+   atomize_and_assert_lines(In, TmpOut),
    reverse(TmpOut, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 atomize_and_assert_lines(Lines, Out) :-
    atomize_and_assert_lines([], Lines, Out).
-   
 atomize_and_assert_lines(Build, [], Out) :-
    Out = Build, !.
-
 atomize_and_assert_lines(Build, [Line|Lines], Out) :-
    split_string(Line, " ", " ", Words),
    atomize(Words, [A1, A2, A3 | Atoms]),
@@ -51,10 +50,8 @@ atomize_and_assert_lines(Build, [Line|Lines], Out) :-
 atomize(In, Out) :-
    atomize([], In, TmpOut),
    reverse(TmpOut, Out).
-
 atomize(Build, [], Out) :-
    Out = Build, !.
-
 atomize(Build, [In|Ins], Out) :-
   atom_codes(Atomic, In),
   atomize([Atomic|Build], Ins , Out).
