@@ -28,11 +28,14 @@ load_atom_lines_from_file(File, Out) :-
    phrase_from_file(lines(In), File),
    retractall(r(_,_,_,_)),
 
-   atomize_and_assert_lines(TmpOut, In, []),
+   atomize_and_assert_lines(TmpOut, In),
    reverse(TmpOut, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+atomize_and_assert_lines(Lines, Out) :-
+   atomize_and_assert_lines([], Lines, Out).
+   
 atomize_and_assert_lines(Build, [], Out) :-
    Out = Build, !.
 
