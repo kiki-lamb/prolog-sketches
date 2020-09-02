@@ -23,8 +23,9 @@ possible        :- possible(_,_,_).
 possible(W,A,T) :-
    could(W,A,T),
    singular(A, SA),
+   add_spaces(SA, SAA),
    format("~w could ~w ~w.\n",
-          [W, SA, T]),
+          [W, SAA, T]),
    fail.
 
 %-----------------------------------------------------------
@@ -34,8 +35,9 @@ possible_paths(P)       :- possible_paths(_,_,_,P).
 possible_paths(W,A,T,P) :-
    could(W,A,T,[_|P]),
    singular(A, SA),
+   add_spaces(SA, SAA),
    format("~w could ~w ~w via ~w.\n",
-           [W, SA, T, P]),
+           [W, SAA, T, P]),
    fail.
 
 %-----------------------------------------------------------
@@ -57,4 +59,7 @@ desires(P,A,X) :-
 
 singular(In, Out) :-
    re_replace("s$", "", In, Out).
+
+add_spaces(In, Out) :-
+   re_replace("_", " ", In, Out).
 

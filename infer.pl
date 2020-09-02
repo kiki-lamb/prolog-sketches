@@ -64,7 +64,7 @@ wwould(Actor, help, Person) :-
    person(Person),
    likes(Person, Actor).
 
-wwould(Actor, get_help, Person) :-
+wwould(Actor, get_help_from, Person) :-
    would(Person, help, Actor).
 
 wwould(Actor, give, Object) :-
