@@ -33,8 +33,7 @@ setup :-
    setup_action_bindings,
    setup_mutual_likes,
    setup_paths,
-   format("[[Setup]] Setup complete.\n",[]),
-   true.
+   format("[[Setup]] Setup complete.\n",[]).
 
 setup_paths :-
    format("[[Setup]] Charting paths...\n",[]),
