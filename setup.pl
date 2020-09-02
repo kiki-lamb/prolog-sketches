@@ -4,7 +4,7 @@
 
 setup :-
    % File = 'dat.ssv',
-   File = 'small_world.ssv',   
+   File = 'dat.ssv',   
    (
       load_atomized_lines_from_file(raw_lines, File),
       format("[[Setup]] Loaded lines from '~w'.\n",[File]);
