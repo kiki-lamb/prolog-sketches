@@ -5,7 +5,7 @@
 :- op(400, xfx, =>).
 
 Here => (There, Path) :-
-   search(Here, There, Path).
+   path(Here, There, Path).
 
 Here => There :-
    Here => (There, _).
