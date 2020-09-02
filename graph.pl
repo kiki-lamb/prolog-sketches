@@ -55,16 +55,16 @@ search(Here, There, Path) :-
 search(Build, Here, There, Path) :-
    (
       found(Here, There, Path, Build)
-      ;  descend([Here|Build], Here, There, Path)
+      ;  descend(Here, There, Path, [Here|Build])
    ).
 
 found(Here, Here, Path, Build) :-
    Path = Build.
 
-descend(_, Here, Here, _) :-
+descend(Here, Here, _, _) :-
    fail.
 
-descend(Build, Here, There,  Path) :-
+descend(Here, There,  Path, Build) :-
    move(Here, Next), 
    not(member(Next, Build)),
    search(Build, Next, There, Path).
