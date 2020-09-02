@@ -21,7 +21,11 @@ move(Here, There) :-
    )
    ;  (
       has(Here, There)
-   ),
+   ),%;
+   %(
+   %   appliance(There),
+   %   would(Here, operate, There)
+   %),
    concrete(There),
    There \== Here.
    

@@ -1,5 +1,4 @@
 alcohol        isa      beverage.
-appliance      isa      object.
 appliance      isa      thing.
 athena         isa      woman.
 athena         likes    sybil.
@@ -19,6 +18,7 @@ chicken_freak  has      cigarette.
 chicken_freak  isa      store.
 chicken_freak  isa      store.
 cigarette      isa      thing.
+man            isa      human.
 dave           has      weed.
 dave           isa      man.
 dishwasher     isa      appliance.
@@ -76,3 +76,4 @@ vodka          isa      alcohol.
 water          isa      beverage.
 woman          isa      human.
 kiki           shop_at  freshco.
+human          operate  appliance.
