@@ -144,8 +144,8 @@ bind_actions :-
    fail.   
 
 bind_mutual_likes :-
-   raw_lines(Actor, like, Subject, _),
-   cross_bind(Subject, like, Actor),
+   raw_lines(Actor, likes, Subject, _),
+   cross_bind(Subject, likes, Actor),
    fail.   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
