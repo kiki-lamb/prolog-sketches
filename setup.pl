@@ -24,26 +24,41 @@ This nelem That :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
-   % File = 'dat.ssv',
    setup_file,
    setup_actors,
    setup_subjects,
    setup_actions,   
    (
-      format("[[Setup]] Binding Classes...\n",[]),
-      bind_classes      
-   ;  format("[[Setup]] Binding Actions...\n",[]),
-      bind_actions      
-   ;  format("[[Setup]] Binding mutual Likes.\n",[]),
-      bind_mutual_likes
-   ;  format("[[Setup]] Charting paths...\n",[]),
-      cache_paths
-   ;  log_paths
+      setup_class_bindings,
+      setup_action_bindings,
+      setup_mutual_likes,
+      setup_paths,
+      log_paths
    ;  nl,
       log_paths_count
    ,  format("[[Setup]] Complete.\n",[]),
       true
    ).
+
+setup_paths :-
+   format("[[Setup]] Charting paths...\n",[]),
+   cache_paths;
+   true.
+
+setup_class_bindings :-
+   format("[[Setup]] Binding Classes...\n",[]),
+   bind_classes;
+   true.
+
+setup_action_bindings :-
+   format("[[Setup]] Binding Actions...\n",[]),
+   bind_actions;
+   true.
+
+setup_mutual_likes :-
+   format("[[Setup]] Binding mutual Likes.\n",[]),
+   bind_mutual_likes;
+   true.
 
 setup_file :-
    File = 'small_world.ssv',   
