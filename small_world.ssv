@@ -10,7 +10,5 @@ cat            eat      cat_coof.
 higgy          isa      cat.
 boson          isa      cat.
 boson          likes    higgy.
-gwen           isa      woman.
-gwen           likes    sybil.
 chicken_freak  isa      store.
 chicken_freak  has      cat_food.
