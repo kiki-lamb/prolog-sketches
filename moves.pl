@@ -13,12 +13,11 @@ move(Here, There) :-
       ),
       would(Here, shop_at, There)
    )
-   ;
-   (
+   ;  (
       person(There),
       would(There, help, Here)
-   );
-   (
+   )
+   ;  (
       has(Here, There)
    ),
    concrete(There),
