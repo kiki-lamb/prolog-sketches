@@ -51,19 +51,19 @@ setup_file :-
 setup_actors :-
    format("[[Setup]] Defining Actors...\n",[]),
    actors(Actors),
-   maplist(logged_assert, Actors),
+%   maplist(logged_assert, Actors),
    maplist(reify, Actors).
 
 setup_subjects :-
    format("[[Setup]] Defining Subjects...\n",[]),
    non_actor_subjects(Subjects),
-   maplist(logged_assert, Subjects),
+%   maplist(logged_assert, Subjects),
    maplist(reify, Subjects).
 
 setup_actions :-
    format("[[Setup]] Defining Actions...\n",[]),
    actions(Actions),
-   maplist(logged_assert, Actions),
+%   maplist(logged_assert, Actions),
    findall(
       [action, Action],
       (
@@ -95,7 +95,38 @@ setup_paths :-
    log_paths,
    true.
 
-   
+%-----------------------------------------------------------
+
+bind_classes :-
+   Thing is_a Class,
+   op(200, fx, Thing),
+   logged_assert_list([Class, Thing]),
+   fail.
+
+bind_actions :-
+   raw_lines(Actor, Action, Subject, _),
+   Action \== isa,
+   cross_bind(Actor, Action, Subject),
+   fail.   
+
+bind_mutual_likes :-
+   raw_lines(Actor, likes, Subject, _),
+   cross_bind(Subject, likes, Actor),
+   fail.   
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+cross_bind(Left, Action, Right) :-
+   findall(L, L is_a Left,  Lefts),
+   findall(R, R is_a Right, Rights),
+   findall(
+      [ L, R ],
+      (L elem [Left|Lefts], R elem [Right|Rights]),
+      Tmp
+   ),
+   findall([Action, L, R], [L, R] elem Tmp, Tmp2),
+   maplist(logged_assert_list, Tmp2).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 actors(Out) :-
@@ -129,38 +160,6 @@ reify(Thing) :-
       logged_assert(abstract(Thing))
    ;  logged_assert(concrete(Thing))
    ).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-bind_classes :-
-   Thing is_a Class,
-   op(200, fx, Thing),
-   logged_assert_list([Class, Thing]),
-   fail.
-
-bind_actions :-
-   raw_lines(Actor, Action, Subject, _),
-   Action \== isa,
-   cross_bind(Actor, Action, Subject),
-   fail.   
-
-bind_mutual_likes :-
-   raw_lines(Actor, likes, Subject, _),
-   cross_bind(Subject, likes, Actor),
-   fail.   
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-cross_bind(Left, Action, Right) :-
-   findall(L, L is_a Left,  Lefts),
-   findall(R, R is_a Right, Rights),
-   findall(
-      [ L, R ],
-      (L elem [Left|Lefts], R elem [Right|Rights]),
-      Tmp
-   ),
-   findall([Action, L, R], [L, R] elem Tmp, Tmp2),
-   maplist(logged_assert_list, Tmp2).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
