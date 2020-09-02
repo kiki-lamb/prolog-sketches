@@ -23,6 +23,9 @@ This nelem That :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+setup :-
+   setup("dat.ssv").
+
 setup(File) :-
    format("[[Setup]] Begin setup.\n",[]),
    setup_file(File),

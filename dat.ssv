@@ -13,7 +13,7 @@ cat            eat      cat_food.
 cat            isa      cute.
 cat            isa      person.
 cat            isa      person.
-chicken_freak  has      beverage.
+chicken_freak  has      soft_drink.
 chicken_freak  has      cat_food.
 chicken_freak  has      cigarette.
 chicken_freak  isa      store.
@@ -22,7 +22,8 @@ cigarette      isa      thing.
 dave           has      weed.
 dave           isa      man.
 dishwasher     isa      appliance.
-energy_drink   isa      beverage.
+energy_drink   isa      soft_drink.
+soft_drink     isa      beverage.
 food           isa      object.
 food           isa      thing.
 freshco        has      vegetable.
@@ -74,3 +75,4 @@ vegetable      isa      food.
 vodka          isa      alcohol.
 water          isa      beverage.
 woman          isa      human.
+kiki           shop_at  freshco.
