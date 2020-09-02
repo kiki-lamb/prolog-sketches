@@ -7,6 +7,7 @@ sybil          isa      woman.
 sybil          likes    kiki.
 cat            isa      person.
 cat            eat      cat_food.
+human          eat      potato.
 higgy          isa      cat.
 boson          isa      cat.
 boson          likes    higgy.
