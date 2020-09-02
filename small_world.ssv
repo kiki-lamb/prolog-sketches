@@ -2,7 +2,7 @@ human          isa      person.
 woman          isa      human.
 kiki           isa      woman.
 kiki           likes    boson.
-kiki           shops_at chicken_freak.
+kiki           shop_at  chicken_freak.
 sybil          isa      woman.
 sybil          likes    kiki.
 cat            isa      person.

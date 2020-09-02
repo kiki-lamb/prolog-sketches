@@ -20,13 +20,13 @@ would(Actor, Action, Thing) :-
    concrete(Thing),
    Thing \== Actor.
 
-wwould(Actor, shops_at, Store) :-
+wwould(Actor, shop_at, Store) :-
    human(Actor),
    (
       store(Store);
       human(Store)
    ),
-   shops_at(Actor, Store).
+   shop_at(Actor, Store).
 
 wwould(Actor, help, Person) :-
    person(Person),
@@ -135,7 +135,7 @@ wwould(Person, smokes, Thing) :-
 % wwould(Actor, buy, Object) :-
 %    object(Object),
 %    has(Store, Object),
-%    wwould(Actor, shops_at, Store).
+%    wwould(Actor, shop_at, Store).
 
 % wwould(Cat, chase, C2) :-
 %    cat(Cat),
@@ -170,10 +170,10 @@ wwould(Person, smokes, Thing) :-
 %    thing(Thing),
 %    smoke(Actor, Thing).
  
-% wwould(Human, shops_at, Store) :-
+% wwould(Human, shop_at, Store) :-
 %    human(Human),
 %    store, store(Store),
-%    shops_at(Human, Store).
+%    shop_at(Human, Store).
 
 % wwould(Human, shower, Appliance) :-
 %    human(Human),

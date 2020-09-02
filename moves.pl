@@ -14,7 +14,7 @@ move(This, This) :-
 
 move(This, That) :-
    (
-      would( This, shops_at, That)
+      would( This, shop_at , That)
    ;  would( This, operate,  That)
    ;  would( This, get_help, That)
    ;  would( This, give,     That)
