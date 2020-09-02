@@ -2,14 +2,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-likes(sybil, kiki).
-likes(kiki, sybil).
+:- op(400, xfy, likes).
 
-likes(boson, kiki).
-likes(kiki, boson).
-
-likes(boson, higgy).
-likes(higgy, boson).
+sybil   likes kiki.
+kiki    likes boson.
+boson   likes higgy.
+X       likes Y :-
+   Y likes X.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
