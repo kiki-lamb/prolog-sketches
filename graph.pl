@@ -49,10 +49,10 @@ cache_path(Here, There, Path) :-
 
 search(Here, There, Path) :-
    start(Here),
-   qsearch([], Here, There, Tmp),
+   search(Here, There, Tmp, []),
    reverse([There|Tmp], Path).
 
-qsearch(Build, Here, There, Path) :-
+search(Here, There, Path, Build) :-
    (
       found(Here, There, Path, Build)
       ;  descend(Here, There, Path, [Here|Build])
@@ -67,7 +67,7 @@ descend(Here, Here, _, _) :-
 descend(Here, There,  Path, Build) :-
    move(Here, Next), 
    not(member(Next, Build)),
-   qsearch(Build, Next, There, Path).
+   search(Next, There, Path, Build).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Logging.
