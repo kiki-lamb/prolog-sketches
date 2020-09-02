@@ -56,13 +56,13 @@ search(Here, Here, Path, Path).
 search(Here, There, Build, Path) :-
    descend(Here, There, [Here|Build], Path).
 
-descend(Here, Here, _, _) :-
-   fail.
-
 descend(Here, There,  Build, Path) :-
    move(Here, Next), 
    not(member(Next, Build)),
    search(Next, There, Build, Path).
+
+descend(Here, Here, _, _) :-
+   fail.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Logging.
