@@ -49,7 +49,7 @@ cache_paths(W,T,P) :-
 
 cache_path(Here, There, Path) :-
    search(Here, There, Path),
-   Here @> There,
+   Here \== There,
    \+ ( try_cached_path(Here, There, Path)),
      retractall(cached_path(Here, There, _)),
    assertz(cached_path(Here, There, Path)).
