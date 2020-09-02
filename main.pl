@@ -1,6 +1,6 @@
 :- initialization(main).
-:- consult("graph.pl").
 :- consult("setup.pl").
+:- consult("graph.pl").
 :- consult("infer.pl").
 :- consult("moves.pl").
 :- debug.
