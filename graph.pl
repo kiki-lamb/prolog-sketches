@@ -49,25 +49,25 @@ cache_path(Here, There, Path) :-
 
 search(Here, There, Path) :-
    start(Here),
-   search(Here, There, Tmp, []),
+   search(Here, There, [], Tmp),
    reverse([There|Tmp], Path).
 
-search(Here, There, Path, Build) :-
+search(Here, There, Build, Path) :-
    (
-      found(Here, There, Path, Build)
-      ;  descend(Here, There, Path, [Here|Build])
+      found(Here, There, Build, Path)
+      ;  descend(Here, There, [Here|Build], Path)
    ).
 
-found(Here, Here, Path, Build) :-
+found(Here, Here, Build, Path) :-
    Path = Build.
 
 descend(Here, Here, _, _) :-
    fail.
 
-descend(Here, There,  Path, Build) :-
+descend(Here, There,  Build, Path) :-
    move(Here, Next), 
    not(member(Next, Build)),
-   search(Next, There, Path, Build).
+   search(Next, There, Build, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Logging.
