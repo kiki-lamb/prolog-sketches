@@ -13,7 +13,6 @@ move(Here, Here) :-
    fail.
 
 move(Here, There) :-
-   concrete(Here),
    (
       would(Here, shops_at, There)
    ;  would(Here, get_help, There)

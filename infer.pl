@@ -1,21 +1,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-would(Person, Action, Thing) :-
-   wwould(Person, Action, Thing),
+would(Actor, Action, Thing) :-
+   concrete(Actor),
+   wwould(Actor, Action, Thing),
    concrete(Thing),
-   Thing \== Person.
+   Thing \== Actor.
 
-wwould(Person, shops_at, Store) :-
+wwould(Actor, shops_at, Store) :-
    store(Store),
    concrete(Store),
-   shops_at(Person, Store).
+   shops_at(Actor, Store).
 
-wwould(Person, help, P2) :-
+wwould(Actor, help, P2) :-
    person(P2),
-   likes(P2, Person).
+   likes(P2, Actor).
 
-wwould(Person, get_help, P2) :-
-   wwould(P2, help, Person).
+wwould(Actor, get_help, P2) :-
+   wwould(P2, help, Actor).
 
 wwould(Here, give, Thing) :-
    has(Here, Thing).
@@ -25,31 +26,31 @@ wwould(Here, give, Thing) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
-% could(Person, Action) :-
-%    could(Person, Action, _).
+% could(Actor, Action) :-
+%    could(Actor, Action, _).
 % 
-% could(Person, Action, Subject) :-
-%    could(Person, Action, Subject, _).
+% could(Actor, Action, Subject) :-
+%    could(Actor, Action, Subject, _).
 % 
-% could(Person, Action, Subject, Path) :-
-%    (would(Person, Action, Subject),
-%     call((path(Person, Subject, Path), !))).
-% 
-% %-----------------------------------------------------------
-% 
-% couldnt(Person, Action) :-
-%    \+ could(Person, Action, _).
-% 
-% couldnt(Person, Action, Thing) :-
-%    \+ could(Person, Action, Thing).
+% could(Actor, Action, Subject, Path) :-
+%    (would(Actor, Action, Subject),
+%     call((path(Actor, Subject, Path), !))).
 % 
 % %-----------------------------------------------------------
 % 
-% wouldnt(Person, Action) :-
-%    \+ would(Person, Action, _).
+% couldnt(Actor, Action) :-
+%    \+ could(Actor, Action, _).
 % 
-% wouldnt(Person, Action, Subject) :-
-%    \+ would(Person, Action, Subject).
+% couldnt(Actor, Action, Thing) :-
+%    \+ could(Actor, Action, Thing).
+% 
+% %-----------------------------------------------------------
+% 
+% wouldnt(Actor, Action) :-
+%    \+ would(Actor, Action, _).
+% 
+% wouldnt(Actor, Action, Subject) :-
+%    \+ would(Actor, Action, Subject).
 % 
 % 
 % %-----------------------------------------------------------
@@ -62,74 +63,74 @@ wwould(Here, give, Thing) :-
 
 %-----------------------------------------------------------
 
-% wwould(Person, help, Subject) :-
-%    concrete(Person),
+% wwould(Actor, help, Subject) :-
+%    concrete(Actor),
 %    concrete(Subject),
-%    person(Person),
+%    person(Actor),
 %    person(Subject),
-%    Person \== Subject,
+%    Actor \== Subject,
 %    format("Doing this one, ~w help ~w?\n",
-%           [Person, Subject]),
+%           [Actor, Subject]),
 %    (
-%       likes(Person,Subject)
-%    ;  likes(Subject,Person)
+%       likes(Actor,Subject)
+%    ;  likes(Subject,Actor)
 %    ).
 
 
-%wwould(Person, Action, Subject) :-
+%wwould(Actor, Action, Subject) :-
 %   format("Checking ~w, ~w, ~w...\n",
-%          [Person, Action, Subject]),
-%   concrete(Person),
+%          [Actor, Action, Subject]),
+%   concrete(Actor),
 %   concrete(Subject),
-%   person(Person),
-%   call(Action, Person, Subject).
+%   person(Actor),
+%   call(Action, Actor, Subject).
           
 % wwould(Appliance, break, Appliance) :-
 %    appliance(Appliance),
 %    human(Human),
 %    couldnt(Human, repair, Appliance).
 
-% wwould(Person, buy, Object) :-
+% wwould(Actor, buy, Object) :-
 %    object(Object),
 %    has(Store, Object),
-%    wwould(Person, shops_at, Store).
+%    wwould(Actor, shops_at, Store).
 
 % wwould(Cat, chase, C2) :-
 %    cat(Cat),
 %    cat(C2),
 %    Cat \== C2.
 
-% wwould(Person, drink, Drink) :-
+% wwould(Actor, drink, Drink) :-
 %    object(Drink),
-%    drink(Person, Drink).
+%    drink(Actor, Drink).
 
-% wwould(Person, eat, Food) :-
+% wwould(Actor, eat, Food) :-
 %    food(Food),
-%    eat(Person, Food).
+%    eat(Actor, Food).
 
 % wwould(Human, operate, Appliance) :-
 %    human(Human), 
 %    appliance(Appliance).
 
-% wwould(Person, pet, Cat) :-
-%    human(Person),
+% wwould(Actor, pet, Cat) :-
+%    human(Actor),
 %    cat(Cat),
-%    wwould(Person, help, Cat).
+%    wwould(Actor, help, Cat).
 
 % wwould(Human, repair, Appliance) :-
 %    human(Human),
 %    appliance(Appliance),
 %    path(Human, screw).
 
-% wwould(Person, scare_off, Cat) :-
-%    person(Person),
+% wwould(Actor, scare_off, Cat) :-
+%    person(Actor),
 %    cat(Cat),
-%    Person \== Cat,
-%    wwouldnt(Person, help, Cat).
+%    Actor \== Cat,
+%    wwouldnt(Actor, help, Cat).
 
-% wwould(Person, smoke, Thing) :-
+% wwould(Actor, smoke, Thing) :-
 %    thing(Thing),
-%    smoke(Person, Thing).
+%    smoke(Actor, Thing).
  
 % wwould(Human, shops_at, Store) :-
 %    human(Human),
@@ -141,10 +142,10 @@ wwould(Here, give, Thing) :-
 %    appliance(Appliance),
 %    give(Appliance, water).
 
-% wwould(Person, starve_for, food) :-
-%    person(Person),
-%    couldnt(Person, eat).
+% wwould(Actor, starve_for, food) :-
+%    person(Actor),
+%    couldnt(Actor, eat).
 
-% wwould(Person, starve_for, water) :-
-%    person(Person),
-%    couldnt(Person, drink, water).
+% wwould(Actor, starve_for, water) :-
+%    person(Actor),
+%    couldnt(Actor, drink, water).
