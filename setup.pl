@@ -51,7 +51,7 @@ setup_file :-
 setup_actors :-
    format("[[Setup]] Defining Actors...\n",[]),
    actors(Actors),
-   maplist(logged_assert, Actors) ,
+   maplist(logged_assert, Actors),
    maplist(reify, Actors).
 
 setup_subjects :-

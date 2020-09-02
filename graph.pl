@@ -69,7 +69,6 @@ try_cached_path(Here, There, Path) :-
 
 search(Here, There) :-
    search(Here, There, _).
-      
 
 search(Here, There, Path) :-
    start(Here),
