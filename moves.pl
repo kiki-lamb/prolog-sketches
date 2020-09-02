@@ -4,22 +4,22 @@
 move( Here, Here ) :- fail.
 
 move( Here, There) :-
-   concrete(Here),
-   person(  Here),
+   concrete(Tere),
+   person(  There),
    (
       (
-         store(There)
-      ;  person(There)
+         store(Here)
+      ;  person(Here)
       ),
-      would(Here, shop_at, There)
+      would(There, shop_at, Here)
    )
    ;
    (
-      person(There),
-      would(There, help, Here),
+      person(Here),
+      would(Here, help, There),
       There \== Here
    ),
-   concrete(There).
+   concrete(Here).
 
 :- op(300, fx, start).
 start(Here)       :-
