@@ -1,5 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- op(300, fx, start).
+start(Here) :-
+   concrete(Here),
+   person(Here ).
+
+%-----------------------------------------------------------
+
 :- op(300, xfx, move).
 
 move(Here, Here) :-
@@ -25,8 +32,3 @@ move(Here, There) :-
    concrete(There),
    There \== Here.
    
-:- op(300, fx, start).
-start(Here) :-
-   concrete(Here),
-   person(Here ).
-
