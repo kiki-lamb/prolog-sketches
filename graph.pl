@@ -49,6 +49,7 @@ try_cached_path(Here, There, Path) :-
 search(Here, There, Path) :-
    start(Here),
    search(Here, There, [], Path).
+
 %-------------------------------------------------------------------------------
 
 search(Here, Here, Path, [Here|Path]).

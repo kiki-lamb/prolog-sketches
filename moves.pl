@@ -4,7 +4,7 @@
 move( Here, Here ) :- fail.
 
 move( Here, There) :-
-   concrete(Tere),
+   concrete(There),
    person(  There),
    (
       (
