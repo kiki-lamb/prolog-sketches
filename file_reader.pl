@@ -7,8 +7,9 @@
 load_atomized_lines_from_file(Tag, File) :-
    load_atomized_lines_from_file(Tag, File, _).
 
-load_atomized_lines_from_file(Tag, File, Out) :- 
-   retractall(r(_,_,_,_)),
+load_atomized_lines_from_file(Tag, File, Out) :-
+   P =.. [ r, _, _, _, _ ],
+   retractall(P),
    phrase_from_file(lines(In), File),
    maplist(tagged_predify(Tag), In, TmpOut2),
    maplist(assert, TmpOut2, Out).
