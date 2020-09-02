@@ -1,5 +1,7 @@
 would(Person, Action, Thing) :-
-   wwould(Person, Action, Thing).
+   wwould(Person, Action, Thing),
+   concrete(Thing),
+   There \== Here.
 
 wwould(Person, shops_at, Store) :-
    concrete(Store),
