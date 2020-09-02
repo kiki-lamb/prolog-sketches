@@ -8,17 +8,17 @@ Here => (There, Path) :-
    path(Here, There, Path).
 
 Here => There :-
-   Here => (There, _).
+   path(Here, There).
 
 %-----------------------------------------------------------
 
 :- op(400, xfx, <=).
 
 There <= (Here, Path) :-
-   Here => (There, Path).
+   path(Here, There, Path).
 
 There <= Here :-
-   Here => (There, _).
+   path(Here, There).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Main entry point.
