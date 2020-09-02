@@ -53,8 +53,7 @@ setup :-
       bagof([action, Action], (
                Action elem Actions,
                G1 =.. [Action, _],
-               assert(G1),
-               op(200, xfx, Action)
+               assert(G1)
             ), Tmp),
       maplist(logged_assert_list, Tmp)
    ),   
