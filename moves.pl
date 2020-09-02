@@ -2,7 +2,7 @@
 
 :- op(300, xfx, move).
 
-move(Here, Here ) :-
+move(Here, Here) :-
    fail.
 
 move(Here, There) :-
@@ -26,6 +26,7 @@ move(Here, There) :-
    There \== Here.
    
 :- op(300, fx, start).
-start(Here)       :-
-   concrete(Here),  person(Here ).
+start(Here) :-
+   concrete(Here),
+   person(Here ).
 
