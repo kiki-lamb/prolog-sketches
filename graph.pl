@@ -54,11 +54,11 @@ search(Here, There, Path) :-
 
 search(Build, Here, There, Path) :-
    (
-      found(Build, Here, There, Path)
+      found(Here, There, Path, Build)
       ;  descend([Here|Build], Here, There, Path)
    ).
 
-found(Build, Here, Here, Path) :-
+found(Here, Here, Path, Build) :-
    Path = Build.
 
 descend(_, Here, Here, _) :-
