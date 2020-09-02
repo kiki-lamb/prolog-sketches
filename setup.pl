@@ -25,38 +25,10 @@ This nelem That :-
 
 setup :-
    % File = 'dat.ssv',
-   File = 'small_world.ssv',   
-   (
-      load_atomized_lines_from_file(raw_lines, File),
-      format("[[Setup]] Loaded lines from '~w'.\n",[File]);
-      format(
-         "[[Setup]] ERROR: Could not load '~w'.\n",
-         [File]
-      )
-   ),
-   (
-      format("[[Setup]] Defining Actors...\n",[]),
-      actors(Actors),
-      maplist(clean_assert, Actors) ,
-      maplist(reify, Actors)
-   ),
-      (
-      format("[[Setup]] Defining Subjects...\n",[]),
-      non_actor_subjects(Subjects),
-      maplist(clean_assert, Subjects),
-      maplist(reify, Subjects)
-   ),   
-   (
-      format("[[Setup]] Defining Actions...\n",[]),
-      actions(Actions),
-      maplist(logged_assert, Actions),
-      bagof([action, Action], (
-               Action elem Actions,
-               G1 =.. [Action, _],
-               assert(G1)
-            ), Tmp),
-      maplist(logged_assert_list, Tmp)
-   ),   
+   setup_file,
+   setup_actors,
+   setup_subjects,
+   setup_actions,   
    (
       format("[[Setup]] Binding Classes...\n",[]),
       bind_classes      
@@ -73,6 +45,40 @@ setup :-
       true
    ).
 
+setup_file :-
+   File = 'small_world.ssv',   
+   (
+      load_atomized_lines_from_file(raw_lines, File),
+      format("[[Setup]] Loaded lines from '~w'.\n",[File]);
+      format(
+         "[[Setup]] ERROR: Could not load '~w'.\n",
+         [File]
+      )
+   ).
+
+setup_actions :-
+   format("[[Setup]] Defining Actions...\n",[]),
+   actions(Actions),
+   maplist(logged_assert, Actions),
+   bagof([action, Action], (
+            Action elem Actions,
+            G1 =.. [Action, _],
+            assert(G1)
+         ), Tmp),
+   maplist(logged_assert_list, Tmp).
+
+setup_actors :-
+   format("[[Setup]] Defining Actors...\n",[]),
+   actors(Actors),
+   maplist(clean_assert, Actors) ,
+   maplist(reify, Actors).
+
+setup_subjects :-
+   format("[[Setup]] Defining Subjects...\n",[]),
+   non_actor_subjects(Subjects),
+   maplist(clean_assert, Subjects),
+   maplist(reify, Subjects).
+   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 actors(Out) :-
