@@ -51,10 +51,10 @@ search(Here, There, Path) :-
    search(Here, There, [], Tmp),
    reverse([There|Tmp], Path).
 
+search(Here, Here, Path, Path).
+
 search(Here, There, Build, Path) :-
    descend(Here, There, [Here|Build], Path).
-
-search(Here, Here, Path, Path).
 
 descend(Here, Here, _, _) :-
    fail.
