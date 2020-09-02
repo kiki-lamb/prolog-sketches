@@ -2,6 +2,27 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- op(400, xfx, is_a).
+
+Thing is_a Class :-
+   member_of(Thing, Class).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- op(400, xfx, e).
+
+This e That :-
+   member(This, That).
+
+%-------------------------------------------------------------------------------
+
+:- op(400, xfx, ne).
+
+This ne That :-
+   \+ This e That.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 setup :-
    % File = 'dat.ssv',
    File = 'small_world.ssv',   
@@ -27,7 +48,7 @@ setup :-
       actions(Actions),
       maplist(logged_assert, Actions),
       bagof([action, Action], (
-               member(Action, Actions),
+               Action e Actions,
                G1 =.. [Action, _],
                assert(G1),
                op(200, xfx, Action)
@@ -66,14 +87,14 @@ subjects(Out) :-
 
 non_actor_subjects(Out) :-
    actors(Actors),
-   findall(Subject, ((raw_lines(_, _, Subject, _), not(member(Subject, Actors)))), Tmp),
+   findall(Subject, ((raw_lines(_, _, Subject, _), Subject ne Actors)), Tmp),
    sort(Tmp, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 reify(Thing) :-
    (
-      member_of(_, Thing),
+      _ is_a Thing,
       logged_assert(abstract(Thing))
    ;  logged_assert(concrete(Thing))
    ).
@@ -81,7 +102,7 @@ reify(Thing) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 bind_classes :-
-   member_of(Thing, Class),
+   Thing is_a Class,
    logged_assert_list([Class, Thing]),
    fail.
 
@@ -99,9 +120,9 @@ bind_mutual_likes :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 cross_bind(Left, Action, Right) :-
-   findall(L, (member_of(L, Left)),  Lefts ),
-   findall(R, (member_of(R, Right)), Rights ),
-   findall([ L, R ], (member(L, [Left | Lefts]), member(R, [Right | Rights])), Tmp),
+   findall(L, L is_a Left,  Lefts ),
+   findall(R, R is_a Right, Rights ),
+   findall([ L, R ], (L e [Left | Lefts], R e [Right | Rights]), Tmp),
    findall([Action, L, R], (member([L, R], Tmp)), Tmp2),
    maplist(logged_assert_list, Tmp2).
 
