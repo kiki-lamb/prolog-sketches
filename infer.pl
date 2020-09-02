@@ -8,6 +8,9 @@ would(Person, help, P2) :-
    person(P2),
    likes(P2, Person).
 
+would(Person, get_help, P2) :-
+   would(P2, help, Person).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 

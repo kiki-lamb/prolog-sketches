@@ -18,10 +18,7 @@ move(Here, There) :-
    (
       would(Here, shops_at, There)
    )
-   ;  (
-      person(There),
-      likes(There, Here)
-   )
+   ;  would(Here, get_help, There)
    ;  (
       has(Here, There)
    ),
