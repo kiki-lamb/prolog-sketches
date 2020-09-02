@@ -67,19 +67,23 @@ try_cached_path(Here, There, Path) :-
 % Graph search.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- op(300, xfx, move).
+   
+:- op(300, fx, start).
+
 search(Here, There) :-
    search(Here, There, _).
 
 search(Here, There, Path) :-
-   start(Here),
+   start Here,
    search(Here, There, Path, []).
 
 search(Here, Here, Path, Build) :-
    reverse([Here|Build], Path).
 
 search(Here, There, Path, Build) :-
-   move(Here, Next), 
-   not(member(Next, [Here|Build])),
+   Here move Next, 
+   Next nelem [Here|Build],
    search(Next, There, Path, [Here|Build]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
