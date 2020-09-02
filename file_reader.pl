@@ -30,7 +30,7 @@ atomize_lines(Build, Tag, [Line|Lines], Out) :-
    
    atomize_lines([G1|Build], Tag, Lines, Out).
 
-f_atomize(Tag, Words, [A1, A2, A3 | Atoms], G1),
+f_atomize(Tag, [A1, A2, A3 | Atoms], G1) :- 
    G1 =.. [ Tag, A1, A2, A3, Atoms ].
    
 
