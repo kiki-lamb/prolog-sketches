@@ -17,7 +17,7 @@ move( Here, There) :-
    (
       person(There),
       would(There, help, Here),
-      There \= Here
+      There \== Here
    ),
    concrete(There).
 
