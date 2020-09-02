@@ -2,13 +2,21 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- op(400, xfy, likes).
+:- op(400, xfx, likes).
 
 sybil   likes kiki.
 kiki    likes boson.
 boson   likes higgy.
 X       likes Y :-
    Y likes X.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- op(400, xfx, ne).
+
+This ne That :-
+   not(member(This, That)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -20,7 +28,7 @@ search(Here, Here, Path, Build) :-
 
 search(Here, There, Path, Build) :-
    likes(Here, Next),
-   not(member(Next, [Here|Build])),
+   Next ne [Here|Build],
    search(Next, There, Path, [Here|Build]).
 
 main :-
