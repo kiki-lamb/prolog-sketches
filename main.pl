@@ -36,9 +36,12 @@ possible_paths(W,A,T,P) :-
    could(W,A,T,[_|P]),
    singular(A, SA),
    add_spaces(SA, SAA),
-   capitalize(W, WUC),
+   smart_capitalize(W, WUC),
+   smart_capitalize(T, TUC),
    format("~w could ~w ~w via ~w.\n",
-           [WUC, SAA, T, P]),
+           [WUC, SAA, TUC, P]),
+%   format("~w could ~w ~w via ~w.\n",
+%           [W, SAA, T, P]),
    fail.
 
 %-----------------------------------------------------------
@@ -63,7 +66,7 @@ singular(In, Out) :-
 
 add_spaces(In, Out) :-
    re_replace("_", " ", In, Out).
-
+   
 capitalize(WordLC, WordUC) :-
     atom_chars(WordLC, [FirstChLow|LWordLC]),
     atom_chars(FirstLow, [FirstChLow]),
@@ -71,3 +74,8 @@ capitalize(WordLC, WordUC) :-
     atom_chars(FirstUpp, [FirstChUpp]),
     atom_chars(WordUC, [FirstChUpp|LWordLC]).
 
+smart_capitalize(In, Out) :-
+   (person(In); store(In)),
+   capitalize(In, Out), !.
+
+smart_capitalize(Out, Out).
