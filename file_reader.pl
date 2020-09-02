@@ -10,23 +10,35 @@ load_atomized_lines_from_file(TagAs, File) :-
 load_atomized_lines_from_file(TagAs, File, Out) :- 
    retractall(r(_,_,_,_)),
    phrase_from_file(lines(In), File),
-   atomize_and_assert_lines(TagAs, In, TmpOut),
-   reverse(TmpOut, Out).
+   atomize_lines(TagAs, In, TmpOut),
+   assert_lines(TagAs, TmpOut, TmpOut2),
+   reverse(TmpOut2, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-atomize_and_assert_lines(TagAs, Lines, Out) :-
-   atomize_and_assert_lines([], TagAs, Lines, Out).
+atomize_lines(TagAs, Lines, Out) :-
+   atomize_lines([], TagAs, Lines, Out).
 
-atomize_and_assert_lines(Build, _, [], Out) :-
+atomize_lines(Build, _, [], Out) :-
    Out = Build, !.
 
-atomize_and_assert_lines(Build, TagAs, [Line|Lines], Out) :-
+atomize_lines(Build, TagAs, [Line|Lines], Out) :-
    split_string(Line, " ", " ", Words),
    atomize(Words, [A1, A2, A3 | Atoms]),
    G1 =.. [ TagAs, A1, A2, A3, Atoms ],
-   assertz(G1),
-   atomize_and_assert_lines(Build, TagAs, Lines, Out).
+   atomize_lines([G1|Build], TagAs, Lines, Out).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+assert_lines(TagAs, Lines, Out) :-
+   assert_lines([], TagAs, Lines, Out).
+
+assert_lines(Build, _, [], Out) :-
+   Out = Build, !.
+
+assert_lines(Build, TagAs, [Line|Lines], Out) :-
+   assertz(Line),
+   assert_lines([Line|Build], TagAs, Lines, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
