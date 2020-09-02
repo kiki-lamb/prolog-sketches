@@ -57,8 +57,7 @@ search(Here, There, Build, Path) :-
       ;  descend(Here, There, [Here|Build], Path)
    ).
 
-found(Here, Here, Build, Path) :-
-   Path = Build.
+found(Here, Here, Path, Path).
 
 descend(Here, Here, _, _) :-
    fail.
