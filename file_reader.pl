@@ -30,17 +30,21 @@ r_atom_codes(In, Out) :-
 % Grammar.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-collect_line([]) -->
-   (".\n" ; end_of_sequence), !.
-
-collect_line([L|Ls]) -->
-   [L], collect_line(Ls).
-
 lines([]) -->
    call(end_of_sequence), !.
 
 lines([CLine|Lines]) -->
-   collect_line(CLine),
+   line(CLine),
    lines(Lines).
+
+%-----------------------------------------------------------
+
+line([]) -->
+   (".\n" ; end_of_sequence), !.
+
+line([L|Ls]) -->
+   [L], line(Ls).
+
+%-----------------------------------------------------------
 
 end_of_sequence([], []).
