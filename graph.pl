@@ -89,6 +89,8 @@ search(Here, There, Path, Build) :-
 
 log_paths :-
    log_path;
+   nl,
+   log_paths_count,
    true.
 
 log_path :-

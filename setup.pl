@@ -24,25 +24,22 @@ This nelem That :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
+   format("[[Setup]] Begin setup.\n",[]),
    setup_file,
    setup_actors,
    setup_subjects,
    setup_actions,   
-   (
-      setup_class_bindings,
-      setup_action_bindings,
-      setup_mutual_likes,
-      setup_paths,
-      log_paths
-;  nl,
-      log_paths_count
-   ,  format("[[Setup]] Complete.\n",[]),
-      true
-   ).
+   setup_class_bindings,
+   setup_action_bindings,
+   setup_mutual_likes,
+   setup_paths,
+   format("[[Setup]] Setup complete.\n",[]),
+   true.
 
 setup_paths :-
    format("[[Setup]] Charting paths...\n",[]),
    cache_paths;
+   log_paths,
    true.
 
 setup_class_bindings :-
