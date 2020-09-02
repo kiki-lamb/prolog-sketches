@@ -96,14 +96,14 @@ setup_paths :-
 
 bind_classes :-
    Thing is_a Class,
-   % op(200, fx, Thing),
+   op(200, fx, Thing),
    logged_assert_list([Class, Thing]),
    fail.
 
 bind_actions :-
    raw_lines(Actor, Action, Subject, _),
    Action \== isa,
-   op(200, xfx, Action),
+%   op(200, xfx, Action),
    cross_bind(Actor, Action, Subject),
    fail.   
 
