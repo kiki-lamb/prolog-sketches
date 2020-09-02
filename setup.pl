@@ -42,9 +42,9 @@ setup :-
    ;  format("[[Setup]] Binding mutual Likes.\n",[]),
       bind_mutual_likes
    ;  format("[[Setup]] Charting paths...\n",[]),
-      stash_paths;
-      log_paths;
-      nl,
+      cache_paths
+   ;  log_paths
+   ;  nl,
       log_paths_count
    ,  format("[[Setup]] Complete.\n",[]),
       true

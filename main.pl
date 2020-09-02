@@ -5,11 +5,13 @@
 :- consult("moves.pl").
 :- debug.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 main :-
    set_prolog_flag(answer_write_options,[max_depth(100)]),
-   setup. %,
-%   paths;
-%   true.
+   setup.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 possible        :- possible(_,_,_).
 possible(W,A,T) :- could(W,A,T),
