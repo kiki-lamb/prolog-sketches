@@ -17,8 +17,13 @@ load_atomized_lines_from_file(Tag, File, Out) :-
 
 tagged_atomize(Tag, Line, G1) :-
    split_string(Line, " ", " ", [A1, A2, A3 | Words]),
-   atomize([ A1, A2, A3, Words ], Atoms),   
+   %   atomize([ A1, A2, A3, Words ], Atoms),
+   maplist(r_atom_codes, [ A1, A2, A3, Words ], Atoms),
+%   atomize([ A1, A2, A3, Words ], Atoms),   
    G1 =.. [Tag|Atoms].   
+
+r_atom_codes(In, Out) :-
+   atom_codes(Out, In).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
