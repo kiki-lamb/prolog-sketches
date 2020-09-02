@@ -76,3 +76,4 @@ vodka          isa      alcohol.
 water          isa      beverage.
 woman          isa      human.
 human          operate  appliance.
+weed           isa      thing.

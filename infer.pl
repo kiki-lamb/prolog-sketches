@@ -10,24 +10,29 @@ wwould(Actor, shops_at, Store) :-
    store(Store),
    shops_at(Actor, Store).
 
-wwould(Actor, help, P2) :-
-   person(P2),
-   likes(P2, Actor).
+wwould(Actor, help, Person) :-
+   person(Person),
+   likes(Person, Actor).
 
-wwould(Actor, get_help, P2) :-
-   would(P2, help, Actor).
+wwould(Actor, get_help, Person) :-
+   would(Person, help, Actor).
 
-wwould(Here, give, Thing) :-
-   has(Here, Thing).
+wwould(Actor, give, Object) :-
+   object(Object),
+   has(Actor, Object).
 
-wwould(Here, Action, Thing) :-
+wwould(Human, operate, Appliance) :-
+   human(Human), 
+   appliance(Appliance).
+
+wwould(Actor, Action, Something) :-
    catch(
       (
-              G1 =.. [Action, Here, Thing],
+              G1 =.. [Action, Actor, Something],
               call(G1)
       ), _, fail
-   ),
-   format("SUCCESS!\n", []).
+   ). %,
+   %format("SUCCESS! ~w ~w ~w\n", [Actor, Action, Something]).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -113,10 +118,6 @@ wwould(Here, Action, Thing) :-
 % wwould(Actor, eat, Food) :-
 %    food(Food),
 %    eat(Actor, Food).
-
-% wwould(Human, operate, Appliance) :-
-%    human(Human), 
-%    appliance(Appliance).
 
 % wwould(Actor, pet, Cat) :-
 %    human(Actor),

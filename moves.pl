@@ -1,21 +1,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- op(300, fx, start).
-start(Here) :-
-   concrete(Here),
-   person(Here ).
+start(This) :-
+   concrete(This),
+   person(This ).
 
 %-----------------------------------------------------------
 
 :- op(300, xfx, move).
 
-move(Here, Here) :-
+move(This, This) :-
    fail.
 
-move(Here, There) :-
+move(This, That) :-
    (
-      would( Here, shops_at, There)
-   ;  would( Here, get_help, There)
-   ;  would( Here, give,     There)
+      would( This, shops_at, That)
+   ;  would( This, operate,  That)
+   ;  would( This, get_help, That)
+   ;  would( This, give,     That)
+
    ).
    
