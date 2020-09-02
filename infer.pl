@@ -1,17 +1,20 @@
-would(Person, shops_at, Store) :-
+would(Person, Action, Thing) :-
+   wwould(Person, Action, Thing).
+
+wwould(Person, shops_at, Store) :-
    concrete(Store),
    store(Store),
    shops_at(Person, Store).
 
-would(Person, help, P2) :-
+wwould(Person, help, P2) :-
    concrete(P2),
    person(P2),
    likes(P2, Person).
 
-would(Person, get_help, P2) :-
-   would(P2, help, Person).
+wwould(Person, get_help, P2) :-
+   wwould(P2, help, Person).
 
-would(Here, give, Thing) :-
+wwould(Here, give, Thing) :-
    concrete(Here), 
    has(Here, Thing).
 
