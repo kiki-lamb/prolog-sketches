@@ -23,10 +23,10 @@ wwould(Actor, shop_at, Store) :-
    ),
    shop_at(Actor, Store).
 
-wwould(Actor, pet, Cat) :-
+wwould(Actor, pet, Subject) :-
    human(Actor),
-   cat(Cat),
-   wwould(Actor, help, Cat).
+   cute(Subject),
+   wwould(Actor, help, Subject).
 
 wwould(Actor, chase, Cat) :-
    cat(Actor),
