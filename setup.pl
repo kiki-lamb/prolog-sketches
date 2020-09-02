@@ -134,6 +134,7 @@ reify(Thing) :-
 
 bind_classes :-
    Thing is_a Class,
+   op(200, fx, Thing),
    logged_assert_list([Class, Thing]),
    fail.
 
