@@ -11,6 +11,9 @@ would(Person, help, P2) :-
 would(Person, get_help, P2) :-
    would(P2, help, Person).
 
+would(Here, give, Thing) :-
+   concrete(Here), 
+   has(Here, Thing).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 

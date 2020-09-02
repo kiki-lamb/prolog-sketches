@@ -15,13 +15,9 @@ move(Here, Here) :-
 move(Here, There) :-
    concrete(Here),
    person(Here),
-   (
-      would(Here, shops_at, There)
-   )
+   would(Here, shops_at, There)
    ;  would(Here, get_help, There)
-   ;  (
-      has(Here, There)
-   ),
+   ;  would(Here, give, There),
    concrete(There),
    There \== Here.
    
