@@ -1,54 +1,54 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-could(Person, Action) :-
-   could(Person, Action, _).
-
-could(Person, Action, Subject) :-
-   could(Person, Action, Subject, _).
-
-could(Person, Action, Subject, Path) :-
-   (would(Person, Action, Subject),
-    call((path(Person, Subject, Path), !))).
+% 
+% could(Person, Action) :-
+%    could(Person, Action, _).
+% 
+% could(Person, Action, Subject) :-
+%    could(Person, Action, Subject, _).
+% 
+% could(Person, Action, Subject, Path) :-
+%    (would(Person, Action, Subject),
+%     call((path(Person, Subject, Path), !))).
+% 
+% %-----------------------------------------------------------
+% 
+% couldnt(Person, Action) :-
+%    \+ could(Person, Action, _).
+% 
+% couldnt(Person, Action, Thing) :-
+%    \+ could(Person, Action, Thing).
+% 
+% %-----------------------------------------------------------
+% 
+% wouldnt(Person, Action) :-
+%    \+ would(Person, Action, _).
+% 
+% wouldnt(Person, Action, Subject) :-
+%    \+ would(Person, Action, Subject).
+% 
+% 
+% %-----------------------------------------------------------
+% 
+% would(Start, Action) :-
+%    would(Start, Action, _).
+% 
+% would(Start, Action, Subject) :-
+%    wwould(Start, Action, Subject).
 
 %-----------------------------------------------------------
 
-couldnt(Person, Action) :-
-   \+ could(Person, Action, _).
-
-couldnt(Person, Action, Thing) :-
-   \+ could(Person, Action, Thing).
-
-%-----------------------------------------------------------
-
-wouldnt(Person, Action) :-
-   \+ would(Person, Action, _).
-
-wouldnt(Person, Action, Subject) :-
-   \+ would(Person, Action, Subject).
-
-
-%-----------------------------------------------------------
-
-would(Start, Action) :-
-   would(Start, Action, _).
-
-would(Start, Action, Subject) :-
-   wwould(Start, Action, Subject).
-
-%-----------------------------------------------------------
-
-wwould(Person, help, Subject) :-
-   concrete(Person),
-   concrete(Subject),
-   person(Person),
-   person(Subject),
-   Person \== Subject,
-   format("Doing this one, ~w help ~w?\n",
-          [Person, Subject]),
-   (
-      likes(Person,Subject)
-   ;  likes(Subject,Person)
-   ).
+% wwould(Person, help, Subject) :-
+%    concrete(Person),
+%    concrete(Subject),
+%    person(Person),
+%    person(Subject),
+%    Person \== Subject,
+%    format("Doing this one, ~w help ~w?\n",
+%           [Person, Subject]),
+%    (
+%       likes(Person,Subject)
+%    ;  likes(Subject,Person)
+%    ).
 
 
 %wwould(Person, Action, Subject) :-
