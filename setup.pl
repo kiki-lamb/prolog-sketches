@@ -1,27 +1,27 @@
 :- consult("file_reader.pl").
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- op(400, xfx, is_a).
 
 Thing is_a Class :-
    member_of(Thing, Class).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- op(400, xfx, elem).
 
 This elem That :-
    member(This, That).
 
-%-------------------------------------------------------------------------------
+%-----------------------------------------------------------
 
 :- op(400, xfx, nelem).
 
 This nelem That :-
    \+ This elem That.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 setup :-
    % File = 'dat.ssv',
@@ -29,7 +29,10 @@ setup :-
    (
       load_atomized_lines_from_file(raw_lines, File),
       format("[[Setup]] Loaded lines from '~w'.\n",[File]);
-      format("[[Setup]] ERROR: Could nod load lines from '~w'.\n",[File])
+      format(
+         "[[Setup]] ERROR: Could not load '~w'.\n",
+         [File]
+      )
    ),
    (
       format("[[Setup]] Defining Actors...\n",[]),
@@ -71,7 +74,7 @@ setup :-
       true
    ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 actors(Out) :-
    findall(Actor, ((raw_lines(Actor, _, _, _))), Tmp),
@@ -87,10 +90,14 @@ subjects(Out) :-
 
 non_actor_subjects(Out) :-
    actors(Actors),
-   findall(Subject, ((raw_lines(_, _, Subject, _), Subject nelem Actors)), Tmp),
+   findall(
+      Subject,
+      ((raw_lines(_, _, Subject, _),
+        Subject nelem Actors)),
+      Tmp),
    sort(Tmp, Out).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 reify(Thing) :-
    (
@@ -99,7 +106,7 @@ reify(Thing) :-
    ;  logged_assert(concrete(Thing))
    ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 bind_classes :-
    Thing is_a Class,
@@ -117,16 +124,20 @@ bind_mutual_likes :-
    cross_bind(Subject, like, Actor),
    fail.   
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 cross_bind(Left, Action, Right) :-
    findall(L, L is_a Left,  Lefts),
    findall(R, R is_a Right, Rights),
-   findall([ L, R ], (L elem [Left | Lefts], R elem [Right | Rights]), Tmp),
+   findall(
+      [ L, R ],
+      (L elem [Left | Lefts], R elem [Right | Rights]),
+      Tmp
+   ),
    findall([Action, L, R], [L, R] elem Tmp, Tmp2),
    maplist(logged_assert_list, Tmp2).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 member_of(Thing, Class) :-
    (
@@ -135,9 +146,9 @@ member_of(Thing, Class) :-
       member_of(ActualType, Class)
    ).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Logging
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 logged_assert_list(L) :-
    G1 =..  L,
