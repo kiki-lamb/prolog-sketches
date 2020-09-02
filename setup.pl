@@ -110,6 +110,8 @@ subjects(Out) :-
    findall(Subject, ((raw_lines(_, _, Subject, _))), Tmp),
    sort(Tmp, Out).
 
+%-----------------------------------------------------------
+
 non_actor_subjects(Out) :-
    actors(Actors),
    findall(
