@@ -38,6 +38,10 @@ wwould(Human, operate, Appliance) :-
    human(Human), 
    appliance(Appliance).
 
+wwould(Person, eats, Food) :-
+   person(Person),
+   eats(Person, Food).
+
 %wwould(Actor, Action, Something) :-
 %   catch(
 %      (
