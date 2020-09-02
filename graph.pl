@@ -88,6 +88,10 @@ search(Here, There, Path, Build) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 log_paths :-
+   log_path;
+   true.
+
+log_path :-
    cached_path(Here, There, Path),
    format("   .oO> cached_path(~w, ~w, ~w)\n",
           [Here, There, Path]),
