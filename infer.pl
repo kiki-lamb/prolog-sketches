@@ -26,7 +26,8 @@ wwould(Here, Action, Thing) :-
               G1 =.. [Action, Here, Thing],
               call(G1)
       ), _, fail
-   ).
+   ),
+   format("SUCCESS!\n", []).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
