@@ -7,12 +7,10 @@ likes(kiki, boson).
 likes(boson, higgy).
 likes(higgy, boson).
 
-search(Here, Here, [Here|Path], Path).
+search(Here, Here, Path, Build) :-
+   reverse([Here|Build], Path).
 
 search(Here, There, Path, Build) :-
-   likes(There, Next),
-   not(member(Next, [There|Build])),
-   search(Here, Next, Path, [There|Build]).
-
-
-  
+   likes(Here, Next),
+   not(member(Next, [Here|Build])),
+   search(Next, There, Path, [Here|Build]).
