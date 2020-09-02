@@ -10,33 +10,20 @@ load_atomized_lines_from_file(Tag, File) :-
 load_atomized_lines_from_file(Tag, File, Out) :- 
    retractall(r(_,_,_,_)),
    phrase_from_file(lines(In), File),
-   maplist(tagged_atomize(Tag), In, TmpOut2),
+   maplist(tagged_predify(Tag), In, TmpOut2),
    maplist(assert, TmpOut2, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-tagged_atomize(Tag, Line, G1) :-
+tagged_predify(Tag, Line, G1) :-
    split_string(Line, " ", " ", [A1, A2, A3 | Words]),
-   %   atomize([ A1, A2, A3, Words ], Atoms),
    maplist(r_atom_codes, [ A1, A2, A3, Words ], Atoms),
-%   atomize([ A1, A2, A3, Words ], Atoms),   
-   G1 =.. [Tag|Atoms].   
+   G1 =.. [Tag|Atoms].
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%          
+   
 r_atom_codes(In, Out) :-
    atom_codes(Out, In).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-atomize(In, Out) :-
-   atomize([], In, TmpOut),
-   reverse(TmpOut, Out).
-
-atomize(Build, [], Out) :-
-   Out = Build, !.
-
-atomize(Build, [In|Ins], Out) :-
-  atom_codes(Atomic, In),
-  atomize([Atomic|Build], Ins , Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Grammar.
