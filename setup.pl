@@ -36,6 +36,7 @@ setup :-
    format("[[Setup]] Setup complete.\n",[]).
 
 %-----------------------------------------------------------
+
 setup_file :-
    File = 'small_world.ssv',   
    (
