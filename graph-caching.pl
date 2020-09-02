@@ -78,9 +78,9 @@ log_paths :-
    true.
 
 log_path :-
-   cached_path(Here, There, _),
-   format("   .oO> cached_path(~w, ~w).\n",
-          [Here, There]),
+   cached_path(Here, There, Path),
+   format("   .oO> cached_path(~w, ~w: ~w).\n",
+          [Here, There, Path]),
    fail.
    
 log_paths_count :-
