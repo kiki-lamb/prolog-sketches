@@ -1,5 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 could(Person, Action) :-
    could(Person, Action, _).
 
@@ -91,7 +96,7 @@ wwould(Person, Action, Subject) :-
 % wwould(Person, buy, Object) :-
 %    object(Object),
 %    has(Store, Object),
-%    wwould(Person, shop_at, Store).
+%    wwould(Person, shops_at, Store).
 
 % wwould(Cat, chase, C2) :-
 %    cat(Cat),
@@ -130,10 +135,10 @@ wwould(Person, Action, Subject) :-
 %    thing(Thing),
 %    smoke(Person, Thing).
  
-% wwould(Human, shop_at, Store) :-
+% wwould(Human, shops_at, Store) :-
 %    human(Human),
 %    store, store(Store),
-%    shop_at(Human, Store).
+%    shops_at(Human, Store).
 
 % wwould(Human, shower, Appliance) :-
 %    human(Human),

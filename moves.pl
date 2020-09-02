@@ -13,7 +13,7 @@ move(Here, There) :-
          store(There)
       ;  person(There)
       ),
-      would(Here, shop_at, There)
+      would(Here, shops_at, There)
    )
    ;  (
       person(There),
