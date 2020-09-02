@@ -42,10 +42,10 @@ wwould(Actor, starve_for, water) :-
 
 wwould(Actor, shop_at, Store) :-
    human(Actor),
-   %(
+   (
       store(Store);
-      human(Store),
-   %),
+      human(Store)
+   ),
    shop_at(Actor, Store).
 
 wwould(Actor, pet, Subject) :-
