@@ -79,6 +79,7 @@ sybil          shop_at  home_hardware.
 sybil          shop_at  mr_meat.
 tequila        isa      alcohol.
 thing          isa      object.
+person         isa      object.
 turkey         isa      meat.
 turnip         isa      vegetable.
 vegetable      isa      food.
