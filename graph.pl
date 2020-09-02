@@ -65,11 +65,13 @@ try_cached_path(Here, There, Path) :-
 % Graph search.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+search(Here, There) :-
+   search(Here, There, _).
+      
+
 search(Here, There, Path) :-
    start(Here),
    search(Here, There, Path, []).
-
-%-----------------------------------------------------------
 
 search(Here, Here, Path, Build) :-
    reverse([Here|Build], Path).
