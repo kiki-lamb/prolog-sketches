@@ -23,9 +23,9 @@ This nelem That :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-setup :-
+setup(File) :-
    format("[[Setup]] Begin setup.\n",[]),
-   setup_file,
+   setup_file(File),
    setup_actors,
    setup_subjects,
    setup_actions,   
@@ -37,15 +37,12 @@ setup :-
 
 %-----------------------------------------------------------
 
-setup_file :-
-   File = 'small_world.ssv',   
-   (
-      load_atomized_lines_from_file(raw_lines, File),
-      format("[[Setup]] Loaded lines from '~w'.\n",[File]);
-      format(
-         "[[Setup]] ERROR: Could not load '~w'.\n",
-         [File]
-      )
+setup_file(File) :-
+   load_atomized_lines_from_file(raw_lines, File),
+   format("[[Setup]] Loaded lines from '~w'.\n",[File]);
+   format(
+      "[[Setup]] ERROR: Could not load '~w'.\n",
+      [File]
    ).
 
 setup_actors :-
@@ -63,7 +60,7 @@ setup_subjects :-
 setup_actions :-
    format("[[Setup]] Defining Actions...\n",[]),
    actions(Actions),
-   %   maplist(logged_assert, Actions),
+%   maplist(logged_assert, Actions),
    findall(
       [action, Action],
       (

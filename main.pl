@@ -1,4 +1,4 @@
-:- initialization(setup).
+:- initialization(setup("small_world.ssv")).
 :- consult("setup.pl").
 :- consult("moves.pl").
 :- consult("graph.pl").
