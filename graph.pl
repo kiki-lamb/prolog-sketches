@@ -48,17 +48,17 @@ try_cached_path(Here, There, Path) :-
 
 search(Here, There, Path) :-
    start(Here),
-   search(Here, There, [], Tmp),
+   search(Here, There, Tmp, []),
    reverse(Tmp, Path).
 
 %-------------------------------------------------------------------------------
 
-search(Here, Here, Path, [Here|Path]).
+search(Here, Here, [Here|Path], Path).
 
-search(Here, There, Build, Path) :-
+search(Here, There, Path, Build) :-
    move(Here, Next), 
    not(member(Next, [Here|Build])),
-   search(Next, There, [Here|Build], Path).
+   search(Next, There, Path, [Here|Build]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Logging.
