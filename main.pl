@@ -36,7 +36,7 @@ possible_paths(W,A,T,P) :-
    could(W,A,T,[_|P]),
    singular(A, SA),
    add_spaces(SA, SAA),
-   first_char_uppercase(W, WUC),
+   capitalize(W, WUC),
    format("~w could ~w ~w via ~w.\n",
            [WUC, SAA, T, P]),
    fail.
@@ -64,12 +64,10 @@ singular(In, Out) :-
 add_spaces(In, Out) :-
    re_replace("_", " ", In, Out).
 
-first_char_uppercase(WordLC, WordUC) :-
+capitalize(WordLC, WordUC) :-
     atom_chars(WordLC, [FirstChLow|LWordLC]),
     atom_chars(FirstLow, [FirstChLow]),
-    lwrupr(FirstLow, FirstUpp),
+    upcase_atom(FirstLow,     
     atom_chars(FirstUpp, [FirstChUpp]),
     atom_chars(WordUC, [FirstChUpp|LWordLC]).
 
-lwrupr(Low, Upp) :-
-   upcase_atom(Low, Upp).
