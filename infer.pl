@@ -1,5 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+could(Actor, Action, Thing) :-
+   could(Actor, Action, Thing, _).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 would(Actor, Action, Thing) :-
    concrete(Actor),
    wwould(Actor, Action, Thing),
