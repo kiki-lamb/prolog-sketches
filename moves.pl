@@ -15,7 +15,7 @@ move(Here, Here) :-
 move(Here, There) :-
    concrete(Here),
    person(Here),
-   (
+   ((
       (
          store(There)
       ;  person(There)
@@ -28,7 +28,7 @@ move(Here, There) :-
    )
    ;  (
       has(Here, There)
-   ),
+   )),
    concrete(There),
    There \== Here.
    
