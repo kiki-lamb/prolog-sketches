@@ -20,14 +20,10 @@ atomize_lines(Tag, Lines, Out) :-
    atomize_lines([], Tag, Lines, Out).
 
 atomize_lines(Build, _, [], Out) :-
-   Out = Build, !. %,
-%   format("List is ~w.\n", [Out]).
+   Out = Build, !.
 
 atomize_lines(Build, Tag, [Line|Lines], Out) :-
    split_string(Line, " ", " ", Words),
-
-%   atomize(Words, [A1, A2, A3 | Atoms]),
-%   G1 =.. [ Tag, A1, A2, A3, Atoms ],
 
    f_atomize(Tag, Words, G1),
    
