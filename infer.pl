@@ -42,6 +42,15 @@ wwould(Person, eats, Food) :-
    person(Person),
    eats(Person, Food).
 
+wwould(Person, drinks, Food) :-
+   person(Person),
+   drinks(Person, Food).
+
+wwould(Person, smokes, Thing) :-
+   human(Person),
+   thing(Thing),
+   smokes(Person, Thing).
+
 %wwould(Actor, Action, Something) :-
 %   catch(
 %      (
