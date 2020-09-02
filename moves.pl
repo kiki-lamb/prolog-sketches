@@ -13,8 +13,9 @@ move(Here, Here) :-
    fail.
 
 move(Here, There) :-
-   would(Here, shops_at, There)
-   ;  would(Here, get_help, There)
-   ;  would(Here, give, There).
-   
+   (
+      would(    Here, shops_at, There)
+   ;  would( Here, get_help, There)
+   ;  would( Here, give,     There)
+   ).
    
