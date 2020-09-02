@@ -35,11 +35,43 @@ setup :-
    setup_paths,
    format("[[Setup]] Setup complete.\n",[]).
 
-setup_paths :-
-   format("[[Setup]] Charting paths...\n",[]),
-   cache_paths;
-   log_paths,
-   true.
+%-----------------------------------------------------------
+setup_file :-
+   File = 'small_world.ssv',   
+   (
+      load_atomized_lines_from_file(raw_lines, File),
+      format("[[Setup]] Loaded lines from '~w'.\n",[File]);
+      format(
+         "[[Setup]] ERROR: Could not load '~w'.\n",
+         [File]
+      )
+   ).
+
+setup_actors :-
+   format("[[Setup]] Defining Actors...\n",[]),
+   actors(Actors),
+   maplist(logged_assert, Actors) ,
+   maplist(reify, Actors).
+
+setup_subjects :-
+   format("[[Setup]] Defining Subjects...\n",[]),
+   non_actor_subjects(Subjects),
+   maplist(logged_assert, Subjects),
+   maplist(reify, Subjects).
+
+setup_actions :-
+   format("[[Setup]] Defining Actions...\n",[]),
+   actions(Actions),
+   maplist(logged_assert, Actions),
+   findall(
+      [action, Action],
+      (
+         Action elem Actions,
+         G1 =.. [Action, _],
+         assert(G1)
+      ), Tmp
+   ),
+   maplist(logged_assert_list, Tmp).
 
 setup_class_bindings :-
    format("[[Setup]] Binding Classes...\n",[]),
@@ -56,39 +88,12 @@ setup_mutual_likes :-
    bind_mutual_likes;
    true.
 
-setup_file :-
-   File = 'small_world.ssv',   
-   (
-      load_atomized_lines_from_file(raw_lines, File),
-      format("[[Setup]] Loaded lines from '~w'.\n",[File]);
-      format(
-         "[[Setup]] ERROR: Could not load '~w'.\n",
-         [File]
-      )
-   ).
+setup_paths :-
+   format("[[Setup]] Charting paths...\n",[]),
+   cache_paths;
+   log_paths,
+   true.
 
-setup_actions :-
-   format("[[Setup]] Defining Actions...\n",[]),
-   actions(Actions),
-   maplist(logged_assert, Actions),
-   bagof([action, Action], (
-            Action elem Actions,
-            G1 =.. [Action, _],
-            assert(G1)
-         ), Tmp),
-   maplist(logged_assert_list, Tmp).
-
-setup_actors :-
-   format("[[Setup]] Defining Actors...\n",[]),
-   actors(Actors),
-   maplist(clean_assert, Actors) ,
-   maplist(reify, Actors).
-
-setup_subjects :-
-   format("[[Setup]] Defining Subjects...\n",[]),
-   non_actor_subjects(Subjects),
-   maplist(clean_assert, Subjects),
-   maplist(reify, Subjects).
    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
