@@ -26,8 +26,15 @@ This ne That :-
 Here => (There, Path) :-
    search(Here, There, Path).
 
+Here => There :-
+   search(Here, There, _).
+
 There <= (Here, Path) :-
    Here => (There, Path).
+
+There <= Here :-
+   Here => There.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -45,6 +52,14 @@ search(Here, There, Path, Build) :-
 main :-
    higgy => (sybil, Path),
    format("~w.\n", [Path]),
+
    sybil => (higgy, Path2),
    format("~w.\n", [Path2]),
+
+   higgy => sybil,
+   format("Yes.\n", []),
+
+   sybil => higgy,
+   format("Yes.\n", []),
+   
    halt.
