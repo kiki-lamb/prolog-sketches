@@ -1,10 +1,16 @@
-human isa   person.
-woman isa   human.
-kiki  isa   woman.
-kiki  like  boson.
-kiki  like higgy.
-sybil isa   woman.
-sybil like  kiki.
-cat   isa   person.
-higgy isa   cat.
-
+human          isa      person.
+woman          isa      human.
+kiki           isa      woman.
+kiki           likes    boson.
+kiki           shop_at  chicken_freak.
+sybil          isa      woman.
+sybil          likes    kiki.
+cat            isa      person.
+cat            eat      cat_coof.
+higgy          isa      cat.
+boson          isa      cat.
+boson          likes    higgy.
+gwen           isa      woman.
+gwen           likes    sybil.
+chicken_freak  isa      store.
+chicken_freak  has      cat_food.

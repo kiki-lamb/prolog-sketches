@@ -2,16 +2,12 @@
 :- consult("graph.pl").
 :- consult("setup.pl").
 :- consult("infer.pl").
-:- consult("moves.pl").
-:- debug.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 main :-
    set_prolog_flag(answer_write_options,[max_depth(100)]),
-   setup.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   setup. %,
+%   paths;
+%   true.
 
 possible        :- possible(_,_,_).
 possible(W,A,T) :- could(W,A,T),
@@ -26,11 +22,6 @@ possible_paths(W,A,T,P) :-
     format("~w could ~w ~w: ~w.\n",
            [W, A, T, P]),
     fail.
-
-looperp(Func) :-
-   call(Func, Something),
-   format("  -  ~w.\n", [Something]),
-   fail.
 
 desires        :- desires(_,_,_).
 desires(P,A,X) :- would(P,A,X),

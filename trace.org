@@ -1,0 +1,208 @@
+* One: 
+
+   Call: (10) ppath(kiki, sybil) ? creep
+   Call: (11) ppath(kiki, sybil, _6702) ? creep
+   Call: (12) path(start, kiki, move, sybil, stop, _6686) ? creep
+   Call: (13) recover(kiki, sybil, _6686) ? creep
+   Call: (14) fail ? creep
+   Fail: (14) fail ? creep
+   Fail: (13) recover(kiki, sybil, _6686) ? creep
+   Redo: (12) path(start, kiki, move, sybil, stop, _6686) ? creep
+   Call: (13) start(kiki) ? creep
+   Call: (14) person(kiki) ? creep
+   Exit: (14) person(kiki) ? creep
+   Exit: (13) start(kiki) ? creep
+   Call: (13) search([], kiki, move, sybil, stop, _7148) ? creep
+   Call: (14) found([], kiki, sybil, stop, _7148) ? creep
+   Call: (15) stop(kiki, sybil) ? creep
+   Call: (16) fail ? creep
+   Fail: (16) fail ? creep
+   Fail: (15) stop(kiki, sybil) ? creep
+   Fail: (14) found([], kiki, sybil, stop, _7148) ? creep
+   Redo: (13) search([], kiki, move, sybil, stop, _7148) ? creep
+   Call: (14) descend([kiki], kiki, move, sybil, stop, _7148) ? creep
+   Call: (15) move(kiki, _7570) ? creep
+   Call: (16) would(kiki, get_help, _7570) ? creep
+   Call: (17) start(kiki) ? creep
+   Call: (18) person(kiki) ? creep
+   Exit: (18) person(kiki) ? creep
+   Exit: (17) start(kiki) ? creep
+   Call: (17) wwould(kiki, get_help, _7570) ? creep
+   Call: (18) would(_7570, help, kiki) ? creep
+   Call: (19) start(_7570) ? creep
+   Call: (20) person(_7570) ? creep
+   Exit: (20) person(human) ? creep
+   Exit: (19) start(human) ? creep
+   Call: (19) wwould(human, help, kiki) ? creep
+   Call: (20) person(human) ? creep
+   Exit: (20) person(human) ? creep
+   Call: (20) person(kiki) ? creep
+   Exit: (20) person(kiki) ? creep
+   Call: (20) human\==kiki ? creep
+   Exit: (20) human\==kiki ? creep
+   Call: (20) like(human, kiki) ? creep
+   Fail: (20) like(human, kiki) ? creep
+   Redo: (19) wwould(human, help, kiki) ? creep
+   Call: (20) like(kiki, human) ? creep
+   Fail: (20) like(kiki, human) ? creep
+   Fail: (19) wwould(human, help, kiki) ? creep
+   Redo: (20) person(_7570) ? creep
+   Exit: (20) person(kiki) ? creep
+   Exit: (19) start(kiki) ? creep
+   Call: (19) wwould(kiki, help, kiki) ? creep
+   Call: (20) person(kiki) ? creep
+   Exit: (20) person(kiki) ? creep
+   Call: (20) person(kiki) ? creep
+   Exit: (20) person(kiki) ? creep
+   Call: (20) kiki\==kiki ? creep
+   Fail: (20) kiki\==kiki ? creep
+   Fail: (19) wwould(kiki, help, kiki) ? creep
+   Redo: (20) person(_7570) ? creep
+   Exit: (20) person(sybil) ? creep
+   Exit: (19) start(sybil) ? creep
+   Call: (19) wwould(sybil, help, kiki) ? creep
+   Call: (20) person(sybil) ? creep
+   Exit: (20) person(sybil) ? creep
+   Call: (20) person(kiki) ? creep
+   Exit: (20) person(kiki) ? creep
+   Call: (20) sybil\==kiki ? creep
+   Exit: (20) sybil\==kiki ? creep
+   Call: (20) like(sybil, kiki) ? creep
+   Exit: (20) like(sybil, kiki) ? creep
+   Exit: (19) wwould(sybil, help, kiki) ? creep
+   Exit: (18) would(sybil, help, kiki) ? creep
+   Exit: (17) wwould(kiki, get_help, sybil) ? creep
+   Exit: (16) would(kiki, get_help, sybil) ? creep
+   Exit: (15) move(kiki, sybil) ? creep
+^  Call: (15) not(member(sybil, [kiki])) ? creep
+^  Exit: (15) not(user:member(sybil, [kiki])) ? creep
+   Call: (15) search([kiki], sybil, move, sybil, stop, _7148) ? creep
+   Call: (16) found([kiki], sybil, sybil, stop, _7148) ? creep
+   Call: (17) _7148=[kiki] ? creep
+   Exit: (17) [kiki]=[kiki] ? creep
+   Exit: (16) found([kiki], sybil, sybil, stop, [kiki]) ? creep
+   Exit: (15) search([kiki], sybil, move, sybil, stop, [kiki]) ? creep
+   Exit: (14) descend([kiki], kiki, move, sybil, stop, [kiki]) ? creep
+   Exit: (13) search([], kiki, move, sybil, stop, [kiki]) ? creep
+   Call: (13) lists:reverse([sybil, kiki], _6686) ? creep
+   Exit: (13) lists:reverse([sybil, kiki], [kiki, sybil]) ? creep
+   Call: (13) stash(kiki, sybil, [kiki, sybil]) ? creep
+^  Call: (14) assert(cache(kiki, sybil, [kiki, sybil])) ? creep
+^  Exit: (14) assert(cache(kiki, sybil, [kiki, sybil])) ? creep
+   Exit: (13) stash(kiki, sybil, [kiki, sybil]) ? creep
+   Exit: (12) path(start, kiki, move, sybil, stop, [kiki, sybil]) ? creep
+   Exit: (11) ppath(kiki, sybil, [kiki, sybil]) ? creep
+   Exit: (10) ppath(kiki, sybil) ? creep
+true ;
+
+
+* Two: 
+
+   Redo: (16) found([kiki], sybil, sybil, stop, _7148) ? creep
+   Call: (17) stop(sybil, sybil) ? creep
+   Call: (18) fail ? creep
+   Fail: (18) fail ? creep
+   Fail: (17) stop(sybil, sybil) ? creep
+   Fail: (16) found([kiki], sybil, sybil, stop, _7148) ? creep
+   Redo: (15) search([kiki], sybil, move, sybil, stop, _7148) ? creep
+   Call: (16) descend([sybil, kiki], sybil, move, sybil, stop, _7148) ? creep
+   Call: (17) move(sybil, _12006) ? creep
+   Call: (18) would(sybil, get_help, _12006) ? creep
+   Call: (19) start(sybil) ? creep
+   Call: (20) person(sybil) ? creep
+   Exit: (20) person(sybil) ? creep
+   Exit: (19) start(sybil) ? creep
+   Call: (19) wwould(sybil, get_help, _12006) ? creep
+   Call: (20) would(_12006, help, sybil) ? creep
+   Call: (21) start(_12006) ? creep
+   Call: (22) person(_12006) ? creep
+   Exit: (22) person(human) ? creep
+   Exit: (21) start(human) ? creep
+   Call: (21) wwould(human, help, sybil) ? creep
+   Call: (22) person(human) ? creep
+   Exit: (22) person(human) ? creep
+   Call: (22) person(sybil) ? creep
+   Exit: (22) person(sybil) ? creep
+   Call: (22) human\==sybil ? creep
+   Exit: (22) human\==sybil ? creep
+   Call: (22) like(human, sybil) ? creep
+   Fail: (22) like(human, sybil) ? creep
+   Redo: (21) wwould(human, help, sybil) ? creep
+   Call: (22) like(sybil, human) ? creep
+   Fail: (22) like(sybil, human) ? creep
+   Fail: (21) wwould(human, help, sybil) ? creep
+   Redo: (22) person(_12006) ? creep
+   Exit: (22) person(kiki) ? creep
+   Exit: (21) start(kiki) ? creep
+   Call: (21) wwould(kiki, help, sybil) ? creep
+   Call: (22) person(kiki) ? creep
+   Exit: (22) person(kiki) ? creep
+   Call: (22) person(sybil) ? creep
+   Exit: (22) person(sybil) ? creep
+   Call: (22) kiki\==sybil ? creep
+   Exit: (22) kiki\==sybil ? creep
+   Call: (22) like(kiki, sybil) ? creep
+   Exit: (22) like(kiki, sybil) ? creep
+   Exit: (21) wwould(kiki, help, sybil) ? creep
+   Exit: (20) would(kiki, help, sybil) ? creep
+   Exit: (19) wwould(sybil, get_help, kiki) ? creep
+   Exit: (18) would(sybil, get_help, kiki) ? creep
+   Exit: (17) move(sybil, kiki) ? creep
+^  Call: (17) not(member(kiki, [sybil, kiki])) ? creep
+^  Fail: (17) not(user:member(kiki, [sybil, kiki])) ? creep
+   Redo: (21) wwould(kiki, help, sybil) ? creep
+   Call: (22) like(sybil, kiki) ? creep
+   Exit: (22) like(sybil, kiki) ? creep
+   Exit: (21) wwould(kiki, help, sybil) ? creep
+   Exit: (20) would(kiki, help, sybil) ? creep
+   Exit: (19) wwould(sybil, get_help, kiki) ? creep
+   Exit: (18) would(sybil, get_help, kiki) ? creep
+   Exit: (17) move(sybil, kiki) ? creep
+^  Call: (17) not(member(kiki, [sybil, kiki])) ? creep
+^  Fail: (17) not(user:member(kiki, [sybil, kiki])) ? creep
+   Redo: (22) person(_12006) ? creep
+   Exit: (22) person(sybil) ? creep
+   Exit: (21) start(sybil) ? creep
+   Call: (21) wwould(sybil, help, sybil) ? creep
+   Call: (22) person(sybil) ? creep
+   Exit: (22) person(sybil) ? creep
+   Call: (22) person(sybil) ? creep
+   Exit: (22) person(sybil) ? creep
+   Call: (22) sybil\==sybil ? creep
+   Fail: (22) sybil\==sybil ? creep
+   Fail: (21) wwould(sybil, help, sybil) ? creep
+   Fail: (20) would(_12006, help, sybil) ? creep
+   Redo: (19) wwould(sybil, get_help, _12006) ? creep
+   Fail: (19) wwould(sybil, get_help, _12006) ? creep
+   Fail: (18) would(sybil, get_help, _12006) ? creep
+   Fail: (17) move(sybil, _12006) ? creep
+   Fail: (16) descend([sybil, kiki], sybil, move, sybil, stop, _7148) ? creep
+   Fail: (15) search([kiki], sybil, move, sybil, stop, _7148) ? creep
+   Redo: (19) wwould(sybil, help, kiki) ? creep
+   Call: (20) like(kiki, sybil) ? creep
+   Exit: (20) like(kiki, sybil) ? creep
+   Exit: (19) wwould(sybil, help, kiki) ? creep
+   Exit: (18) would(sybil, help, kiki) ? creep
+   Exit: (17) wwould(kiki, get_help, sybil) ? creep
+   Exit: (16) would(kiki, get_help, sybil) ? creep
+   Exit: (15) move(kiki, sybil) ? creep
+^  Call: (15) not(member(sybil, [kiki])) ? creep
+^  Exit: (15) not(user:member(sybil, [kiki])) ? creep
+   Call: (15) search([kiki], sybil, move, sybil, stop, _7148) ? creep
+   Call: (16) found([kiki], sybil, sybil, stop, _7148) ? creep
+   Call: (17) _7148=[kiki] ? creep
+   Exit: (17) [kiki]=[kiki] ? creep
+   Exit: (16) found([kiki], sybil, sybil, stop, [kiki]) ? creep
+   Exit: (15) search([kiki], sybil, move, sybil, stop, [kiki]) ? creep
+   Exit: (14) descend([kiki], kiki, move, sybil, stop, [kiki]) ? creep
+   Exit: (13) search([], kiki, move, sybil, stop, [kiki]) ? creep
+   Call: (13) lists:reverse([sybil, kiki], _6686) ? creep
+   Exit: (13) lists:reverse([sybil, kiki], [kiki, sybil]) ? creep
+   Call: (13) stash(kiki, sybil, [kiki, sybil]) ? creep
+^  Call: (14) assert(cache(kiki, sybil, [kiki, sybil])) ? creep
+^  Exit: (14) assert(cache(kiki, sybil, [kiki, sybil])) ? creep
+   Exit: (13) stash(kiki, sybil, [kiki, sybil]) ? creep
+   Exit: (12) path(start, kiki, move, sybil, stop, [kiki, sybil]) ? creep
+   Exit: (11) ppath(kiki, sybil, [kiki, sybil]) ? creep
+   Exit: (10) ppath(kiki, sybil) ? creep
+true .

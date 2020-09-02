@@ -1,56 +1,46 @@
 :- use_module(library(pio)).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preds.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+load_atomized_lines_from_file(Tag, File) :-
+   load_atomized_lines_from_file(Tag, File, _).
+
+load_atomized_lines_from_file(Tag, File, Out) :-
+   P =.. [ r, _, _, _, _ ],
+   retractall(P),
+   phrase_from_file(lines(Lines), File),
+   maplist(tagged_predify(Tag), Lines, TmpOut2),
+   maplist(assert, TmpOut2, Out).
+
+%-------------------------------------------------------------------------------
+
+tagged_predify(Tag, Line, G1) :-
+   split_string(Line, " ", " ", [A1, A2, A3 | Words]),
+   maplist(r_atom_codes, [ A1, A2, A3, Words ], Atoms),
+   G1 =.. [Tag|Atoms].
+
+%-------------------------------------------------------------------------------
+   
+r_atom_codes(In, Out) :-
+   atom_codes(Out, In).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Grammar.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+collect_line([]) -->
+   (".\n" ; end_of_sequence), !.
+
+collect_line([L|Ls]) -->
+   [L], collect_line(Ls).
+
 lines([]) -->
-   call(eos), !.
+   call(end_of_sequence), !.
 
 lines([CLine|Lines]) -->
-   cline(CLine),
+   collect_line(CLine),
    lines(Lines).
 
-eos([], []).
-
-cline([]) -->
-   (".\n" ; call(eos)), !.
-
-cline([L|Ls]) -->
-   [L], cline(Ls).
-
-clines(Ls, File) :-
-   phrase_from_file(lines(Ls), File).
-
-collect(Build, Out) :-
-   Out = Build.
-
-collect(Using, In, Out) :-
-   G =.. [ Using, In, [], Tmp ],
-   call(G),
-   reverse(Tmp, Out).
-
-assertify_lines(File) :-
-   clines(Ls, File),
-   assertify_lines(Ls, _).
-
-assertify_lines(In, Out) :-
-   retractall(r(_,_,_,_)),
-   collect(aasertify_lines, In, Out).
-
-aasertify_lines([], Build, Out) :-
-   collect(Build, Out), !.
-
-aasertify_lines([Line|Lines], Build, Out) :-
-   split_string(Line, " ", " ", Words),
-   atomize(Words, [A1, A2, A3 | Atoms]),
-   Term =.. [r, A1, A2, A3, Atoms],
-   assertz(Term),
-   aasertify_lines(Lines, Build, Out).
-
-atomize(In, Out) :-
-   collect(aatomize, In, Out).
-
-aatomize([], Build, Out) :-
-   collect(Build, Out), !.
-
-aatomize([In|Ins], Build, Out) :-
-  atom_codes(Atomic, In),
-  aatomize(Ins, [Atomic|Build], Out).
-
+end_of_sequence([], []).
