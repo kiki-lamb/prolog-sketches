@@ -2,6 +2,7 @@
 :- consult("setup.pl").
 :- consult("moves.pl").
 :- consult("graph.pl").
+:- consult("graph-caching.pl").
 :- consult("infer.pl").
 :- debug.
 

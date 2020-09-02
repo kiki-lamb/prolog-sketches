@@ -75,5 +75,4 @@ vegetable      isa      food.
 vodka          isa      alcohol.
 water          isa      beverage.
 woman          isa      human.
-kiki           shop_at  freshco.
 human          operate  appliance.
