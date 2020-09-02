@@ -23,6 +23,11 @@ This ne That :-
 :- op(400, xfx, =>).
 :- op(400, xfx, <=).
 
+Here => (There, Path) :-
+   search(Here, There, Path).
+
+There <= (Here, Path) :-
+   Here => (There, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -38,8 +43,8 @@ search(Here, There, Path, Build) :-
    search(Next, There, Path, [Here|Build]).
 
 main :-
-   search(higgy, sybil, Path),
+   higgy => (sybil, Path),
    format("~w.\n", [Path]),
-   search(sybil, higgy, Path2),
+   sybil => (higgy, Path2),
    format("~w.\n", [Path2]),
    halt.
