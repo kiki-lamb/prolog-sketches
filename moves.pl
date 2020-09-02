@@ -10,20 +10,18 @@ move(Here, There) :-
    person(Here),
    (
       (
-         (
-            store(There)
-         ;  person(There)
-         ),
-         would(Here, shop_at, There)
-      )
-      ;  (
-         person(There),
-         would(There, help, Here)
-      )
-      ;  (
-         has(Here, There)
-      )
-   ), 
+         store(There)
+      ;  person(There)
+      ),
+      would(Here, shop_at, There)
+   )
+   ;  (
+      person(There),
+      would(There, help, Here)
+   )
+   ;  (
+      has(Here, There)
+   ),
    concrete(There),
    There \== Here.
    
