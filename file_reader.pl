@@ -22,11 +22,16 @@ atomize_lines(Build, _, [], Out) :-
    Out = Build, !.
 
 atomize_lines(Build, Tag, [Line|Lines], Out) :-
-   split_string(Line, " ", " ", Words),
-
-   f_atomize(Tag, Words, G1),
+   g_atomize(Tag, Line, G1),
+   
+%   split_string(Line, " ", " ", Words),
+%   f_atomize(Tag, Words, G1),
    
    atomize_lines([G1|Build], Tag, Lines, Out).
+
+g_atomize(Tag, Line, G1) :-
+   split_string(Line, " ", " ", Words),
+   f_atomize(Tag, Words, G1).
 
 f_atomize(Tag, [A1, A2, A3 | Atoms], G1) :- 
    atomize([ A1, A2, A3, Atoms ], Thonk),
