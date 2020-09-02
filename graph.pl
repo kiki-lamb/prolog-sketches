@@ -1,45 +1,49 @@
 :- dynamic cached_path/3. 
 
-%path(Here, Here, [Here]) :-
-%   fail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 path(Here, There) :-
    path(Here, There, _).
 
 path(Here, There, Path) :-
-   (try_path(Here, There, Path)) ->
+   (try_cached_path(Here, There, Path)) ->
       true
-   ;  once((
-                (stash_path(Here, There, Path)),
-         true
-      )),
-      try_path(Here, There, Path).
+   ;  once(
+         (
+            (cache_path(Here, There, Path)),
+            true
+         )
+      ),
+      try_cached_path(Here, There, Path).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Caching
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-try_path(Here, There, Path) :-
+try_cached_path(Here, There, Path) :-
    cached_path(Here, There, Path)
    ;  cached_path(There, Here, Tmp),
       reverse(Tmp, Path).   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-stash_paths :-
-   stash_paths(_,_,_).
+cache_paths :-
+   cache_paths(_,_,_).
 
-stash_paths(W,T,P) :-
-   stash_path(W,T,P),
+cache_paths(W,T,P) :-
+   cache_path(W,T,P),
    fail.
 
-stash_path(Here, There, Path) :-
+cache_path(Here, There, Path) :-
    search(Here, There, Path),
    Here @> There,
-   \+ ( try_path(Here, There, Path)),
+   \+ ( try_cached_path(Here, There, Path)),
      retractall(cached_path(Here, There, _)),
    assertz(cached_path(Here, There, Path)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graph search
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 search(Here, There, Path) :-
    start(Here),
@@ -63,6 +67,8 @@ descend(Build, Here, There,  Path) :-
    not(member(Next, Build)),
    search(Build, Next, There, Path).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Logging
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 log_paths :-
