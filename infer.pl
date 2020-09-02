@@ -1,3 +1,8 @@
+trim_atom(In, Out) :-
+   re_replace("s$", "", In, Out).
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 could(Actor, Action, Thing) :-
