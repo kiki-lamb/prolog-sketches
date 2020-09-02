@@ -67,10 +67,6 @@ try_cached_path(Here, There, Path) :-
 % Graph search.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- op(300, xfx, move).
-   
-:- op(300, fx, start).
-
 search(Here, There) :-
    search(Here, There, _).
 
