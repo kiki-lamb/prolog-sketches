@@ -1,15 +1,16 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 would(Person, Action, Thing) :-
    wwould(Person, Action, Thing),
    concrete(Thing),
-   There \== Here.
+   Thing \== Person.
 
 wwould(Person, shops_at, Store) :-
-   concrete(Store),
    store(Store),
+   concrete(Store),
    shops_at(Person, Store).
 
 wwould(Person, help, P2) :-
-   concrete(P2),
    person(P2),
    likes(P2, Person).
 
@@ -17,8 +18,10 @@ wwould(Person, get_help, P2) :-
    wwould(P2, help, Person).
 
 wwould(Here, give, Thing) :-
-   concrete(Here), 
    has(Here, Thing).
+
+%wwould(Here, Action, Thing) :-
+   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
