@@ -14,7 +14,7 @@ move(Here, Here) :-
 
 move(Here, There) :-
    (
-      would(    Here, shops_at, There)
+      would( Here, shops_at, There)
    ;  would( Here, get_help, There)
    ;  would( Here, give,     There)
    ).
