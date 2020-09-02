@@ -18,8 +18,8 @@ move( Here, There) :-
       person(There),
       would(There, help, Here),
       There \== Here
-   ),
-   concrete(There).
+   ). %,
+%   concrete(There).
 
 :- op(300, fx, start).
 start(Here)       :-
