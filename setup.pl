@@ -63,7 +63,7 @@ setup_subjects :-
 setup_actions :-
    format("[[Setup]] Defining Actions...\n",[]),
    actions(Actions),
-%   maplist(logged_assert, Actions),
+   %   maplist(logged_assert, Actions),
    findall(
       [action, Action],
       (
