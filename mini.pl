@@ -14,15 +14,15 @@ X       links Y :-
 
 :- op(400, xfx, e).
 
-This e That :-
+This elem That :-
    member(This, That).
 
 %-------------------------------------------------------------------------------
 
 :- op(400, xfx, ne).
 
-This ne That :-
-   \+ This e That.
+This nelem That :-
+   \+ This elem That.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -55,7 +55,7 @@ search(Here, Here, Path, Build) :-
 
 search(Here, There, Path, Build) :-
    Here links Next,
-   Next ne [Here|Build],
+   Next nelem [Here|Build],
    search(Next, There, Path, [Here|Build]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
