@@ -1,7 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- op(300, xfx, move).
-move(Here, Here ) :- fail.
+
+move(Here, Here ) :-
+   fail.
 
 move(Here, There) :-
    concrete(Here),
