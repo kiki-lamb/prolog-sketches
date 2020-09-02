@@ -40,7 +40,9 @@ lines([CLine|Lines]) -->
 %-----------------------------------------------------------
 
 line([]) -->
-   (".\n" ; end_of_sequence), !.
+   (
+      ".\n"
+   ;  end_of_sequence), !.
 
 line([L|Ls]) -->
    [L], line(Ls).
