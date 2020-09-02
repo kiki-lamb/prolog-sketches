@@ -17,11 +17,12 @@ main :-
    nl.
    
 possible        :- possible(_,_,_).
-possible(W,A,T) :- could(W,A,T),
-                   singular(A, SA),
-                   format("~w could ~w ~w.\n",
-                          [W, SA, T]),
-                   fail.
+possible(W,A,T) :-
+   could(W,A,T),
+   singular(A, SA),
+   format("~w could ~w ~w.\n",
+          [W, SA, T]),
+   fail.
 
 possible_paths          :- possible_paths(_,_,_,_).
 possible_paths(P)       :- possible_paths(_,_,_,P).

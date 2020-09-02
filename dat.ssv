@@ -23,12 +23,15 @@ dave           has      weed.
 dave           isa      man.
 dishwasher     isa      appliance.
 energy_drink   isa      soft_drink.
+fermenter      isa      appliance.
+fermenter      has      hooch.
 food           isa      object.
 food           isa      thing.
 freshco        has      vegetable.
 freshco        isa      store.
 gwen           isa      woman.
 gwen           likes    sybil.
+hooch          isa      alcohol.
 higgy          isa      cat.
 higgy          isa      cat.
 home_hardware  has      screw.
@@ -62,6 +65,7 @@ soft_drink     isa      beverage.
 steak          isa      meat.
 store          isa      location.
 sybil          drinks   tequila.
+sybil          drinks   hooch.
 sybil          eat      turkey.
 sybil          eat      vegetable.
 sybil          isa      woman.
@@ -78,4 +82,5 @@ vodka          isa      alcohol.
 water          isa      beverage.
 weed           isa      thing.
 woman          isa      human.
-human          drinks water
+human          drinks   water.
+cat            drinks   water.
