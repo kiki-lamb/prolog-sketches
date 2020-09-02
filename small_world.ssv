@@ -12,6 +12,5 @@ boson          isa      cat.
 boson          likes    higgy.
 gwen           isa      woman.
 gwen           likes    sybil.
-athena         likes    sybil.
 chicken_freak  isa      store.
 chicken_freak  has      cat_food.

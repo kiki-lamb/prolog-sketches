@@ -3,6 +3,7 @@
 :- consult("setup.pl").
 :- consult("infer.pl").
 :- consult("moves.pl").
+:- debug.
 
 main :-
    set_prolog_flag(answer_write_options,[max_depth(100)]),

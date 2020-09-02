@@ -20,7 +20,8 @@ atomize_lines(Tag, Lines, Out) :-
    atomize_lines([], Tag, Lines, Out).
 
 atomize_lines(Build, _, [], Out) :-
-   Out = Build, !.
+   Out = Build, !. %,
+%   format("List is ~w.\n", [Out]).
 
 atomize_lines(Build, Tag, [Line|Lines], Out) :-
    split_string(Line, " ", " ", Words),
@@ -28,13 +29,14 @@ atomize_lines(Build, Tag, [Line|Lines], Out) :-
 %   atomize(Words, [A1, A2, A3 | Atoms]),
 %   G1 =.. [ Tag, A1, A2, A3, Atoms ],
 
-
    f_atomize(Tag, Words, G1),
    
    atomize_lines([G1|Build], Tag, Lines, Out).
 
 f_atomize(Tag, [A1, A2, A3 | Atoms], G1) :- 
-   G1 =.. [ Tag, A1, A2, A3, Atoms ].
+   atomize([ A1, A2, A3, Atoms ], Thonk),
+   
+   G1 =.. [Tag|Thonk].
    
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

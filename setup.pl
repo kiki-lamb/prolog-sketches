@@ -4,7 +4,7 @@
 
 setup :-
    % File = 'dat.ssv',
-   File = 'dat.ssv',   
+   File = 'small_world.ssv',   
    (
       load_atomized_lines_from_file(raw_lines, File),
       format("[[Setup]] Loaded lines from '~w'.\n",[File]);
@@ -130,6 +130,7 @@ logged_assert(G1) :-
    clean_assert(G1).
 
 clean_assert(G1) :-
+%   format("clean_assert ~w.\n", [G1]),
    dynamic(G1),
    retract(G1)
    ;  true,
