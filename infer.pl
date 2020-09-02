@@ -76,7 +76,8 @@ wwould(Person, help, Subject) :-
 
 
 wwould(Person, Action, Subject) :-
-   format("Checking ~w, ~w, ~w...\n", [Person, Action, Subject]),
+%   format("Checking ~w, ~w, ~w...\n",
+%          [Person, Action, Subject]),
    concrete(Person),
    concrete(Subject),
    person(Person),
