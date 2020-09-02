@@ -8,7 +8,7 @@ sybil   links kiki.
 kiki    links boson.
 boson   links higgy.
 X       links Y :-
-   Y links X.
+      Y links X.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
