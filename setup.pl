@@ -34,7 +34,7 @@ setup :-
       setup_mutual_likes,
       setup_paths,
       log_paths
-,  nl,
+;  nl,
       log_paths_count
    ,  format("[[Setup]] Complete.\n",[]),
       true
