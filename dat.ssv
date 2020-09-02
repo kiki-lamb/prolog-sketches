@@ -45,6 +45,7 @@ human          isa      person.
 human          smokes   weed.
 kiki           dislike  cat_food.
 kiki           dislike  tequila.
+kiki           dislike  whiskey.
 kiki           drink    alcohol.
 kiki           drink    energy_drink.
 kiki           eat      meat.

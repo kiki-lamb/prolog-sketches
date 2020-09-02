@@ -80,9 +80,11 @@ wwould(Person, eat, Food) :-
    eat(Person, Food),
    \+ dislike(Person, Food).
 
-wwould(Person, drink, Food) :-
+wwould(Person, drink, Beverage) :-
    person(Person),
-   drink(Person, Food).
+   beverage(Beverage),
+   drink(Person, Beverage),
+   \+ dislike(Person, Beverage).
 
 wwould(Person, smokes, Thing) :-
    human(Person),
