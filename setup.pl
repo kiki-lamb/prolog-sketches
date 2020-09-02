@@ -9,17 +9,17 @@ Thing is_a Class :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- op(400, xfx, e).
+:- op(400, xfx, elem).
 
-This e That :-
+This elem That :-
    member(This, That).
 
 %-------------------------------------------------------------------------------
 
-:- op(400, xfx, ne).
+:- op(400, xfx, nelem).
 
-This ne That :-
-   \+ This e That.
+This nelem That :-
+   \+ This elem That.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -48,7 +48,7 @@ setup :-
       actions(Actions),
       maplist(logged_assert, Actions),
       bagof([action, Action], (
-               Action e Actions,
+               Action elem Actions,
                G1 =.. [Action, _],
                assert(G1),
                op(200, xfx, Action)
@@ -87,7 +87,7 @@ subjects(Out) :-
 
 non_actor_subjects(Out) :-
    actors(Actors),
-   findall(Subject, ((raw_lines(_, _, Subject, _), Subject ne Actors)), Tmp),
+   findall(Subject, ((raw_lines(_, _, Subject, _), Subject nelem Actors)), Tmp),
    sort(Tmp, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -122,8 +122,8 @@ bind_mutual_likes :-
 cross_bind(Left, Action, Right) :-
    findall(L, L is_a Left,  Lefts),
    findall(R, R is_a Right, Rights),
-   findall([ L, R ], (L e [Left | Lefts], R e [Right | Rights]), Tmp),
-   findall([Action, L, R], (([L, R] e Tmp)), Tmp2),
+   findall([ L, R ], (L elem [Left | Lefts], R elem [Right | Rights]), Tmp),
+   findall([Action, L, R], [L, R] elem Tmp, Tmp2),
    maplist(logged_assert_list, Tmp2).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
