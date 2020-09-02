@@ -6,7 +6,7 @@ kiki           shop_at  chicken_freak.
 sybil          isa      woman.
 sybil          likes    kiki.
 cat            isa      person.
-cat            eat      cat_coof.
+cat            eat      cat_food.
 higgy          isa      cat.
 boson          isa      cat.
 boson          likes    higgy.
