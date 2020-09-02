@@ -23,8 +23,8 @@ dave           has      weed.
 dave           isa      man.
 dishwasher     isa      appliance.
 energy_drink   isa      soft_drink.
-fermenter      isa      appliance.
-fermenter      has      hooch.
+hooch_shelf    isa      appliance.
+hooch_shelf    has      hooch.
 food           isa      object.
 food           isa      thing.
 freshco        has      vegetable.

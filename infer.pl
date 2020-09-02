@@ -1,8 +1,3 @@
-singular(In, Out) :-
-   re_replace("s$", "", In, Out).
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 could(Actor, Action, Thing) :-
@@ -56,6 +51,11 @@ wwould(Person, smokes, Thing) :-
    human(Person),
    thing(Thing),
    smokes(Person, Thing).
+
+wwould(Actor, pet, Cat) :-
+   human(Actor),
+   cat(Cat),
+   wwould(Actor, help, Cat).
 
 %wwould(Actor, Action, Something) :-
 %   catch(
@@ -151,10 +151,6 @@ wwould(Person, smokes, Thing) :-
 %    food(Food),
 %    eat(Actor, Food).
 
-% wwould(Actor, pet, Cat) :-
-%    human(Actor),
-%    cat(Cat),
-%    wwould(Actor, help, Cat).
 
 % wwould(Human, repair, Appliance) :-
 %    human(Human),
