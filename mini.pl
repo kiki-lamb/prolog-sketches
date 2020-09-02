@@ -21,20 +21,20 @@ This ne That :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :- op(400, xfx, =>).
-:- op(400, xfx, <=).
 
 Here => (There, Path) :-
    search(Here, There, Path).
 
 Here => There :-
-   search(Here, There, _).
+   Here => (There, _).
+
+:- op(400, xfx, <=).
 
 There <= (Here, Path) :-
    Here => (There, Path).
 
 There <= Here :-
    Here => There.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
