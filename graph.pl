@@ -52,12 +52,9 @@ search(Here, There, Path) :-
    reverse([There|Tmp], Path).
 
 search(Here, There, Build, Path) :-
-   (
-      found(Here, There, Build, Path)
-      ;  descend(Here, There, [Here|Build], Path)
-   ).
+   descend(Here, There, [Here|Build], Path).
 
-found(Here, Here, Path, Path).
+search(Here, Here, Path, Path).
 
 descend(Here, Here, _, _) :-
    fail.
