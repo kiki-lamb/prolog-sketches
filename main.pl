@@ -4,15 +4,17 @@
 :- consult("graph.pl").
 :- consult("graph-caching.pl").
 :- consult("infer.pl").
-:- debug.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 main :- 
-   setup("dat.ssv");
-   nl, nl,
-   possible;
-   true.
+   setup("dat.ssv"),
+   nl,
+   (
+      possible
+   ;  true
+   ),
+   nl.
    
 possible        :- possible(_,_,_).
 possible(W,A,T) :- could(W,A,T),
