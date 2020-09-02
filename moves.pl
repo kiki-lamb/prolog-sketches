@@ -3,7 +3,8 @@
 :- op(300, fx, start).
 start(This) :-
    concrete(This),
-   person(This ).
+   person(This);
+   appliance(This).
 
 %-----------------------------------------------------------
 
