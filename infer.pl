@@ -23,6 +23,19 @@ wwould(Actor, shop_at, Store) :-
    ),
    shop_at(Actor, Store).
 
+wwould(Actor, pet, Cat) :-
+   human(Actor),
+   cat(Cat),
+   wwould(Actor, help, Cat).
+
+wwould(Actor, chase, Cat) :-
+   cat(Actor),
+   cat(Cat).
+
+wwould(Actor, sleep_on, Appliance) :-
+   cat(Actor),
+   appliance(Appliance).
+
 wwould(Actor, help, Person) :-
    person(Person),
    likes(Person, Actor).
@@ -43,19 +56,14 @@ wwould(Person, eat, Food) :-
    eat(Person, Food),
    \+ dislike(Person, Food).
 
-wwould(Person, drinks, Food) :-
+wwould(Person, drink, Food) :-
    person(Person),
-   drinks(Person, Food).
+   drink(Person, Food).
 
 wwould(Person, smokes, Thing) :-
    human(Person),
    thing(Thing),
    smokes(Person, Thing).
-
-wwould(Actor, pet, Cat) :-
-   human(Actor),
-   cat(Cat),
-   wwould(Actor, help, Cat).
 
 %wwould(Actor, Action, Something) :-
 %   catch(
