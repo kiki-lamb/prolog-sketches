@@ -11,8 +11,7 @@ load_atomized_lines_from_file(Tag, File, Out) :-
    retractall(r(_,_,_,_)),
    phrase_from_file(lines(In), File),
    atomize_lines(Tag, In, TmpOut),
-   maplist(assert, TmpOut, TmpOut2),
-   reverse(TmpOut2, Out).
+   maplist(assert, TmpOut, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
