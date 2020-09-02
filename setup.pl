@@ -120,10 +120,10 @@ bind_mutual_likes :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 cross_bind(Left, Action, Right) :-
-   findall(L, L is_a Left,  Lefts ),
-   findall(R, R is_a Right, Rights ),
+   findall(L, L is_a Left,  Lefts),
+   findall(R, R is_a Right, Rights),
    findall([ L, R ], (L e [Left | Lefts], R e [Right | Rights]), Tmp),
-   findall([Action, L, R], (member([L, R], Tmp)), Tmp2),
+   findall([Action, L, R], (([L, R] e Tmp)), Tmp2),
    maplist(logged_assert_list, Tmp2).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
