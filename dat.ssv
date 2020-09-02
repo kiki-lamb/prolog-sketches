@@ -54,7 +54,7 @@ mr_meat        isa      store.
 pepperoni      isa      meat.
 pepsi          isa      beverage.
 potato         isa      vegetable.
-sink           give     water.
+sink           has      water.
 sink           isa      appliance.
 steak          isa      meat.
 store          isa      location.

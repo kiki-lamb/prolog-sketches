@@ -3,6 +3,10 @@
 could(Actor, Action, Thing) :-
    could(Actor, Action, Thing, _).
 
+could(Actor, Action, Thing, Path) :-
+   would(Actor, Action, Thing),
+   path(Actor, Thing, Path).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 would(Actor, Action, Thing) :-
@@ -12,7 +16,11 @@ would(Actor, Action, Thing) :-
    Thing \== Actor.
 
 wwould(Actor, shops_at, Store) :-
-   store(Store),
+   human(Actor),
+   (
+      store(Store);
+      human(Store)
+   ),
    shops_at(Actor, Store).
 
 wwould(Actor, help, Person) :-
@@ -30,14 +38,14 @@ wwould(Human, operate, Appliance) :-
    human(Human), 
    appliance(Appliance).
 
-wwould(Actor, Action, Something) :-
-   catch(
-      (
-              G1 =.. [Action, Actor, Something],
-              call(G1)
-      ), _, fail
-   ). %,
-   %format("SUCCESS! ~w ~w ~w\n", [Actor, Action, Something]).
+%wwould(Actor, Action, Something) :-
+%   catch(
+%      (
+%         G1 =.. [Action, Actor, Something],
+%         call(G1)
+%      ), _, fail
+%   ),
+%   format("SUCCESS! ~w ~w ~w\n", [Actor, Action, Something]).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
