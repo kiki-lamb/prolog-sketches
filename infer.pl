@@ -31,6 +31,14 @@ would(Actor, Action, Thing) :-
    concrete(Thing),
    Thing \== Actor.
 
+wwould(Actor, starve_for, food) :-
+    person(Actor),
+    couldnt(Actor, eat).
+
+wwould(Actor, starve_for, water) :-
+   person(Actor),
+   couldnt(Actor, drink, water).
+
 wwould(Actor, shop_at, Store) :-
    human(Actor),
    %(
@@ -81,6 +89,11 @@ wwould(Person, smokes, Thing) :-
    thing(Thing),
    smokes(Person, Thing).
 
+%-----------------------------------------------------------
+% These are busted 'cause they would need a path to the 
+% (missing) object in order to trigger them:
+%-----------------------------------------------------------
+
 wwould(Actor, scare_off, Cat) :-
    person(Actor),
    cat(Cat),
@@ -91,11 +104,3 @@ wwould(Human, shower, Appliance) :-
    human(Human),
    appliance(Appliance),
    has(Appliance, water).
-
-wwould(Actor, starve_for, food) :-
-    person(Actor),
-    couldnt(Actor, eat).
-
-wwould(Actor, starve_for, water) :-
-   person(Actor),
-   couldnt(Actor, drink, water).
