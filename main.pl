@@ -1,15 +1,9 @@
-:- initialization(main).
+:- initialization(setup).
 :- consult("setup.pl").
 :- consult("moves.pl").
 :- consult("graph.pl").
 :- consult("infer.pl").
 :- debug.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-main :-
-   set_prolog_flag(answer_write_options,[max_depth(100)]),
-   setup.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
