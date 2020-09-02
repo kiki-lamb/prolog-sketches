@@ -22,13 +22,6 @@ path(Here, There, Path) :-
 % Caching.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-try_cached_path(Here, There, Path) :-
-   cached_path(Here, There, Path)
-   ;  cached_path(There, Here, Tmp),
-      reverse(Tmp, Path).   
-
-%-------------------------------------------------------------------------------
-
 cache_paths :-
    cache_paths(_,_,_).
 
@@ -42,6 +35,12 @@ cache_path(Here, There, Path) :-
    \+ ( try_cached_path(Here, There, Path)),
      retractall(cached_path(Here, There, _)),
    assertz(cached_path(Here, There, Path)).
+%-------------------------------------------------------------------------------
+
+try_cached_path(Here, There, Path) :-
+   cached_path(Here, There, Path)
+   ;  cached_path(There, Here, Tmp),
+      reverse(Tmp, Path).   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Graph search.
