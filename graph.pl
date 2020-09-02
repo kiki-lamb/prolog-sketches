@@ -16,7 +16,7 @@ There <= (Here, Path) :-
    Here => (There, Path).
 
 There <= Here :-
-   Here => There.
+   Here => (There, _).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Main entry point.
@@ -53,6 +53,7 @@ cache_path(Here, There, Path) :-
    \+ ( try_cached_path(Here, There, Path)),
      retractall(cached_path(Here, There, _)),
    assertz(cached_path(Here, There, Path)).
+
 %-------------------------------------------------------------------------------
 
 try_cached_path(Here, There, Path) :-
