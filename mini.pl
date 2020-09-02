@@ -2,13 +2,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:- op(400, xfx, likes).
+:- op(400, xfx, links).
 
-sybil   likes kiki.
-kiki    likes boson.
-boson   likes higgy.
-X       likes Y :-
-   Y likes X.
+sybil   links kiki.
+kiki    links boson.
+boson   links higgy.
+X       links Y :-
+   Y links X.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,7 +27,7 @@ search(Here, Here, Path, Build) :-
    reverse([Here|Build], Path).
 
 search(Here, There, Path, Build) :-
-   likes(Here, Next),
+   Here links Next,
    Next ne [Here|Build],
    search(Next, There, Path, [Here|Build]).
 
