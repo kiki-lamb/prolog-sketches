@@ -1,4 +1,4 @@
-:- initialization(setup("dat.ssv")).
+:- initialization(main).
 :- consult("setup.pl").
 :- consult("moves.pl").
 :- consult("graph.pl").
@@ -8,6 +8,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+main :- 
+   setup("dat.ssv");
+   nl, nl,
+   possible;
+   true.
+   
 possible        :- possible(_,_,_).
 possible(W,A,T) :- could(W,A,T),
                    singular(A, SA),

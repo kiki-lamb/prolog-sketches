@@ -46,7 +46,6 @@ kiki           likes    boson.
 kiki           shop_at  chicken_freak.
 kiki           shop_at  freshco.
 kiki           shop_at  lcbo.
-kiki           smoke    cigarette.
 kiki           smokes   cigarette.
 lcbo           has      alcohol.
 lcbo           isa      store.
@@ -79,3 +78,4 @@ vodka          isa      alcohol.
 water          isa      beverage.
 weed           isa      thing.
 woman          isa      human.
+human          drinks water
