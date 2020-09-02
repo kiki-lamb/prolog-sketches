@@ -31,7 +31,7 @@ r_atom_codes(In, Out) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 lines([]) -->
-   call(end_of_sequence), !.
+   end_of_sequence, !.
 
 lines([CLine|Lines]) -->
    line(CLine),
