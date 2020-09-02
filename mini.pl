@@ -49,6 +49,8 @@ search(Here, There, Path, Build) :-
    Next ne [Here|Build],
    search(Next, There, Path, [Here|Build]).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 main :-
    higgy => (sybil, Path),
    format("~w.\n", [Path]),
