@@ -1,6 +1,12 @@
 would(Person, shops_at, Store) :-
+   concrete(Store),
    store(Store),
    shops_at(Person, Store).
+
+would(Person, help, P2) :-
+   concrete(P2),
+   person(P2),
+   likes(P2, Person).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
