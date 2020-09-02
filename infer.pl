@@ -8,7 +8,6 @@ would(Actor, Action, Thing) :-
 
 wwould(Actor, shops_at, Store) :-
    store(Store),
-   concrete(Store),
    shops_at(Actor, Store).
 
 wwould(Actor, help, P2) :-
@@ -21,8 +20,8 @@ wwould(Actor, get_help, P2) :-
 wwould(Here, give, Thing) :-
    has(Here, Thing).
 
-%wwould(Here, Action, Thing) :-
-   
+wwould(Here, Action, Thing) :-
+   G1 =.. [Action, Here, Thing].
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
