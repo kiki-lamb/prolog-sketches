@@ -49,11 +49,11 @@ try_cached_path(Here, There, Path) :-
 search(Here, There, Path) :-
    start(Here),
    search(Here, There, [], Tmp),
-   reverse([There|Tmp], Path).
+   reverse(Tmp, Path).
 
 %-------------------------------------------------------------------------------
 
-search(Here, Here, Path, Path).
+search(Here, Here, Path, [Here|Path]).
 
 search(Here, There, Build, Path) :-
    move(Here, Next), 
