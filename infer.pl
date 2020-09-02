@@ -29,7 +29,8 @@ would(Actor, Action, Thing) :-
    concrete(Actor),
    wwould(Actor, Action, Thing),
    concrete(Thing),
-   Thing \== Actor.
+   Thing \== Actor,
+   \+ dislike(Actor, Thing).
 
 wwould(Actor, starve_for, food) :-
     person(Actor),
@@ -77,14 +78,12 @@ wwould(Human, operate, Appliance) :-
 
 wwould(Person, eat, Food) :-
    person(Person),
-   eat(Person, Food),
-   \+ dislike(Person, Food).
+   eat(Person, Food).
 
 wwould(Person, drink, Beverage) :-
    person(Person),
    beverage(Beverage),
-   drink(Person, Beverage),
-   \+ dislike(Person, Beverage).
+   drink(Person, Beverage).
 
 wwould(Person, smokes, Thing) :-
    human(Person),
