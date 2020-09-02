@@ -16,11 +16,7 @@ move(Here, There) :-
    concrete(Here),
    person(Here),
    (
-      (
-         store(There)
-      ;  person(There)
-      ),
-      shops_at(Here, There)
+      would(Here, shops_at, There)
    )
    ;  (
       person(There),

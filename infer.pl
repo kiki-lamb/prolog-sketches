@@ -1,3 +1,8 @@
+would(Person, shops_at, Store) :-
+   store(Store),
+   shops_at(Person, Store).
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 % could(Person, Action) :-
