@@ -8,9 +8,9 @@ likes(kiki, boson).
 search(Here, Here, Path, [Here|Path]).
 
 search(Here, There, Build, Path) :-
-   likes(Here, Next), 
-   not(member(Next, [Here|Build])),
-   search(Next, There, [Here|Build], Path).
+   likes(There, Next),
+   not(member(Next, [There|Build])),
+   search(Here, Next, [There|Build], Path).
 
 
   
