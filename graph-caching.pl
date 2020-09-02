@@ -63,29 +63,25 @@ try_cached_path(Here, There, Path) :-
    ;  cached_path(There, Here, Tmp),
       reverse(Tmp, Path).   
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Logging.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 log_paths :-
    log_path;
-   nl,
+%   nl,
    log_paths_count,
    true.
 
 log_path :-
-   cached_path(Here, There, Path),
-   format("   .oO> cached_path(~w, ~w: ~w).\n",
-          [Here, There, Path]),
+   cached_path(_,_,_), %Here, There, Path),
+%    format("   .oO> cached_path(~w, ~w: ~w).\n",
+%           [Here, There, Path]),
    fail.
    
 log_paths_count :-
    bagof([X,Y,Z], (cached_path(Z,Y,X)), Tmp),
    length(Tmp, Count),
-   format("        Charted ~w paths.\n\n", [Count]).
+   format("[[Setup]] Charted ~w paths.\n", [Count]).
 
 
