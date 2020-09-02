@@ -22,7 +22,7 @@ couldnt(Person, Action) :-
 couldnt(Person, Action, Thing) :-
    \+ could(Person, Action, Thing).
 
- :- op(200, xfy, op_couldnt).
+:- op(200, xfy, op_couldnt).
 op_couldnt(Person, Action) :-
    couldnt(Person, Action).
 
