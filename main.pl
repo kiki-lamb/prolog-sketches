@@ -67,7 +67,7 @@ add_spaces(In, Out) :-
 capitalize(WordLC, WordUC) :-
     atom_chars(WordLC, [FirstChLow|LWordLC]),
     atom_chars(FirstLow, [FirstChLow]),
-    upcase_atom(FirstLow,     
+    upcase_atom(FirstLow, FirstUpp),
     atom_chars(FirstUpp, [FirstChUpp]),
     atom_chars(WordUC, [FirstChUpp|LWordLC]).
 
