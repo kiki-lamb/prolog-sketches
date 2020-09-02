@@ -12,13 +12,6 @@ boson          isa      cat.
 boson          likes    higgy.
 gwen           isa      woman.
 gwen           likes    sybil.
-athena         isa      woman.
 athena         likes    sybil.
 chicken_freak  isa      store.
 chicken_freak  has      cat_food.
-sybil          drink    tequila.
-sybil          eat      turkey.
-sybil          eat      vegetable.
-sybil          shop_at  dave.
-sybil          shop_at  home_hardware.
-sybil          shop_at  mr_meat.
