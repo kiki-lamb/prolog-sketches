@@ -8,7 +8,7 @@ beverage       isa      thing.
 boson          isa      cat.
 boson          likes    higgy.
 cabbage        isa      vegetable.
-cat            eat      cat_food.
+cat            eats     cat_food.
 cat            isa      cute.
 cat            isa      person.
 cat            isa      person.
@@ -36,14 +36,13 @@ home_hardware  has      screw.
 home_hardware  isa      store.
 human          drink    beer.
 human          isa      person.
-kiki           dislike  cat_food.
 kiki           dislike  tequila.
 kiki           drink    energy_drink.
 kiki           drink    vodka.
-kiki           eat      meat.
+kiki           eats     meat.
 kiki           isa      woman.
 kiki           likes    boson.
-kiki           shops_at  chicken_freak.
+kiki           shops_at chicken_freak.
 kiki           shops_at freshco.
 kiki           shops_at lcbo.
 kiki           smoke    cigarette.
@@ -60,8 +59,8 @@ sink           isa      appliance.
 steak          isa      meat.
 store          isa      location.
 sybil          drink    tequila.
-sybil          eat      turkey.
-sybil          eat      vegetable.
+sybil          eats     turkey.
+sybil          eats     vegetable.
 sybil          isa      woman.
 sybil          likes    kiki.
 sybil          shops_at dave.
@@ -75,5 +74,5 @@ vegetable      isa      food.
 vodka          isa      alcohol.
 water          isa      beverage.
 woman          isa      human.
-human          operate  appliance.
 weed           isa      thing.
+cat_food       isa      meat.
