@@ -130,7 +130,7 @@ cross_bind(Left, Action, Right) :-
    findall(R, R is_a Right, Rights),
    findall(
       [ L, R ],
-      (L elem [Left | Lefts], R elem [Right | Rights]),
+      (L elem [Left|Lefts], R elem [Right|Rights]),
       Tmp
    ),
    findall([Action, L, R], [L, R] elem Tmp, Tmp2),
