@@ -10,34 +10,15 @@ load_atomized_lines_from_file(Tag, File) :-
 load_atomized_lines_from_file(Tag, File, Out) :- 
    retractall(r(_,_,_,_)),
    phrase_from_file(lines(In), File),
-   atomize_lines(Tag, In, TmpOut),
-   maplist(assert, TmpOut, Out).
+   maplist(tagged_atomize(Tag), In, TmpOut2),
+   maplist(assert, TmpOut2, Out).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-atomize_lines(Tag, Lines, Out) :-
-   atomize_lines([], Tag, Lines, Out).
-
-atomize_lines(Build, _, [], Out) :-
-   Out = Build, !.
-
-atomize_lines(Build, Tag, [Line|Lines], Out) :-
-   g_atomize(Tag, Line, G1),
-   
-%   split_string(Line, " ", " ", Words),
-%   f_atomize(Tag, Words, G1),
-   
-   atomize_lines([G1|Build], Tag, Lines, Out).
-
-g_atomize(Tag, Line, G1) :-
-   split_string(Line, " ", " ", Words),
-   f_atomize(Tag, Words, G1).
-
-f_atomize(Tag, [A1, A2, A3 | Atoms], G1) :- 
-   atomize([ A1, A2, A3, Atoms ], Thonk),
-   
-   G1 =.. [Tag|Thonk].
-   
+tagged_atomize(Tag, Line, G1) :-
+   split_string(Line, " ", " ", [A1, A2, A3 | Atoms]),
+   atomize([ A1, A2, A3, Atoms ], Thonk),   
+   G1 =.. [Tag|Thonk].   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
