@@ -10,6 +10,8 @@ Here => (There, Path) :-
 Here => There :-
    Here => (There, _).
 
+%-----------------------------------------------------------
+
 :- op(400, xfx, <=).
 
 There <= (Here, Path) :-
