@@ -1,4 +1,4 @@
-trim_atom(In, Out) :-
+singular(In, Out) :-
    re_replace("s$", "", In, Out).
 
 
@@ -43,9 +43,10 @@ wwould(Human, operate, Appliance) :-
    human(Human), 
    appliance(Appliance).
 
-wwould(Person, eats, Food) :-
+wwould(Person, eat, Food) :-
    person(Person),
-   eats(Person, Food).
+   eat(Person, Food),
+   \+ dislike(Person, Food).
 
 wwould(Person, drinks, Food) :-
    person(Person),

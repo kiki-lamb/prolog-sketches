@@ -37,6 +37,7 @@ human          drink    beer.
 human          isa      person.
 human          smokes   weed.
 kiki           dislike  tequila.
+kiki           dislike  cat_food.
 kiki           drinks   alcohol.
 kiki           drinks   energy_drink.
 kiki           eat      meat.
