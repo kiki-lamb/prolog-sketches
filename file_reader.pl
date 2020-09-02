@@ -16,13 +16,10 @@ load_atomized_lines_from_file(Tag, File, Out) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 tagged_atomize(Tag, Line, G1) :-
-   split_string(Line, " ", " ", [A1, A2, A3|Atoms]),
-   atomize([ A1, A2, A3, Atoms ], Atoms),   
-   G1 =.. [Tag|Atoms].   
+   split_string(Line, " ", " ", [A1, A2, A3 | Atoms]),
+   atomize([ A1, A2, A3, Atoms ], Thonk),   
+   G1 =.. [Tag|Thonk].   
 
-r_atom_codes(In, Atomic) :-
-   atom_codes(Atomic, In).
-   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 atomize(In, Out) :-
