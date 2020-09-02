@@ -15,13 +15,19 @@ wwould(Actor, help, P2) :-
    likes(P2, Actor).
 
 wwould(Actor, get_help, P2) :-
-   wwould(P2, help, Actor).
+   would(P2, help, Actor).
 
 wwould(Here, give, Thing) :-
    has(Here, Thing).
 
 wwould(Here, Action, Thing) :-
-   G1 =.. [Action, Here, Thing].
+   catch(
+      (
+              G1 =.. [Action, Here, Thing],
+              call(G1)
+      ), _, fail
+   ).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
