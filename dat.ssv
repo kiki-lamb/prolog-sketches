@@ -9,8 +9,9 @@ athena         write_a  book.
 beer           isa      alcohol.
 beverage       isa      object.
 beverage       isa      thing.
-book           isa      paper.
-bookshelf      has      paper.
+book           isa      writing.
+bookshelf      has      writing.
+writing        isa      paper.
 bookshelf      isa      appliance.
 boson          isa      cat.
 boson          likes    higgy.
@@ -76,12 +77,12 @@ mr_meat        isa      store.
 pepperoni      isa      meat.
 pepsi          isa      beverage.
 person         isa      object.
-picture        isa      paper.
-poem           isa      paper.
+picture        isa      art.
+poem           isa      writing.
 potato         isa      vegetable.
 paper          isa      thing.
 sink           isa      appliance.
-sketchbook     has      paper.
+sketchbook     has      art.
 sketchbook     isa      appliance.
 soft_drink     isa      beverage.
 steak          isa      meat.
@@ -108,4 +109,5 @@ water          isa      beverage.
 weed           isa      thing.
 whiskey        isa      alcohol.
 woman          isa      human.
-sketchbook     dislike  book.
+drawing        isa      art.
+art            isa      paper.
