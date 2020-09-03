@@ -33,6 +33,7 @@ computer       has      bytes.
 computer       isa      appliance.
 dave           dislike  operate.
 dave           dislike  read.
+dave           dislike  scare_off.
 dave           has      weed.
 dave           isa      man.
 dishwasher     isa      appliance.
