@@ -111,6 +111,11 @@ wwould(Person, read_a, Thing) :-
    human(Person),
    writing(Thing).
 
+wwould(Person, look_at, Thing) :-
+   person(Person),
+   art(Thing),
+   Thing \== poem.
+
 %-----------------------------------------------------------
 % These are busted 'cause they would need a path to the 
 % (missing) object in order to trigger them:
