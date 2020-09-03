@@ -92,6 +92,21 @@ wwould(Person, smokes, Thing) :-
    thing(Thing),
    smokes(Person, Thing).
 
+wwould(Person, write_a, Thing) :-
+   human(Person),
+   thing(Thing),
+   write_a(Person, Thing).
+
+wwould(Person, draw, Thing) :-
+   human(Person),
+   art(Thing),
+   draw(Person, Thing).
+
+wwould(Person, read_a, Thing) :-
+   human(Person),
+   thing(Thing),
+   readable(Thing).
+
 %-----------------------------------------------------------
 % These are busted 'cause they would need a path to the 
 % (missing) object in order to trigger them:
