@@ -165,11 +165,12 @@ reify(Thing) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 member_of(Thing, Class) :-
-   (
-      raw_lines(Thing, isa, Class, _)
-   ;  raw_lines(Thing, isa, ActualType, _),
-      member_of(ActualType, Class)
-   ).
+   raw_lines(Thing, isa, Class, _).
+   
+
+member_of(Thing, Class) :-
+   raw_lines(Thing, isa, ActualType, _),
+   member_of(ActualType, Class).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Logging
@@ -190,6 +191,6 @@ logged_assert(G1) :-
 
 clean_assert(G1) :-
    dynamic(G1),
-   retract(G1)
+   (retract(G1)
    ;  true,
-      assertz(G1).
+      assertz(G1)).

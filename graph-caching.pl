@@ -59,9 +59,11 @@ cache_path(Here, There, Path) :-
 %-----------------------------------------------------------
 
 try_cached_path(Here, There, Path) :-
-   cached_path(Here, There, Path)
-   ;  cached_path(There, Here, Tmp),
-      reverse(Tmp, Path).   
+   cached_path(Here, There, Path).
+
+try_cached_path(Here, There, Path) :-
+   cached_path(There, Here, Tmp),
+   reverse(Tmp, Path).   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Logging.

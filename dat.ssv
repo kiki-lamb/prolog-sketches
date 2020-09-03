@@ -118,8 +118,7 @@ turkey         isa      meat.
 turnip         isa      vegetable.
 vegetable      isa      food.
 vodka          isa      alcohol.
-wall           has      canvas.
-wall           isa      appliance.
+sybil          has      canvas.
 water          isa      beverage.
 weed           isa      thing.
 whiskey        isa      alcohol.
