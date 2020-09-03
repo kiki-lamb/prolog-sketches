@@ -1,6 +1,5 @@
 alcohol        isa      beverage.
 appliance      isa      thing.
-art            isa      thing.
 athena         dislike  pet.
 athena         drink    whiskey.
 athena         eat      vegetable.
@@ -10,8 +9,8 @@ athena         write_a  book.
 beer           isa      alcohol.
 beverage       isa      object.
 beverage       isa      thing.
-book           isa      readable.
-bookshelf      has      readable.
+book           isa      paper.
+bookshelf      has      paper.
 bookshelf      isa      appliance.
 boson          isa      cat.
 boson          likes    higgy.
@@ -77,12 +76,12 @@ mr_meat        isa      store.
 pepperoni      isa      meat.
 pepsi          isa      beverage.
 person         isa      object.
-picture        isa      art.
-poem           isa      readable.
+picture        isa      paper.
+poem           isa      paper.
 potato         isa      vegetable.
-readable       isa      thing.
+paper          isa      thing.
 sink           isa      appliance.
-sketchbook     has      art.
+sketchbook     has      paper.
 sketchbook     isa      appliance.
 soft_drink     isa      beverage.
 steak          isa      meat.
@@ -109,3 +108,4 @@ water          isa      beverage.
 weed           isa      thing.
 whiskey        isa      alcohol.
 woman          isa      human.
+sketchbook     dislike  book.

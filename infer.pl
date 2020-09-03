@@ -99,13 +99,13 @@ wwould(Person, write_a, Thing) :-
 
 wwould(Person, draw, Thing) :-
    human(Person),
-   art(Thing),
+   paper(Thing),
    draw(Person, Thing).
 
 wwould(Person, read_a, Thing) :-
    human(Person),
    thing(Thing),
-   readable(Thing).
+   paper(Thing).
 
 %-----------------------------------------------------------
 % These are busted 'cause they would need a path to the 

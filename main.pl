@@ -19,15 +19,19 @@ main :-
 
 %-----------------------------------------------------------
 
-possible        :- possible(_,_,_).
-possible(W,A,T) :-
-   could(W,A,T),
+possible          :- possible(_,_,_,_).
+possible(P)       :- possible(_,_,_,P).
+possible(W,A,T,P) :-
+   could(W,A,T,[_|P]),
    singular(A, SA),
    add_spaces(SA, SAA),
+   smart_capitalize(W, WUC),
+   smart_capitalize(T, TUC),
    format("~w could ~w ~w.\n",
-          [W, SAA, T]),
+          [WUC, SAA, TUC]),
+%   format("~w could ~w ~w via ~w.\n",
+%           [W, SAA, T, P]),
    fail.
-
 %-----------------------------------------------------------
 
 possible_paths          :- possible_paths(_,_,_,_).
