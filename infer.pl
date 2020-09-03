@@ -102,6 +102,11 @@ wwould(Person, draw, Thing) :-
    art(Thing),
    draw(Person, Thing).
 
+wwould(Person, paint, Thing) :-
+   human(Person),
+   painting(Thing),
+   paint(Person, Thing).
+
 wwould(Person, read_a, Thing) :-
    human(Person),
    writing(Thing).
