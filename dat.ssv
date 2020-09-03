@@ -15,6 +15,7 @@ bookshelf      has      writing.
 bookshelf      isa      appliance.
 boson          isa      cat.
 boson          likes    higgy.
+bytes          isa      thing.
 cabbage        isa      vegetable.
 cat            drink    water.
 cat            eat      cat_food.
@@ -28,6 +29,8 @@ chicken_freak  has      soft_drink.
 chicken_freak  isa      store.
 chicken_freak  isa      store.
 cigarette      isa      thing.
+computer       has      bytes.
+computer       isa      appliance.
 dave           dislike  operate.
 dave           dislike  read.
 dave           has      weed.
@@ -70,6 +73,7 @@ kiki           shop_at  chicken_freak.
 kiki           shop_at  freshco.
 kiki           shop_at  lcbo.
 kiki           smokes   cigarette.
+kiki           writ     e_a program.
 lcbo           has      alcohol.
 lcbo           isa      store.
 man            isa      human.
@@ -86,6 +90,7 @@ picture        isa      art.
 poem           isa      art.
 poem           isa      writing.
 potato         isa      vegetable.
+program        isa      bytes.
 sink           has      water.
 sink           isa      appliance.
 sketchbook     has      art.
