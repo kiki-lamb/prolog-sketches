@@ -32,6 +32,7 @@ freshco        has      vegetable.
 freshco        isa      store.
 gwen           isa      woman.
 gwen           likes    sybil.
+gwen           dislike  operate.
 higgy          isa      cat.
 higgy          isa      cat.
 home_hardware  has      screw.
@@ -45,10 +46,12 @@ human          isa      person.
 human          smokes   weed.
 kiki           dislike  cat_food.
 kiki           dislike  tequila.
+kiki           dislike  turkey.
 kiki           dislike  whiskey.
 kiki           drink    alcohol.
 kiki           drink    energy_drink.
 kiki           eat      meat.
+kiki           eats     potato.
 kiki           isa      woman.
 kiki           likes    boson.
 kiki           likes    higgy.
@@ -64,11 +67,13 @@ mr_meat        has      meat.
 mr_meat        isa      store.
 pepperoni      isa      meat.
 pepsi          isa      beverage.
+person         isa      object.
 potato         isa      vegetable.
 sink           isa      appliance.
 soft_drink     isa      beverage.
 steak          isa      meat.
 store          isa      location.
+sybil          dislike  pet.
 sybil          drink    hooch.
 sybil          drink    tequila.
 sybil          eat      turkey.
@@ -81,7 +86,6 @@ sybil          shop_at  home_hardware.
 sybil          shop_at  mr_meat.
 tequila        isa      alcohol.
 thing          isa      object.
-person         isa      object.
 turkey         isa      meat.
 turnip         isa      vegetable.
 vegetable      isa      food.

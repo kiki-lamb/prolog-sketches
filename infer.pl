@@ -30,7 +30,9 @@ would(Actor, Action, Thing) :-
    wwould(Actor, Action, Thing),
    concrete(Thing),
    Thing \== Actor,
-   \+ dislike(Actor, Thing).
+   \+ dislike(Actor, Thing),
+   \+ dislike(Actor, Action),
+   \+ dislike(Thing, Action).
 
 wwould(Actor, starve_for, food) :-
     person(Actor),
