@@ -73,15 +73,15 @@ kiki           shop_at  chicken_freak.
 kiki           shop_at  freshco.
 kiki           shop_at  lcbo.
 kiki           smokes   cigarette.
-kiki           writ     e_a program.
+kiki           write_a  program.
 lcbo           has      alcohol.
 lcbo           isa      store.
 man            isa      human.
 meat           isa      food.
 mr_meat        has      meat.
 mr_meat        isa      store.
-new_painting   isa      painting.
-painting       isa      art.
+canvas         isa      art.
+painting       isa      canvas.
 paper          isa      thing.
 pepperoni      isa      meat.
 pepsi          isa      beverage.
@@ -117,7 +117,7 @@ turkey         isa      meat.
 turnip         isa      vegetable.
 vegetable      isa      food.
 vodka          isa      alcohol.
-wall           has      new_painting.
+wall           has      canvas.
 wall           isa      appliance.
 water          isa      beverage.
 weed           isa      thing.

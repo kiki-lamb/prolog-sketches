@@ -70,7 +70,7 @@ wwould(Actor, help, Person) :-
 wwould(Actor, get_help_from, Person) :-
    would(Person, help, Actor).
 
-wwould(Actor, give, Object) :-
+wwould(Actor, provide, Object) :-
    object(Object),
    has(Actor, Object).
 
@@ -104,7 +104,7 @@ wwould(Person, draw, Thing) :-
 
 wwould(Person, paint, Thing) :-
    human(Person),
-   painting(Thing),
+   canvas(Thing),
    paint(Person, Thing).
 
 wwould(Person, read_a, Thing) :-

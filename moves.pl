@@ -20,6 +20,6 @@ move(This, That) :-
    ;  would( This, operate,       That)
    ;  would( This, sleep_on,      That)
    ;  would( This, get_help_from, That)
-   ;  would( This, give,          That)
+   ;  would( This, provide,       That)
    ).
    
