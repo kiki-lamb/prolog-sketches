@@ -57,7 +57,6 @@ end_of_sequence([], []).
 convert_words(LLs, Out) :-
    maplist(r_atom_codes, LLs, Out).
 
-
 main :-
    phrase_from_file(lines(Ls), "tiny.ssv"),
    findall(Y, (member(X, Ls), convert_words(X, Y)), Out),
