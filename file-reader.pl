@@ -54,4 +54,6 @@ end_of_sequence([], []).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-main :- phrase_from_file(lines(_), "tiny.ssv").
+main :- 
+   phrase_from_file(lines([L|Ls]), "tiny.ssv"),
+   maplist(r_atom_codes, L, Out).
