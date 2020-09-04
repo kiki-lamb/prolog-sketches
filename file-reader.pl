@@ -1,3 +1,4 @@
+:- initialization(main).
 :- use_module(library(pio)).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -34,10 +35,23 @@ lines([])     --> end_of_sequence, !.
 lines([L|Ls]) --> line(L),
                   lines(Ls).
 
-line([])      --> ".\n", !.
-line([])      --> end_of_sequence, !.
-line([L|Ls])  --> [L], line(Ls).
+line([])     --> end_of_sequence, !.
+line([])     --> "\n", !.
+line([L|Ls]) --> word(L),
+                 line(Ls).
+
+
+
+word([])      --> end_of_sequence, !.
+word([])      --> " ", !.
+word([])      --> ".", !.
+word([L|Ls])  --> [L],
+                  word(Ls).
 
 %-----------------------------------------------------------
 
 end_of_sequence([], []).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+main :- phrase_from_file(lines(_), "tiny.ssv").

@@ -1,4 +1,4 @@
-:- initialization(main).
+%:- initialization(main).
 :- consult("setup.pl").
 :- consult("moves.pl").
 :- consult("graph.pl").

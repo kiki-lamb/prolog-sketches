@@ -191,6 +191,6 @@ logged_assert(G1) :-
 
 clean_assert(G1) :-
    dynamic(G1),
-   (retract(G1)
+   retract(G1)
    ;  true,
-      assertz(G1)).
+      assertz(G1).
