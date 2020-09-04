@@ -54,6 +54,13 @@ end_of_sequence([], []).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-main :- 
-   phrase_from_file(lines([L|Ls]), "tiny.ssv"),
-   maplist(r_atom_codes, L, Out).
+convert_words(LLs, Out) :-
+   maplist(r_atom_codes, LLs, Out).
+
+
+main :-
+   phrase_from_file(lines(Ls), "tiny.ssv"),
+   findall(Y, (member(X, Ls), convert_words(X, Y)), Out),
+   nl,
+   format("~w\n", [Out]),
+   nl.
