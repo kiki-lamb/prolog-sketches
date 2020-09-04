@@ -25,7 +25,8 @@ tagged_predify(Tag, Line, G1) :-
 %-----------------------------------------------------------
    
 r_atom_codes(In, Out) :-
-   atom_codes(Out, In).
+   Out = In.
+%   atom_codes(Out, In).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Grammar.
@@ -37,16 +38,22 @@ lines([L|Ls]) --> line(L),
 
 line([])     --> end_of_sequence, !.
 line([])     --> "\n", !.
-line([L|Ls]) --> word(L),
+line([L|Ls]) --> elem(L), %L),
                  line(Ls).
+
+elem(X) --> dot(X).
+elem(X) --> word(X).
+
+dot([])      --> end_of_sequence, !.
+dot([sym|Ls])      --> ".", elem(Ls).
+
 
 
 
 word([])      --> end_of_sequence, !.
 word([])      --> " ", !.
-word([])      --> ".", !.
 word([L|Ls])  --> [L],
-                  word(Ls).
+                  elem(Ls).
 
 %-----------------------------------------------------------
 
