@@ -41,11 +41,11 @@ line([])     --> "\n", !.
 line([L|Ls]) --> elem(L), %L),
                  line(Ls).
 
-elem(X) --> dot(X).
-elem(X) --> word(X).
+elem(L) --> dot(L).
+elem(L) --> word(L).
 
 dot([])      --> end_of_sequence, !.
-dot([sym|Ls])      --> ".", elem(Ls).
+dot([dot|Ls])      --> ".", elem(Ls).
 
 
 
