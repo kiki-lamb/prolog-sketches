@@ -11,15 +11,16 @@ lines([])     --> end_of_sequence, !.
 lines([L|Ls]) --> line(L),
                   lines(Ls).
 
-line([])      --> "\n", !.
 line([])      --> end_of_sequence, !.
-line([L|Ls])  --> word(L), line(Ls).
+line([L|Ls])  --> word(L),
+                  line(Ls).
+line([])      --> ".\n", !.
 
 
 words([])     --> end_of_sequence, !.
 words([L|Ls]) --> word(L),
+                  words(Ls).
 
-                  lines(Ls).
 word([])      --> " ", !.
 word([])      --> ".", !.
 word([])      --> end_of_sequence, !.
