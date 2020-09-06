@@ -18,13 +18,8 @@ load_atomized_lines_from_file(Tag, File, Out) :-
 
 tagged_predify(Tag, Line, G1) :-
    split_string(Line, " ", " ", [A1, A2, A3 | Words]),
-   maplist(r_atom_codes, [ A1, A2, A3, Words ], Atoms),
+   maplist(atom_codes, Atoms, [ A1, A2, A3, Words ]),
    G1 =.. [Tag|Atoms].
-
-%-----------------------------------------------------------
-   
-r_atom_codes(In, Out) :-
-   atom_codes(Out, In).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Grammar.
